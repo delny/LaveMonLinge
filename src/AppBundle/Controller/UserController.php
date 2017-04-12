@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\UserConnectType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
-     * @Route("/inscription", name="app-inscription")
+     * @Route("/inscription", name="app_inscription")
      */
     public function inscriptionAction(Request $request)
     {
@@ -35,10 +36,50 @@ class UserController extends Controller
                 'Vous êtes bien inscrit !'
             );
 
+            //renvoie vers la page d'accueil
+            return $this->redirectToRoute('homepage');
+
         }
 
         return $this->render(':user:inscription.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/signin", name="app_connexion")
+     */
+    public function connexionAction(Request $request)
+    {
+        //recup manager
+        $userManager = $this->container->get('app.user_manager');
+        //on crée instance de user
+        $user = $userManager->create();
+
+        //on construit le formulaire
+        $form = $this->createForm(UserConnectType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid())
+        {
+            $userExist = $userManager->getUserByEmail($user->getEmail());
+            var_dump($userExist);
+            exit();
+            //message de notification
+            $this->addFlash(
+                'success',
+                'Vous vous êtes connecté avec succès !'
+            );
+
+            //renvoie vers la page d'accueil
+            return $this->redirectToRoute('homepage');
+
+        }
+
+        return $this->render(':user:signin.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
     }
 }

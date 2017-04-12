@@ -39,4 +39,9 @@ class UserManager
         }
         $this->manager->flush($user);
     }
+
+    public function getUserByEmail($email)
+    {
+        return $this->manager->getRepository(User::class)->getUserByEmail($email);
+    }
 }
