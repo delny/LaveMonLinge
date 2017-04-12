@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h2>Ma commande</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Date de collecte</th>
+            <th>Date de livraison</th>
+            <th>Prix unitaire</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1er sac</td>
+            <td>Laverie</td>
+            <td>02/02/2017</td>
+            <td>02/02/2017</td>
+            <td>15 €</td>
+        </tr>
+        <tr>
+            <td>2eme sac</td>
+            <td>Laverie</td>
+            <td>02/02/2017</td>
+            <td>02/02/2017</td>
+            <td>10 €</td>
+        </tr>
+        <tr>
+            <td>3eme sac</td>
+            <td>Laverie</td>
+            <td>02/02/2017</td>
+            <td>02/02/2017</td>
+            <td>10 €</td>
+        </tr>
+        </tbody>
+    </table>
+    <section class="row">
+        <article class="col-md-4">
+            <h3>Adresse facturation</h3>
+            <address>
+                <ul>
+                    <li>Toto</li>
+                    <li>25 rue de toto</li>
+                    <li>58457 Toto</li>
+                    <li>TOTO</li>
+                </ul>
+            </address>
+        </article>
+        <article class="col-md-4">
+            <h3>Adresse livraison</h3>
+            <address>
+                <ul>
+                    <li>Toto</li>
+                    <li>25 rue de toto</li>
+                    <li>58457 Toto</li>
+                    <li>TOTO</li>
+                </ul>
+            </address>
+        </article>
+        <article class="col-md-4">
+            Total: 45 €
+        </article>
+    </section>
+    <section class="buy row">
+        <button class=" btn btn-success">Payer</button>
+    </section>
+{% endblock %}

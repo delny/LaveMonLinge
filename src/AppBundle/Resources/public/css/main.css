@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.buy {
+    text-align: right;
+}
+
+.connect {
+    text-align: right;
+    margin-top: 2%;
+}
+
+.connect a {
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    padding: 1%;
+}
