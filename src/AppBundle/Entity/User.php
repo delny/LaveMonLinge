@@ -124,7 +124,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return FALSE;
+        return $this->roles;
     }
 
     /**
@@ -140,7 +140,7 @@ class User implements UserInterface
      */
     public function getUsername()
     {
-        return FALSE;
+        return $this->email;
     }
 
     /**
@@ -148,7 +148,7 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        return FALSE;
+        //rien
     }
 
 

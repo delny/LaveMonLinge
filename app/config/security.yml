@@ -6,6 +6,8 @@ security:
     providers:
         in_memory:
             memory: ~
+        main:
+            entity: { class: AppBundle\Entity\User, property: email }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -25,3 +27,5 @@ security:
     encoders:
         AppBundle\Entity\User:
             algorithm: sha512
+            iterations: 9616
+            encode_as_base64: true
