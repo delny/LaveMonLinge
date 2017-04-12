@@ -3,7 +3,7 @@ namespace AppBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use AppBundle\Entity\user;
+use AppBundle\Entity\User;
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -12,14 +12,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
             [
                 'email' =>'test@gmail.com',
-                'password'=> password_hash('test', sha512)
+                'password'=> hash('sha512','test'),
 
             ],
 
 
             [
                 'email' =>'test2@gmail.com',
-                'password'=> password_hash('test2', sha512)
+                'password'=> hash('sha512','test2'),
 
 
             ],
