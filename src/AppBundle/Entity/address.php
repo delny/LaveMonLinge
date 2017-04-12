@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="address")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\addressRepository")
  */
-class address
+class Address
 {
     /**
      * @var int
@@ -50,8 +50,8 @@ class address
     private $type;
 
     /**
-     * @var user $user
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user")
+     * @var User $user
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      */
     private $user;
 
