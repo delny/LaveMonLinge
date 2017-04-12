@@ -27,6 +27,13 @@ class UserController extends Controller
         if ($form->isSubmitted() AND $form->isValid())
         {
             //si le formulaire est valide
+
+            //encodage du mot de passe
+            $plainPassword = $user->getPassword();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+            $user->setPassword($encoded);
+
             //ajout du user à la bdd
             $userManager->save($user);
 
@@ -65,7 +72,12 @@ class UserController extends Controller
         {
             $userExist = $userManager->getUserByEmail($user->getEmail());
 
-            if ($userExist->getPassword()==sha1($user->getPassword()))
+            //mot de passe encodé
+            $plainPassword = $user->getPassword();
+            $encoder = $this->container->get('security.password_encoder');
+            $encoded = $encoder->encodePassword($user, $plainPassword);
+
+            if ($userExist->getPassword() == $encoded)
             {
                 //connexion reussie
                 //message de notification

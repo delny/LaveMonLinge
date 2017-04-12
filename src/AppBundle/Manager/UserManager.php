@@ -34,8 +34,6 @@ class UserManager
         if ($user->getId() === null)
         {
             $this->manager->persist($user);
-            $password = $user->getPassword();
-            $user->setPassword(sha1($password));
         }
         $this->manager->flush($user);
     }
