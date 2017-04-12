@@ -4,8 +4,8 @@ use AppBundle\Entity\TypeClothing;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use AppBundle\Entity\TypeVetement;
-class LoadTypeVetementData extends AbstractFixture implements OrderedFixtureInterface
+
+class LoadTypeClothingData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

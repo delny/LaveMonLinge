@@ -3,7 +3,7 @@ namespace AppBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use AppBundle\Entity\orderlaundry;
+use AppBundle\Entity\OrderLaundry;
 class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -38,7 +38,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
             ],
         ];
         foreach ($datas as $i => $data) {
-            $order = new orderlaundry();
+            $order = new OrderLaundry();
             $order->setDataCollect($data['datecollecte']);
             $order->setDataDelivery($data['datelivraison']);
             $order->setStatut($data['statut']);
