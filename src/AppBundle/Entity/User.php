@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * user
+ * User
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
@@ -54,11 +54,7 @@ class User
      */
     private $address;
 
-
-
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -67,22 +63,14 @@ class User
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return user
+     * @param int $id
      */
-    public function setEmail($email)
+    public function setId($id)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get email
-     *
      * @return string
      */
     public function getEmail()
@@ -91,27 +79,46 @@ class User
     }
 
     /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return user
+     * @param string $email
      */
-    public function setPassword($password)
+    public function setEmail($email)
     {
-        $this->password = $password;
-
-        return $this;
+        $this->email = $email;
     }
 
     /**
-     * Get password
-     *
      * @return string
      */
     public function getPassword()
     {
         return $this->password;
     }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * @return address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param address $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+
+
 }
 
