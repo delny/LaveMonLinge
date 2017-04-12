@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * user
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
  */
-class user
+class User
 {
     /**
      * @var int
@@ -18,6 +19,7 @@ class user
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     private $id;
 
@@ -25,6 +27,10 @@ class user
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     *
+     * @Assert\NotBlank(
+     *     message="L'email ne peut pas être vide!"
+     * )
      */
     private $email;
 
@@ -32,13 +38,17 @@ class user
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     *
+     * @Assert\NotBlank(
+     *     message="Le mot de passe ne peut pas être vide!"
+     * )
      */
     private $password;
 
     /**
-     * @var address $address
+     * @var Address $address
      * @ORM\OneToMany(
-     *     targetEntity="AppBundle\Entity\address",
+     *     targetEntity="AppBundle\Entity\Address",
      *     mappedBy="user"
      * )
      */
