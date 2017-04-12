@@ -64,17 +64,25 @@ class UserController extends Controller
         if ($form->isSubmitted() AND $form->isValid())
         {
             $userExist = $userManager->getUserByEmail($user->getEmail());
-            var_dump($userExist);
-            exit();
-            //message de notification
-            $this->addFlash(
-                'success',
-                'Vous vous êtes connecté avec succès !'
-            );
 
-            //renvoie vers la page d'accueil
-            return $this->redirectToRoute('homepage');
-
+            if ($userExist->getPassword()==sha1($user->getPassword()))
+            {
+                //connexion reussie
+                //message de notification
+                $this->addFlash(
+                    'success',
+                    'Vous vous êtes connecté avec succès !'
+                );
+                //renvoie vers la page d'accueil
+                return $this->redirectToRoute('homepage');
+            }
+            else
+            {
+                $this->addFlash(
+                    'danger',
+                    'Erreur de login et/ou de mot de passe!'
+                );
+            }
         }
 
         return $this->render(':user:signin.html.twig', array(

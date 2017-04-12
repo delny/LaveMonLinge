@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User
 {
