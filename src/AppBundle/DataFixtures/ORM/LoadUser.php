@@ -12,14 +12,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
 
             [
                 'email' =>'test@gmail.com',
-                'password'=> password_hash('test', PASSWORD_BCRYPT)
+                'password'=> password_hash('test', sha512)
 
             ],
 
 
             [
                 'email' =>'test2@gmail.com',
-                'password'=> password_hash('test2', PASSWORD_BCRYPT)
+                'password'=> password_hash('test2', sha512)
 
 
             ],

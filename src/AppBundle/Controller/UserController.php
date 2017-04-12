@@ -7,6 +7,7 @@ use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
@@ -85,6 +86,12 @@ class UserController extends Controller
                     'success',
                     'Vous vous êtes connecté avec succès !'
                 );
+
+                //ouverture de la session
+                $session = new Session();
+
+                $session->set('userId', $userExist->getId());
+
                 //renvoie vers la page d'accueil
                 return $this->redirectToRoute('homepage');
             }

@@ -24,4 +24,4 @@ security:
             #form_login: ~
     encoders:
         AppBundle\Entity\User:
-            algorithm: bcrypt
+            algorithm: sha512
