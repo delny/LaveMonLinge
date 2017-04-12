@@ -31,7 +31,7 @@ class orderItem
 
     /**
      * @var optionLaundry $options
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\optionLaundry")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\optionLaundry")
      */
     private $options;
 
@@ -40,6 +40,12 @@ class orderItem
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\product")
      */
     private $product;
+
+    /**
+     * @var orderlaundry $orderLaundry
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\orderlaundry")
+     */
+    private $orderLaundry;
 
     /**
      * Get id

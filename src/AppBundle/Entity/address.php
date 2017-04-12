@@ -49,6 +49,12 @@ class address
      */
     private $type;
 
+    /**
+     * @var user $user
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\user")
+     */
+    private $user;
+
 
     /**
      * Get id

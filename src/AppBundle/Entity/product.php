@@ -44,7 +44,7 @@ class product
 
     /**
      * @var TypeVetement $typeVetement
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\TypeVetement")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\TypeVetement")
      */
     private $typeVetement;
 

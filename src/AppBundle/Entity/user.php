@@ -37,9 +37,13 @@ class user
 
     /**
      * @var address $address
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\address")
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\address",
+     *     mappedBy="user"
+     * )
      */
     private $address;
+
 
 
     /**
