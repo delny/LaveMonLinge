@@ -3,15 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\userRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int
@@ -118,6 +119,37 @@ class User
         $this->address = $address;
     }
 
+    /**
+     * @return bool
+     */
+    public function getRoles()
+    {
+        return FALSE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUsername()
+    {
+        return FALSE;
+    }
+
+    /**
+     * @return bool
+     */
+    public function eraseCredentials()
+    {
+        return FALSE;
+    }
 
 
 }
