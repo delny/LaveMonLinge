@@ -5,13 +5,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * address
+ * Address
  *
  * @ORM\Table(name="address")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\addressRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AddressRepository")
  */
 class Address
 {
+
     /**
      * @var int
      *
@@ -55,10 +56,7 @@ class Address
      */
     private $user;
 
-
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -67,22 +65,14 @@ class Address
     }
 
     /**
-     * Set cp
-     *
-     * @param string $cp
-     *
-     * @return address
+     * @param int $id
      */
-    public function setCp($cp)
+    public function setId($id)
     {
-        $this->cp = $cp;
-
-        return $this;
+        $this->id = $id;
     }
 
     /**
-     * Get cp
-     *
      * @return string
      */
     public function getCp()
@@ -91,22 +81,14 @@ class Address
     }
 
     /**
-     * Set city
-     *
-     * @param string $city
-     *
-     * @return address
+     * @param string $cp
      */
-    public function setCity($city)
+    public function setCp($cp)
     {
-        $this->city = $city;
-
-        return $this;
+        $this->cp = $cp;
     }
 
     /**
-     * Get city
-     *
      * @return string
      */
     public function getCity()
@@ -115,22 +97,14 @@ class Address
     }
 
     /**
-     * Set street
-     *
-     * @param string $street
-     *
-     * @return address
+     * @param string $city
      */
-    public function setStreet($street)
+    public function setCity($city)
     {
-        $this->street = $street;
-
-        return $this;
+        $this->city = $city;
     }
 
     /**
-     * Get street
-     *
      * @return string
      */
     public function getStreet()
@@ -139,27 +113,44 @@ class Address
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return address
+     * @param string $street
      */
-    public function setType($type)
+    public function setStreet($street)
     {
-        $this->type = $type;
-
-        return $this;
+        $this->street = $street;
     }
 
     /**
-     * Get type
-     *
      * @return string
      */
     public function getType()
     {
         return $this->type;
     }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return user
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param user $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
 }
 
