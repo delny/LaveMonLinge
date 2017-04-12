@@ -42,4 +42,9 @@ class UserManager
     {
         return $this->manager->getRepository(User::class)->getUserByEmail($email);
     }
+
+    public function getUserById($id)
+    {
+        return $this->manager->getRepository(User::class)->getUserById($id);
+    }
 }

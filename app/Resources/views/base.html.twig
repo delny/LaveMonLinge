@@ -33,9 +33,15 @@
                 </button>
                 <a class="navbar-brand" href="#">Lavemonlinge</a>
             </div>
-            <div id="navbar" class="navbar-collapse collapse connect">
-                <a href="#" >Connexion</a>
-            </div>
+            {% if user %}
+                <div id="navbar" class="navbar-collapse collapse connect">
+                    <a href="{{ path('app_logout') }}" >Se déconnecter</a>
+                </div>
+            {% else %}
+                <div id="navbar" class="navbar-collapse collapse connect">
+                    <a href="{{ path('app_connexion') }}" >Connexion</a>
+                </div>
+            {% endif %}
             <!--/.navbar-collapse -->
         </div>
     </nav>
