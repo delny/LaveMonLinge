@@ -11,12 +11,12 @@ services:
             class: AppBundle\Manager\UserManager
             arguments:
               - "@=service('doctrine').getManager()"
-
+    
     app.order_item_manager:
             class: AppBundle\Manager\OrderItemManager
             arguments:
               - "@=service('doctrine').getManager()"
-
+    
     app.laundry_manager:
             class: AppBundle\Manager\LaundryManager
             arguments:
@@ -26,3 +26,10 @@ services:
             class: AppBundle\Manager\CartManager
             arguments:
               - "@session"
+
+    admin.optionlaundry:
+            class: AppBundle\Admin\OptionLaundryAdmin
+            arguments: [~, AppBundle\Entity\OptionLaundry, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: OptionLaundry }
+

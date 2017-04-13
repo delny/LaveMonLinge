@@ -10,4 +10,23 @@ namespace AppBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUserByEmail($email)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere('u.email = :email')
+            ->setParameter(':email', $email)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function getUserById($id)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->andWhere('u.id = :id')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

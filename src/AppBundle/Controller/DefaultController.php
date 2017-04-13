@@ -13,9 +13,27 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $user = $this->getUserConnected();
         // replace this example code with whatever you need
         return $this->render(':panier:panier.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'user' => $user,
         ]);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    private function getUserConnected()
+    {
+        return $this->getUserManager()->getUserConnected();
+    }
+
+    /**
+     * @return \AppBundle\Manager\UserManager|object
+     */
+    private function getUserManager()
+    {
+        return $this->container->get('app.user_manager');
     }
 }

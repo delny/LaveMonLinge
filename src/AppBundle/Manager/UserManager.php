@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserManager
 {
@@ -34,9 +35,32 @@ class UserManager
         if ($user->getId() === null)
         {
             $this->manager->persist($user);
-            $password = $user->getPassword();
-            $user->setPassword(sha1($password));
         }
         $this->manager->flush($user);
+    }
+
+    public function getUserByEmail($email)
+    {
+        return $this->manager->getRepository(User::class)->getUserByEmail($email);
+    }
+
+    public function getUserById($id)
+    {
+        return $this->manager->getRepository(User::class)->getUserById($id);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getUserConnected()
+    {
+        $session = new Session();
+        $userId = $session->get('userId');
+        if ($userId == null)
+        {
+            return null;
+        }
+
+        return $this->getUserById($userId);
     }
 }
