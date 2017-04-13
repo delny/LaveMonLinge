@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * OptionLaundry
  *
  * @ORM\Table(name="option_laundry")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\optionLaundryRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OptionLaundryRepository")
  */
 class OptionLaundry
 {
