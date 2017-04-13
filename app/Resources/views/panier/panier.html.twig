@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
+
+
     <h2>Ma commande</h2>
     <table class="table">
         <thead>
@@ -12,27 +14,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1er sac</td>
-            <td>Laverie</td>
-            <td>02/02/2017</td>
-            <td>02/02/2017</td>
-            <td>15 €</td>
-        </tr>
-        <tr>
-            <td>2eme sac</td>
-            <td>Laverie</td>
-            <td>02/02/2017</td>
-            <td>02/02/2017</td>
-            <td>10 €</td>
-        </tr>
-        <tr>
-            <td>3eme sac</td>
-            <td>Laverie</td>
-            <td>02/02/2017</td>
-            <td>02/02/2017</td>
-            <td>10 €</td>
-        </tr>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.qte }}</td>
+                <td>02/02/2017</td>
+                <td>02/02/2017</td>
+                <td>{{ item.product.price }}</td>
+            </tr>
+        {% endfor %}
+
         </tbody>
     </table>
     <section class="row">

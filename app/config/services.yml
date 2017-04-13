@@ -11,3 +11,8 @@ services:
             class: AppBundle\Manager\UserManager
             arguments:
               - "@=service('doctrine').getManager()"
+
+    app.order_item_manager:
+                class: AppBundle\Manager\OrderItemManager
+                arguments:
+                  - "@=service('doctrine').getManager()"
