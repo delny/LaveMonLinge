@@ -8,10 +8,13 @@ services:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
     app.user_manager:
-            class: AppBundle\Manager\UserManager
-            arguments:
-              - "@=service('doctrine').getManager()"
-    
+        class: AppBundle\Manager\UserManager
+        arguments:
+            - "@=service('doctrine').getManager()"
+    app.token_authenticator:
+        class:  AppBundle\Security\TokenAuthenticator
+        arguments:
+            - "@service_container"
     app.order_item_manager:
             class: AppBundle\Manager\OrderItemManager
             arguments:
@@ -26,7 +29,6 @@ services:
             class: AppBundle\Manager\CartManager
             arguments:
               - "@session"
-
     admin.optionlaundry:
             class: AppBundle\Admin\OptionLaundryAdmin
             arguments: [~, AppBundle\Entity\OptionLaundry, ~]
