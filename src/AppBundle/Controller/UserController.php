@@ -16,27 +16,30 @@ class UserController extends Controller
      */
     public function inscriptionAction(Request $request)
     {
+        if ($this->getUserConnected())
+        {
+            //renvoie vers la page d'accueil
+            return $this->redirectToRoute('homepage');
+        }
         //recup du usermanager
-        $userManager = $this->container->get('app.user_manager');
+        $userManager = $this->getUserManager();
+
         //on créer un instance de user
-        $user = $userManager->create();
+        $userNew = $userManager->create();
 
         //on construit le formulaire
-        $form = $this->createForm(UserType::class, $user);
-
+        $form = $this->createForm(UserType::class, $userNew);
         $form->handleRequest($request);
         if ($form->isSubmitted() AND $form->isValid())
         {
             //si le formulaire est valide
 
             //encodage du mot de passe
-            $plainPassword = $user->getPassword();
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($user, $plainPassword);
-            $user->setPassword($encoded);
+            $encodedPassword = $this->encode($userNew,$userNew->getPassword());
+            $userNew->setPassword($encodedPassword);
 
             //ajout du user à la bdd
-            $userManager->save($user);
+            $userManager->save($userNew);
 
             //message de notification
             $this->addFlash(
@@ -51,6 +54,7 @@ class UserController extends Controller
 
         return $this->render(':user:inscription.html.twig', array(
             'form' => $form->createView(),
+            'user' => null,
         ));
     }
 
@@ -59,14 +63,18 @@ class UserController extends Controller
      */
     public function connexionAction(Request $request)
     {
+        if ($this->getUserConnected())
+        {
+            //renvoie vers la page d'accueil
+            return $this->redirectToRoute('homepage');
+        }
         //recup manager
-        $userManager = $this->container->get('app.user_manager');
+        $userManager = $this->getUserManager();
         //on crée instance de user
         $user = $userManager->create();
 
         //on construit le formulaire
         $form = $this->createForm(UserConnectType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid())
@@ -74,11 +82,9 @@ class UserController extends Controller
             $userExist = $userManager->getUserByEmail($user->getEmail());
 
             //mot de passe encodé
-            $plainPassword = $user->getPassword();
-            $encoder = $this->container->get('security.password_encoder');
-            $encoded = $encoder->encodePassword($user, $plainPassword);
+            $encodedPassword = $this->encode($user,$user->getPassword());
 
-            if ($userExist->getPassword() == $encoded)
+            if ($userExist->getPassword() == $encodedPassword)
             {
                 //connexion reussie
                 //message de notification
@@ -106,7 +112,49 @@ class UserController extends Controller
 
         return $this->render(':user:signin.html.twig', array(
             'form' => $form->createView(),
+            'user' => null,
         ));
 
+    }
+
+    /**
+     * @Route("/logout",name="app_logout")
+     */
+    public function logoutAction(Request $request)
+    {
+        $request->getSession()->invalidate();
+        //renvoie vers la page d'accueil
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @return \AppBundle\Manager\UserManager|object
+     */
+    private function getUserManager()
+    {
+        return $this->container->get('app.user_manager');
+    }
+
+    private function encode($user,$plainPassword)
+    {
+        $encoder = $this->container->get('security.password_encoder');
+        $encoded = $encoder->encodePassword($user, $plainPassword);
+
+        return $encoded;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    private function getUserConnected()
+    {
+        $session = new Session();
+        $userId = $session->get('userId');
+        if ($userId == null)
+        {
+            return null;
+        }
+
+        return $this->getUserManager()->getUserById($userId);
     }
 }
