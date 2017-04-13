@@ -39,10 +39,9 @@ security:
     encoders:
         AppBundle\Entity\User:
             algorithm: sha512
-
-    access_control:
-        #- { path: ^/admin/, role: ROLE_ADMIN }
-
             iterations: 9616
             encode_as_base64: true
+
+    access_control:
+        #- { path: ^/admin/, role: ROLE_ADMIN }       
 
