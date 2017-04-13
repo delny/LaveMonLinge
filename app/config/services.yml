@@ -11,3 +11,8 @@ services:
             class: AppBundle\Manager\UserManager
             arguments:
               - "@=service('doctrine').getManager()"
+    admin.optionlaundry:
+            class: AppBundle\Admin\OptionLaundryAdmin
+            arguments: [~, AppBundle\Entity\OptionLaundry, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: OptionLaundry }
