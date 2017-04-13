@@ -6,6 +6,7 @@
 {% block content %}
 
     <h1>Connectez-vous</h1>
+    <div class="form-signin">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {# Les erreurs générales du formulaire. #}
@@ -26,8 +27,21 @@
         {# Génération de l'input. #}
         {{ form_widget(form.email, {'attr': {'placeholder': 'entrez votre email'}}) }}
     </div>
+    {# Génération manuelle et éclatée : #}
+    <div class="form-group">
+        {# Génération du label. #}
+        {{ form_label(form.password, "Mot de passe") }}
 
-    {{ form_row(form.password) }}
+        {# Affichage des erreurs pour ce champ précis. #}
+        {% if form_errors(form.password) %}
+            <div class="alert alert-danger">
+                {{ form_errors(form.password) }}
+            </div>
+        {% endif %}
+
+        {# Génération de l'input. #}
+        {{ form_widget(form.password, {'attr': {'placeholder': 'entrez votre mot de passe'}}) }}
+    </div>
 
     {# Génération automatique des champs pas encore écrits.
      Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
@@ -37,4 +51,5 @@
     <button type="submit" class="btn btn-default">Se connecter</button>
     {# Fermeture de la balise <form> du formulaire HTML #}
     {{ form_end(form) }}
+    </div>
 {% endblock %}

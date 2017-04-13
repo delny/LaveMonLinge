@@ -1,0 +1,26 @@
+<!-- Debut Menu -->
+<nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Togglenavigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('homepage') }}">Lavemonlinge</a>
+        </div>
+        {% if user %}
+            <div id="navbar" class="navbar-collapse collapse connect">
+                <a href="{{ path('app_logout') }}" >Se déconnecter</a>
+            </div>
+        {% else %}
+            <div id="navbar" class="navbar-collapse collapse connect">
+                <a href="{{ path('app_connexion') }}" >Connexion</a>
+                <a href="{{ path('app_inscription') }}" >Inscription</a>
+            </div>
+        {% endif %}
+        <!--/.navbar-collapse -->
+    </div>
+</nav>
+<!-- Fin Menu -->
