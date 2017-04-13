@@ -38,9 +38,15 @@ a:hover {
     border-radius: 10px;
     padding: 1%;
 }
+.pressing img {
+    width: 300px;
+    height:350px;
+}
+
 .form-signin {
     text-align: center;
 }
 .form-signin label, .form-inscription label {
     width:150px;
 }
+

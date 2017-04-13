@@ -30,6 +30,15 @@ class OrderItem
 
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="qte", type="integer", length=10)
+     */
+    private $qte;
+
+
+
+    /**
      * @var OptionLaundry $options
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\OptionLaundry")
      */
@@ -37,13 +46,16 @@ class OrderItem
 
     /**
      * @var product $product
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product",
+     *  inversedBy="orderItems"
+     * )
      */
     private $product;
 
     /**
      * @var Orderlaundry $orderLaundry
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\OrderLaundry")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\OrderLaundry",
+     *     inversedBy="orderItems")
      */
     private $orderLaundry;
 
@@ -127,7 +139,21 @@ class OrderItem
         $this->orderLaundry = $orderLaundry;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getQte()
+    {
+        return $this->qte;
+    }
 
+    /**
+     * @param mixed $qte
+     */
+    public function setQte($qte)
+    {
+        $this->qte = $qte;
+    }
 
 
 
