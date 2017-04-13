@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TypeClothing
+ * OptionLaundry
  *
- * @ORM\Table(name="type_clothing")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TypeClothingRepository")
+ * @ORM\Table(name="option_laundry")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OptionLaundryRepository")
  */
-class TypeClothing
+class OptionLaundry
 {
     /**
      * @var int
@@ -84,4 +84,6 @@ class TypeClothing
     }
 
 
+
 }
+

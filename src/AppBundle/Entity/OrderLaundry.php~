@@ -1,0 +1,76 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * OrderLaundry
+ *
+ * @ORM\Table(name="orderlaundry")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderLaundryRepository")
+ */
+class OrderLaundry
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_collect", type="datetime")
+     */
+    private $dateCollect;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_delivery", type="datetime")
+     */
+    private $dateDelivery;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="statut", type="string", length=255)
+     */
+    private $statut;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="price_delivery", type="integer")
+     */
+    private $priceDelivery;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="Total", type="integer")
+     */
+    private $total;
+
+    /**
+     * @var OrderItem $orderItems
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\orderItem",
+     *     mappedBy="orderLaundry"
+     * )
+     */
+    private $orderItems;
+
+    /**
+     * @var user $user
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
+
+   
+}

@@ -31,7 +31,8 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ProductType",
+     *     inversedBy="products")
      */
     private $type;
 
@@ -54,8 +55,22 @@ class Product
      *  mappedBy="product" )
      */
     private $orderItems;
+    
+
+
     /**
-     * @return int
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->typeClothing = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -63,14 +78,22 @@ class Product
     }
 
     /**
-     * @param int $id
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Product
      */
-    public function setId($id)
+    public function setName($name)
     {
-        $this->id = $id;
+        $this->name = $name;
+
+        return $this;
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -79,31 +102,23 @@ class Product
     }
 
     /**
-     * @param string $name
+     * Set price
+     *
+     * @param integer $price
+     *
+     * @return Product
      */
-    public function setName($name)
+    public function setPrice($price)
     {
-        $this->name = $name;
+        $this->price = $price;
+
+        return $this;
     }
 
     /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * @return int
+     * Get price
+     *
+     * @return integer
      */
     public function getPrice()
     {
@@ -111,15 +126,57 @@ class Product
     }
 
     /**
-     * @param int $price
+     * Set type
+     *
+     * @param \AppBundle\Entity\ProductType $type
+     *
+     * @return Product
      */
-    public function setPrice($price)
+    public function setType(\AppBundle\Entity\ProductType $type = null)
     {
-        $this->price = $price;
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
-     * @return TypeClothing
+     * Get type
+     *
+     * @return \AppBundle\Entity\ProductType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Add typeClothing
+     *
+     * @param \AppBundle\Entity\TypeClothing $typeClothing
+     *
+     * @return Product
+     */
+    public function addTypeClothing(\AppBundle\Entity\TypeClothing $typeClothing)
+    {
+        $this->typeClothing[] = $typeClothing;
+
+        return $this;
+    }
+
+    /**
+     * Remove typeClothing
+     *
+     * @param \AppBundle\Entity\TypeClothing $typeClothing
+     */
+    public function removeTypeClothing(\AppBundle\Entity\TypeClothing $typeClothing)
+    {
+        $this->typeClothing->removeElement($typeClothing);
+    }
+
+    /**
+     * Get typeClothing
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTypeClothing()
     {
@@ -127,15 +184,36 @@ class Product
     }
 
     /**
-     * @param TypeClothing $typeClothing
+     * Add orderItem
+     *
+     * @param \AppBundle\Entity\OrderItem $orderItem
+     *
+     * @return Product
      */
-    public function setTypeClothing($typeClothing)
+    public function addOrderItem(\AppBundle\Entity\OrderItem $orderItem)
     {
-        $this->typeClothing = $typeClothing;
+        $this->orderItems[] = $orderItem;
+
+        return $this;
     }
 
+    /**
+     * Remove orderItem
+     *
+     * @param \AppBundle\Entity\OrderItem $orderItem
+     */
+    public function removeOrderItem(\AppBundle\Entity\OrderItem $orderItem)
+    {
+        $this->orderItems->removeElement($orderItem);
+    }
 
-
-
+    /**
+     * Get orderItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderItems()
+    {
+        return $this->orderItems;
+    }
 }
-
