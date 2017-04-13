@@ -5,6 +5,12 @@
 
 {% block content %}
 
+    <h1>Connectez-vous</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
     <div class="form-signin">
     <h1>Connectez-vous</h1>
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -25,7 +31,7 @@
             {% endif %}
 
         {# Génération de l'input. #}
-        {{ form_widget(form.email, {'attr': {'placeholder': 'entrez votre email'}}) }}
+        {{ form_widget(form.email, {'attr': {'placeholder': 'entrez votre email' }}) }}
     </div>
     {# Génération manuelle et éclatée : #}
     <div class="form-group">

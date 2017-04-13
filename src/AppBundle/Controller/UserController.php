@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Security;
 
 class UserController extends Controller
 {
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function inscriptionAction(Request $request)
     {
-        if ($this->getUserConnected())
+        if ($this->getUser())
         {
             //renvoie vers la page d'accueil
             return $this->redirectToRoute('homepage');
@@ -63,7 +64,14 @@ class UserController extends Controller
      */
     public function connexionAction(Request $request)
     {
-        if ($this->getUserConnected())
+        $authenticationUtils = $this->container->get('security.authentication_utils');
+
+        //recup erreur si erreur il y a
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if ($this->getUser())
         {
             //renvoie vers la page d'accueil
             return $this->redirectToRoute('homepage');
@@ -77,44 +85,12 @@ class UserController extends Controller
         $form = $this->createForm(UserConnectType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() AND $form->isValid())
-        {
-            $userExist = $userManager->getUserByEmail($user->getEmail());
-
-            //mot de passe encodé
-            $encodedPassword = $this->encode($user,$user->getPassword());
-
-            if ($userExist->getPassword() == $encodedPassword)
-            {
-                //connexion reussie
-                //message de notification
-                $this->addFlash(
-                    'success',
-                    'Vous vous êtes connecté avec succès !'
-                );
-
-                //ouverture de la session
-                $session = new Session();
-
-                $session->set('userId', $userExist->getId());
-
-                //renvoie vers la page d'accueil
-                return $this->redirectToRoute('homepage');
-            }
-            else
-            {
-                $this->addFlash(
-                    'danger',
-                    'Erreur de login et/ou de mot de passe!'
-                );
-            }
-        }
-
         return $this->render(':user:signin.html.twig', array(
+            'last_username' => $lastUsername,
+            'error'         => $error,
             'form' => $form->createView(),
             'user' => null,
         ));
-
     }
 
     /**
@@ -122,7 +98,6 @@ class UserController extends Controller
      */
     public function logoutAction(Request $request)
     {
-        $request->getSession()->invalidate();
         //renvoie vers la page d'accueil
         return $this->redirectToRoute('homepage');
     }
@@ -143,11 +118,4 @@ class UserController extends Controller
         return $encoded;
     }
 
-    /**
-     * @return mixed|null
-     */
-    private function getUserConnected()
-    {
-        return $this->getUserManager()->getUserConnected();
-    }
 }
