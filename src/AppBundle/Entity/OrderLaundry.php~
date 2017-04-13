@@ -223,35 +223,5 @@ class OrderLaundry
     }
 
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->orderItems = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add orderItem
-     *
-     * @param \AppBundle\Entity\orderItem $orderItem
-     *
-     * @return OrderLaundry
-     */
-    public function addOrderItem(\AppBundle\Entity\orderItem $orderItem)
-    {
-        $this->orderItems[] = $orderItem;
-
-        return $this;
-    }
-
-    /**
-     * Remove orderItem
-     *
-     * @param \AppBundle\Entity\orderItem $orderItem
-     */
-    public function removeOrderItem(\AppBundle\Entity\orderItem $orderItem)
-    {
-        $this->orderItems->removeElement($orderItem);
-    }
 }
+

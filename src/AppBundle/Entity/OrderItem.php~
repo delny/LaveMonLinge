@@ -158,35 +158,5 @@ class OrderItem
 
 
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->options = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add option
-     *
-     * @param \AppBundle\Entity\OptionLaundry $option
-     *
-     * @return OrderItem
-     */
-    public function addOption(\AppBundle\Entity\OptionLaundry $option)
-    {
-        $this->options[] = $option;
-
-        return $this;
-    }
-
-    /**
-     * Remove option
-     *
-     * @param \AppBundle\Entity\OptionLaundry $option
-     */
-    public function removeOption(\AppBundle\Entity\OptionLaundry $option)
-    {
-        $this->options->removeElement($option);
-    }
 }
+

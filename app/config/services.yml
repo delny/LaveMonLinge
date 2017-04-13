@@ -16,22 +16,27 @@ services:
         arguments:
             - "@service_container"
     app.order_item_manager:
-            class: AppBundle\Manager\OrderItemManager
-            arguments:
-              - "@=service('doctrine').getManager()"
+        class: AppBundle\Manager\OrderItemManager
+        arguments:
+          - "@=service('doctrine').getManager()"
     
     app.laundry_manager:
-            class: AppBundle\Manager\LaundryManager
-            arguments:
-              - "@=service('doctrine').getManager()"
+        class: AppBundle\Manager\LaundryManager
+        arguments:
+          - "@=service('doctrine').getManager()"
 
     app.cart_manager:
-            class: AppBundle\Manager\CartManager
-            arguments:
-              - "@session"
+        class: AppBundle\Manager\CartManager
+        arguments:
+          - "@session"
     admin.optionlaundry:
-            class: AppBundle\Admin\OptionLaundryAdmin
-            arguments: [~, AppBundle\Entity\OptionLaundry, ~]
-            tags:
-                - { name: sonata.admin, manager_type: orm, label: OptionLaundry }
+        class: AppBundle\Admin\OptionLaundryAdmin
+        arguments: [~, AppBundle\Entity\OptionLaundry, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: OptionLaundry }
+
+    app.product_manager:
+        class: AppBundle\Manager\ProductManager
+        arguments:
+            - "@=service('doctrine').getManager()"
 

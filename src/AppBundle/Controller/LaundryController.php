@@ -16,6 +16,9 @@ class LaundryController extends Controller
      */
     public function listAction(Request $request)
     {
+        // recupere liste produits
+        $bag = $this->getManager('app.product_manager')->getBag();
+
         $form = $this->createForm(LaundryType::class, $this->getManager("app.laundry_manager")->create());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -35,7 +38,7 @@ class LaundryController extends Controller
             // redirection
             return $this->redirectToRoute('app_showCart');
         }
-        return $this->render(':lavage:list.html.twig', ["form" => $form->createView()]);
+        return $this->render(':lavage:list.html.twig', ["form" => $form->createView(), 'bag' => $bag]);
     }
 
 

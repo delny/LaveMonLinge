@@ -1,0 +1,46 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProductType
+ *
+ * @ORM\Table(name="product_type")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductTypeRepository")
+ */
+class ProductType
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+
+
+    /**
+     *
+     * @ORM\Column(name="compute_price_by_weight", type="boolean")
+     */
+    private $computePriceByWeight;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product",
+     *     mappedBy="type")
+     */
+    private $products;
+}
+

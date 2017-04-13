@@ -2,30 +2,26 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Form\Model\Laundry;
-use Symfony\Component\HttpFoundation\Session\Session;
+use AppBundle\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
 
 
-class CartManager
+class ProductManager
 {
-    private $session;
+    private $entityManager;
 
-    public function __construct(Session $session)
+    /**
+     * UserManager constructor.
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->session = $session;
+        $this->entityManager = $entityManager;
     }
 
 
-    public function addToCart($id, Laundry $laundry)
-    {
-
-        if (!$this->session->has('cart')) {
-            $this->session->set('cart',[]);
-        }
-        $cart = $this->session->get('cart');
-
-        $cart[$id] = $laundry->getQte();
-        $this->session->set('cart',$cart);
-
+    public function getBag(){
+        $bag = $this->entityManager->getRepository(Product::class)->findAll();
+        return $bag;
     }
 }
