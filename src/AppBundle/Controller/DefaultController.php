@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
@@ -27,14 +26,7 @@ class DefaultController extends Controller
      */
     private function getUserConnected()
     {
-        $session = new Session();
-        $userId = $session->get('userId');
-        if ($userId == null)
-        {
-            return null;
-        }
-
-        return $this->getUserManager()->getUserById($userId);
+        return $this->getUserManager()->getUserConnected();
     }
 
     /**

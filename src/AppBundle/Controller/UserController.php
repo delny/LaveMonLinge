@@ -148,13 +148,6 @@ class UserController extends Controller
      */
     private function getUserConnected()
     {
-        $session = new Session();
-        $userId = $session->get('userId');
-        if ($userId == null)
-        {
-            return null;
-        }
-
-        return $this->getUserManager()->getUserById($userId);
+        return $this->getUserManager()->getUserConnected();
     }
 }
