@@ -37,3 +37,8 @@ a:hover {
     border-radius: 10px;
     padding: 1%;
 }
+
+.pressing img {
+    width: 300px;
+    height:350px;
+}
