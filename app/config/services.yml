@@ -13,6 +13,16 @@ services:
               - "@=service('doctrine').getManager()"
 
     app.order_item_manager:
-                class: AppBundle\Manager\OrderItemManager
-                arguments:
-                  - "@=service('doctrine').getManager()"
+            class: AppBundle\Manager\OrderItemManager
+            arguments:
+              - "@=service('doctrine').getManager()"
+
+    app.laundry_manager:
+            class: AppBundle\Manager\LaundryManager
+            arguments:
+              - "@=service('doctrine').getManager()"
+
+    app.cart_manager:
+            class: AppBundle\Manager\CartManager
+            arguments:
+              - "@session"

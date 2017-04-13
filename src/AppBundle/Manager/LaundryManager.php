@@ -3,9 +3,10 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\OrderItem;
+use AppBundle\Form\Model\Laundry;
 use Doctrine\ORM\EntityManagerInterface;
 
-class OrderItemManager
+class LaundryManager
 {
     private $entityManager;
 
@@ -23,7 +24,7 @@ class OrderItemManager
      */
     public function create()
     {
-        return new OrderItem();
+        return new Laundry();
     }
 
     public function findArray($cart){

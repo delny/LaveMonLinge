@@ -32,7 +32,9 @@ class CartController extends Controller
         }
 
         $items = $this->getManager("app.order_item_manager")->findArray(array_keys($cart));
-
+        //dump($items);
+        //dump($items[0]->setQte($qte));
+        //die();
         return $this->render(':panier:panier.html.twig', ['items' => $items,'cart' => $cart]);
     }
 

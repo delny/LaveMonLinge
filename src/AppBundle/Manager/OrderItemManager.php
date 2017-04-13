@@ -30,4 +30,12 @@ class OrderItemManager
         $categories = $this->entityManager->getRepository(OrderItem::class)->findArray($cart);
         return $categories;
     }
+
+    public function save(OrderItem $order_item){
+        if(null === $order_item->getId())
+            $this->entityManager->persist($order_item);
+
+        $this->entityManager->flush();
+    }
+
 }

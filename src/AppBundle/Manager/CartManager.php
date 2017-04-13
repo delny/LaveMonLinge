@@ -2,27 +2,30 @@
 
 namespace AppBundle\Manager;
 
-use AppBundle\Entity\OrderItem;
 use AppBundle\Form\Model\Laundry;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class SessionManager
+
+class CartManager
 {
     private $session;
 
     public function __construct(Session $session)
     {
-
+        $this->session = $session;
     }
 
 
-    public function addToSession()
+    public function addToCart($id, Laundry $laundry)
     {
-        $session = $this->container->get('session');
-        if (!$session->has('cart')) {
-            $session->set('cart',[]);
+
+        if (!$this->session->has('cart')) {
+            $this->session->set('cart',[]);
         }
-        $cart = $session->get('cart');
-        $session->set('cart',$cart);
+        $cart = $this->session->get('cart');
+
+        $cart[$id] = $laundry->getQte();
+        $this->session->set('cart',$cart);
+
     }
 }

@@ -7,10 +7,11 @@
         <thead>
         <tr>
             <th>Nom</th>
-            <th>Type</th>
+            <th>Quantité</th>
             <th>Date de collecte</th>
             <th>Date de livraison</th>
             <th>Prix unitaire</th>
+            <th>Prix total</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@
                 <td>02/02/2017</td>
                 <td>02/02/2017</td>
                 <td>{{ item.product.price }}</td>
+                <td>{{ item.qte * item.product.price }}</td>
             </tr>
         {% endfor %}
 

@@ -49,6 +49,12 @@ class Product
     private $typeClothing;
 
     /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderItem",
+     *  mappedBy="product" )
+     */
+    private $orderItems;
+    /**
      * @return int
      */
     public function getId()

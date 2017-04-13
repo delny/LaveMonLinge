@@ -46,7 +46,9 @@ class OrderItem
 
     /**
      * @var product $product
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product",
+     *  inversedBy="orderItems"
+     * )
      */
     private $product;
 
