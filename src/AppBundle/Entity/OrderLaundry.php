@@ -24,16 +24,16 @@ class OrderLaundry
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dataCollect", type="datetime")
+     * @ORM\Column(name="date_collect", type="datetime")
      */
-    private $dataCollect;
+    private $dateCollect;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dataDelivery", type="datetime")
+     * @ORM\Column(name="date_delivery", type="datetime")
      */
-    private $dataDelivery;
+    private $dateDelivery;
 
     /**
      * @var string
@@ -42,17 +42,11 @@ class OrderLaundry
      */
     private $statut;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbBags", type="integer")
-     */
-    private $nbBags;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="priceDelivery", type="integer")
+     * @ORM\Column(name="price_delivery", type="integer")
      */
     private $priceDelivery;
 
@@ -78,8 +72,19 @@ class OrderLaundry
      */
     private $user;
 
+   
     /**
-     * @return int
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orderItems = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -87,46 +92,70 @@ class OrderLaundry
     }
 
     /**
-     * @param int $id
+     * Set dateCollect
+     *
+     * @param \DateTime $dateCollect
+     *
+     * @return OrderLaundry
      */
-    public function setId($id)
+    public function setDateCollect($dateCollect)
     {
-        $this->id = $id;
+        $this->dateCollect = $dateCollect;
+
+        return $this;
     }
 
     /**
+     * Get dateCollect
+     *
      * @return \DateTime
      */
-    public function getDataCollect()
+    public function getDateCollect()
     {
-        return $this->dataCollect;
+        return $this->dateCollect;
     }
 
     /**
-     * @param \DateTime $dataCollect
+     * Set dateDelivery
+     *
+     * @param \DateTime $dateDelivery
+     *
+     * @return OrderLaundry
      */
-    public function setDataCollect($dataCollect)
+    public function setDateDelivery($dateDelivery)
     {
-        $this->dataCollect = $dataCollect;
+        $this->dateDelivery = $dateDelivery;
+
+        return $this;
     }
 
     /**
+     * Get dateDelivery
+     *
      * @return \DateTime
      */
-    public function getDataDelivery()
+    public function getDateDelivery()
     {
-        return $this->dataDelivery;
+        return $this->dateDelivery;
     }
 
     /**
-     * @param \DateTime $dataDelivery
+     * Set statut
+     *
+     * @param string $statut
+     *
+     * @return OrderLaundry
      */
-    public function setDataDelivery($dataDelivery)
+    public function setStatut($statut)
     {
-        $this->dataDelivery = $dataDelivery;
+        $this->statut = $statut;
+
+        return $this;
     }
 
     /**
+     * Get statut
+     *
      * @return string
      */
     public function getStatut()
@@ -135,31 +164,23 @@ class OrderLaundry
     }
 
     /**
-     * @param string $statut
+     * Set priceDelivery
+     *
+     * @param integer $priceDelivery
+     *
+     * @return OrderLaundry
      */
-    public function setStatut($statut)
+    public function setPriceDelivery($priceDelivery)
     {
-        $this->statut = $statut;
+        $this->priceDelivery = $priceDelivery;
+
+        return $this;
     }
 
     /**
-     * @return int
-     */
-    public function getNbBags()
-    {
-        return $this->nbBags;
-    }
-
-    /**
-     * @param int $nbBags
-     */
-    public function setNbBags($nbBags)
-    {
-        $this->nbBags = $nbBags;
-    }
-
-    /**
-     * @return int
+     * Get priceDelivery
+     *
+     * @return integer
      */
     public function getPriceDelivery()
     {
@@ -167,68 +188,27 @@ class OrderLaundry
     }
 
     /**
-     * @param int $priceDelivery
-     */
-    public function setPriceDelivery($priceDelivery)
-    {
-        $this->priceDelivery = $priceDelivery;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotal()
-    {
-        return $this->total;
-    }
-
-    /**
-     * @param int $total
+     * Set total
+     *
+     * @param integer $total
+     *
+     * @return OrderLaundry
      */
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
     }
 
     /**
-     * @return OrderItem
+     * Get total
+     *
+     * @return integer
      */
-    public function getOrderItems()
+    public function getTotal()
     {
-        return $this->orderItems;
-    }
-
-    /**
-     * @param OrderItem $orderItems
-     */
-    public function setOrderItems($orderItems)
-    {
-        $this->orderItems = $orderItems;
-    }
-
-    /**
-     * @return user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param user $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->orderItems = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->total;
     }
 
     /**
@@ -253,5 +233,39 @@ class OrderLaundry
     public function removeOrderItem(\AppBundle\Entity\orderItem $orderItem)
     {
         $this->orderItems->removeElement($orderItem);
+    }
+
+    /**
+     * Get orderItems
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderItems()
+    {
+        return $this->orderItems;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return OrderLaundry
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

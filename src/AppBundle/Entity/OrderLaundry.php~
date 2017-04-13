@@ -24,16 +24,16 @@ class OrderLaundry
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dataCollect", type="datetime")
+     * @ORM\Column(name="date_collect", type="datetime")
      */
-    private $dataCollect;
+    private $dateCollect;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dataDelivery", type="datetime")
+     * @ORM\Column(name="date_delivery", type="datetime")
      */
-    private $dataDelivery;
+    private $dateDelivery;
 
     /**
      * @var string
@@ -42,17 +42,11 @@ class OrderLaundry
      */
     private $statut;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nbBags", type="integer")
-     */
-    private $nbBags;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="priceDelivery", type="integer")
+     * @ORM\Column(name="price_delivery", type="integer")
      */
     private $priceDelivery;
 
@@ -78,150 +72,5 @@ class OrderLaundry
      */
     private $user;
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDataCollect()
-    {
-        return $this->dataCollect;
-    }
-
-    /**
-     * @param \DateTime $dataCollect
-     */
-    public function setDataCollect($dataCollect)
-    {
-        $this->dataCollect = $dataCollect;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDataDelivery()
-    {
-        return $this->dataDelivery;
-    }
-
-    /**
-     * @param \DateTime $dataDelivery
-     */
-    public function setDataDelivery($dataDelivery)
-    {
-        $this->dataDelivery = $dataDelivery;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatut()
-    {
-        return $this->statut;
-    }
-
-    /**
-     * @param string $statut
-     */
-    public function setStatut($statut)
-    {
-        $this->statut = $statut;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNbBags()
-    {
-        return $this->nbBags;
-    }
-
-    /**
-     * @param int $nbBags
-     */
-    public function setNbBags($nbBags)
-    {
-        $this->nbBags = $nbBags;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPriceDelivery()
-    {
-        return $this->priceDelivery;
-    }
-
-    /**
-     * @param int $priceDelivery
-     */
-    public function setPriceDelivery($priceDelivery)
-    {
-        $this->priceDelivery = $priceDelivery;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTotal()
-    {
-        return $this->total;
-    }
-
-    /**
-     * @param int $total
-     */
-    public function setTotal($total)
-    {
-        $this->total = $total;
-    }
-
-    /**
-     * @return OrderItem
-     */
-    public function getOrderItems()
-    {
-        return $this->orderItems;
-    }
-
-    /**
-     * @param OrderItem $orderItems
-     */
-    public function setOrderItems($orderItems)
-    {
-        $this->orderItems = $orderItems;
-    }
-
-    /**
-     * @return user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param user $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-    }
-
-
+   
 }
-
