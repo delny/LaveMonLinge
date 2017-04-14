@@ -1,7 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
-
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         my_provider:
@@ -14,20 +15,16 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        main:
+            pattern:  ^/
+            anonymous:  true
             guard:
                 authenticators:
                     - app.token_authenticator
             provider: my_provider
-
-        main:
-            anonymous:  ~
             form_login:
                 login_path: app_connexion
                 check_path: app_connexion
-            guard:
-                authenticators:
-                    - app.token_authenticator
-            provider: my_provider
             logout:
                 path: app_logout
                 target: homepage
@@ -43,5 +40,14 @@ security:
             encode_as_base64: true
 
     access_control:
+        # uniquement pour user
+        - { path: ^/cart$, role:  ROLE_USER }
+        - { path: ^/laundry$, role:  ROLE_USER }
+        - { path: ^/pressing$, role:  ROLE_USER }
+        - { path: ^/form, role:  ROLE_USER }
+        # accessible en anonyme
+        - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/sigin$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/inscription$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/admin/, role: ROLE_ADMIN }
 
