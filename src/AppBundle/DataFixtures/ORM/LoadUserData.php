@@ -13,15 +13,12 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
             [
                 'email' =>'test@gmail.com',
                 'password'=> hash('sha512','test'),
-
             ],
 
 
             [
                 'email' =>'test2@gmail.com',
                 'password'=> hash('sha512','test2'),
-
-
             ],
         ];
         foreach ($datas as $i => $data) {

@@ -5,7 +5,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CartController extends Controller
+class BasketController extends Controller
 {
     /**
      * @Route("/addtocart/{id}", name="app_addToCart")
