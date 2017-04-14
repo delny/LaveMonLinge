@@ -39,4 +39,8 @@ services:
         class: AppBundle\Manager\ProductManager
         arguments:
             - "@=service('doctrine').getManager()"
+    app.producttype_manager:
+        class: AppBundle\Manager\ProductTypeManager
+        arguments:
+            - "@=service('doctrine').getManager()"
 

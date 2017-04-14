@@ -49,4 +49,50 @@ a:hover {
 .form-signin label, .form-inscription label {
     width:150px;
 }
-
+.welcome {
+    text-align: center;
+}
+.welcome section {
+    margin: 40px 0px;
+}
+.welcome h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size:72px;
+}
+.welcome .btn-welcome {
+    cursor:pointer;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #144352;
+    width: 171px;
+    height: 40px;
+    /*texte*/
+    color: #ffffff;
+}
+.welcome .btn-welcome:hover {
+    background-color: #0F323E;
+}
+/* logos section*/
+.welcome .logo-welcome{
+    border-radius: 50%;
+    border: 2px solid #144352;
+    width: 80px;
+    height: 80px;
+    margin:auto;
+}
+.welcome .logo-welcome p {
+    padding-top: 20px;
+}
+.welcome .logo-welcome p span {
+    color: #0A2129;
+    font-size: 40px; /* Approximation causée par une substitution de police */
+    font-weight: 400;
+    line-height: 42px; /* Approximation causée par une substitution de police */
+    text-align: center;
+}
+.welcome .logo-choice{
+    border: 2px solid #144352;
+    width: 140px;
+    height: 100px;
+    margin:auto;
+}
