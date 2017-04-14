@@ -14,13 +14,9 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'datecollecte' => \DateTime::createFromFormat('Y-m-d H:i:s', '2017-04-12 16:00:00'),
                 'datelivraison' => \DateTime::createFromFormat('Y-m-d H:i:s', '2017-04-15 16:00:00'),
                 'statut'=>'Expédié',
-                'nombreSacs'=>3,
                 'prixLivraison'=>9,
                 'total'=>48,
                 'user'=>$this->getReference('user-0'),
-
-
-
             ],
 
 
@@ -28,21 +24,16 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'datecollecte' => \DateTime::createFromFormat('Y-m-d H:i:s', '2017-04-15 16:00:00'),
                 'datelivraison' => \DateTime::createFromFormat('Y-m-d H:i:s', '2017-04-18 16:00:00'),
                 'statut'=>'Expédié',
-                'nombreSacs'=>3,
                 'prixLivraison'=>9,
                 'total'=>19,
                 'user'=>$this->getReference('user-1'),
-
-
-
             ],
         ];
         foreach ($datas as $i => $data) {
             $order = new OrderLaundry();
-            $order->setDataCollect($data['datecollecte']);
-            $order->setDataDelivery($data['datelivraison']);
+            $order->setDateCollect($data['datecollecte']);
+            $order->setDateDelivery($data['datelivraison']);
             $order->setStatut($data['statut']);
-            $order->setNbBags($data['nombreSacs']);
             $order->setPriceDelivery($data['prixLivraison']);
             $order->setTotal($data['total']);
             $order->setUser($data['user']);

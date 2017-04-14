@@ -28,4 +28,7 @@ class CartManager
         $this->session->set('cart',$cart);
 
     }
+
+    
+
 }
