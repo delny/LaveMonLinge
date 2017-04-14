@@ -10,28 +10,33 @@ namespace AppBundle\Form\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class Laundry
+class Card
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\NotEqualTo(value = 0)
-     */
-    protected $qte;
 
     /**
-     * @return mixed
+     * @var array
      */
-    public function getQte()
+    private $products;
+
+    /**
+     * @return array
+     */
+    public function getProducts()
     {
-        return $this->qte;
+        return $this->products;
     }
 
     /**
-     * @param mixed $qte
+     * @param array $products
+     * @return Card
      */
-    public function setQte($qte)
+    public function setProducts($products)
     {
-        $this->qte = $qte;
+        $this->products = $products;
+        return $this;
     }
+
+
+
 
 }

@@ -2,15 +2,15 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Product;
+use AppBundle\Entity\ProductType;
+use AppBundle\Form\Model\Card;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LaundryType extends AbstractType
+class CardType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,14 +18,13 @@ class LaundryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('qte', ChoiceType::class, [
-                'choices' => [
-                    '50'    => '50',
-                    '3'     => '3'
+            $builder->add('products', CollectionType::class, [
+                'entry_type' => ProductEntryType::class,
+                'entry_options' => [
+                  'productType' => $options['productType'],
                 ],
-            ])
-            ->add('submit', SubmitType::class);
+                'allow_add' => true,
+            ]);
     }
 
     /**
@@ -34,8 +33,10 @@ class LaundryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-           'data_class' => 'AppBundle\Form\Model\Laundry',
+           'data_class' => Card::class,
         ));
+        $resolver->setRequired(['productType']);
+        $resolver->setAllowedTypes('productType',ProductType::class);
     }
 
 }

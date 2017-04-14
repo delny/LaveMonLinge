@@ -12,11 +12,10 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('bundles/app/css/main.css') }}">
-    <!--[if lt IE 9]>
-    <script src="{{ asset('bundles/app/js/vendor/html5-3.6-respond-1.4.2.min.js')}}"></script>
-    <![endif]-->
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/main.css') }}">
+    {% endblock %}
 </head>
 <body>
     <!--[if lt IE 8]>
@@ -48,6 +47,13 @@
 
 
         {% block content %}{% endblock %}
+        {% block javascript %}
+            <!--[if lt IE 9]>
+            <script src="{{ asset('bundles/app/js/vendor/html5-3.6-respond-1.4.2.min.js')}}"></script>
+            <![endif]-->
+            <script src="{{ asset('bundles/app/js/vendor/jquery-1.11.2.min.js') }}"></script>
+            <script src="{{ asset('bundles/app/js/main.js') }}"></script>
+        {% endblock %}
         <footer>
             <p>&copy; Company 2015</p>
         </footer>

@@ -6,7 +6,7 @@ use AppBundle\Form\Model\Laundry;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 
-class CartManager
+class CardManager
 {
     private $session;
 

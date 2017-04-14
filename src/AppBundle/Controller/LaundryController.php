@@ -11,9 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LaundryController extends Controller
 {
-    /**
-     * @Route("/laundry", name="app_laundry_list")
-     */
+
     public function listAction(Request $request)
     {
         // recupere liste produits
