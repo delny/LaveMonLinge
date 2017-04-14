@@ -55,7 +55,6 @@ class UserController extends Controller
 
         return $this->render(':user:inscription.html.twig', array(
             'form' => $form->createView(),
-            'user' => null,
         ));
     }
 
@@ -89,7 +88,6 @@ class UserController extends Controller
             'last_username' => $lastUsername,
             'error'         => $error,
             'form' => $form->createView(),
-            'user' => null,
         ));
     }
 

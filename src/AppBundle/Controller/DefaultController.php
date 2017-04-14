@@ -13,11 +13,17 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $user = $this->getUser();
-        // replace this example code with whatever you need
-        return $this->render(':panier:panier.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-            'user' => $user,
+        $listTypeProduct = $this->getTypeProductManager()->getListTypeProduct();
+        $idProducts = [];
+        foreach ($listTypeProduct as $key => $typeProduct)
+        {
+            $idProducts[$typeProduct->getName()] = $typeProduct->getId();
+        }
+        extract($idProducts);
+        // retour de la vue
+        return $this->render(':accueil:accueil.html.twig', [
+            'idPressing' => $pressing,
+            'idLaverie' => $laverie,
         ]);
     }
 
@@ -27,5 +33,10 @@ class DefaultController extends Controller
     private function getUserManager()
     {
         return $this->container->get('app.user_manager');
+    }
+
+    private function getTypeProductManager()
+    {
+        return $this->container->get('app.producttype_manager');
     }
 }

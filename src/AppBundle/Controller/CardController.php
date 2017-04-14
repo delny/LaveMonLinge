@@ -2,9 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\OrderLaundry;
 use AppBundle\Entity\ProductType;
-
 use AppBundle\Form\CardType;
 use AppBundle\Form\Model\Card;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +19,8 @@ class CardController extends Controller
         $form = $this->createForm(CardType::class, new Card(), ['productType' => $productType]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getManager('app.cart_manager')->addToCart($productType->getId(), $form->getData());
+            $this->getManager('app.card_manager')->addToBasket($form->getData());
+            return $this->redirectToRoute('app_showCart');
         }
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
     }

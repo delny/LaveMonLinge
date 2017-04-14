@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class ProductTypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getListTypeProduct()
+    {
+        return $this->findAll();
+    }
 }
