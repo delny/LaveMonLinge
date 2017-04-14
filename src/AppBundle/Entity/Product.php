@@ -55,7 +55,12 @@ class Product
      *  mappedBy="product" )
      */
     private $orderItems;
-    
+
+    /**
+     * @var string
+     * @ORM\Column(name="img", type="string",length=255)
+     */
+    private $img;
 
 
     /**
@@ -215,5 +220,21 @@ class Product
     public function getOrderItems()
     {
         return $this->orderItems;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param string $img
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
     }
 }
