@@ -34,6 +34,11 @@ services:
         arguments: [~, AppBundle\Entity\OptionLaundry, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: OptionLaundry }
+    admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        arguments: [~,AppBundle\Entity\Product,~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, label: Product }
 
     app.product_manager:
         class: AppBundle\Manager\ProductManager

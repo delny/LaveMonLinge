@@ -16,16 +16,19 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
                 'name' =>'chemise',
                 'price'=> 10,
                 'type_id' => $this->getReference('productType-0'),
+                'img' => 'chemise.jpg',
             ],
             [
                 'name' =>'veste',
                 'price'=> 20,
                 'type_id' => $this->getReference('productType-0'),
+                'img' => 'chemise.jpg',
             ],
             [
                 'name' =>'sac',
                 'price'=> 15,
                 'type_id' => $this->getReference('productType-1'),
+                'img' => 'chemise.jpg',
             ],
         ];
 
@@ -34,6 +37,7 @@ class LoadProductData extends AbstractFixture implements OrderedFixtureInterface
             $product->setName($data['name']);
             $product->setPrice($data['price']);
             $product->setType($data['type_id']);
+            $product->setImg($data['img']);
             $manager->persist($product);
             $this->addReference('product-'.$i, $product);
         }

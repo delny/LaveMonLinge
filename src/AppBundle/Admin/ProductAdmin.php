@@ -9,20 +9,19 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ProductAdmin extends AbstractAdmin
 {
+
     protected function configureFormFields(FormMapper $form)
     {
         //Fait référence aux formulaires de créations et d'update
         $form->add('name', 'text');
         $form->add('price','number');
-        $form->add('type_id','number');
-        $form->add('img','text');
+        $form->add('img','file');
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter->add('name');
         $filter->add('price');
-        $filter->add('type_id');
         $filter->add('img');
     }
 
@@ -30,7 +29,23 @@ class ProductAdmin extends AbstractAdmin
     {
         $list->addIdentifier('name');
         $list->add('price');
-        $list->add('type_id');
-        $list->add('imd');
+        $list->add('img');
+    }
+
+    public function prePersist($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    public function preUpdate($image)
+    {
+        $this->manageFileUpload($image);
+    }
+
+    private function manageFileUpload($image)
+    {
+        if ($image->getFile()) {
+            $image->refreshUpdated();
+        }
     }
 }
