@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <section class="lavage">
-        <article class="col-md-4">
-            <figure>
-                <img src="{{ asset('bundles/app/img/chemise.jpg') }}" alt="">
-                <figcaption>
-                    {{ form(form) }}
-                </figcaption>
-            </figure>
-        </article>
+        <h2>Products</h2>
+        {{ form_start(form) }}
+        <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">
+
+        </ul>
+
+        {% if form.offsetExists('quantity') %}
+            {{ form_row(form.quantity) }}
+        {% endif %}
+
+        <button type="submit">Ajoutez au panier</button>
+        {{ form_end(form) }}
+
     </section>
+
 {% endblock %}
