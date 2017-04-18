@@ -12,14 +12,8 @@ class BasketController extends Controller
      * @Route("/basket", name="app_showBasket")
      */
     public function showBasketAction(){
-        $session = $this->container->get('session');
-        if($session->has('cart')){
-            $cart = $session->get('cart');
-        }
-
-        $items = $this->getManager("app.order_item_manager")->findArray(array_keys($cart->getProducts()));
-
-        return $this->render(':panier:panier.html.twig', ['items' => $items,'cart' => $cart]);
+        $basket = $this->getManager('app.basket_manager')->getBasket()->getProducts();
+        return $this->render(':panier:panier.html.twig', ['basket' => $basket]);
     }
 
     private function getManager($manager){

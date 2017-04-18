@@ -12,12 +12,14 @@
         </div>
         {% if app.user %}
             <div id="navbar" class="navbar-collapse collapse connect">
+                <a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
                 <a href="{{ path('app_logout') }}" >Se déconnecter</a>
             </div>
         {% else %}
             <div id="navbar" class="navbar-collapse collapse connect">
                 <a href="{{ path('app_connexion') }}" >Connexion</a>
                 <a href="{{ path('app_inscription') }}" >Inscription</a>
+                <a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
             </div>
         {% endif %}
         <!--/.navbar-collapse -->
