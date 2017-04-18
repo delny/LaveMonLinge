@@ -1,0 +1,23 @@
+{% block _card_products_entry_product_entry_widget %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>
+                        {{ label }}
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    {% if form.parent.vars.choices[form.vars.value] is defined %}
+                        <img src="{{ asset('bundles/app/img/'~form.parent.vars.choices[form.vars.value].data.img) }}" alt="" />
+                    {% endif %}
+
+                    <p>
+                        {{- form_widget(form) -}}
+                    </p>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block _card_products_entry_product_entry_label %}
+{% endblock %}
