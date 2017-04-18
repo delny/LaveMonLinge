@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -39,7 +38,6 @@ class ProductAdmin extends AbstractAdmin
     {
         $filter->add('name');
         $filter->add('price');
-        $filter->add('type');
         $filter->add('img');
     }
 
@@ -50,7 +48,6 @@ class ProductAdmin extends AbstractAdmin
     {
         $list->addIdentifier('name');
         $list->add('price');
-        $list->add('type');
         $list->add('img');
     }
 

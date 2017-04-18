@@ -60,7 +60,7 @@ class OrderLaundry
     /**
      * @var OrderItem $orderItems
      * @ORM\OneToMany(
-     *     targetEntity="AppBundle\Entity\orderItem",
+     *     targetEntity="AppBundle\Entity\OrderItem",
      *     mappedBy="orderLaundry"
      * )
      */

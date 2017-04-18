@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class OrderLaundryAdmin extends AbstractAdmin
 {
@@ -17,12 +18,14 @@ class OrderLaundryAdmin extends AbstractAdmin
         $userManager = $this->configurationPool->getContainer()->get('app.user_manager');
         $usersList = $userManager->getAllUsers();
 
-        $form->add('user',\Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
+        $form->add('user',ChoiceType::class, array(
             'choices' => $usersList,
-            'choice_label' => 'name',
+            'choice_label' => 'email',
         ));
         $form->add('statut','text');
         $form->add('total','number');
+        $form->add('dateCollect','date');
+        $form->add('dateDelivery','date');
     }
 
     /**
@@ -30,9 +33,11 @@ class OrderLaundryAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('user');
-        $filter->add('status');
+        $filter->add('user.email');
+        $filter->add('statut');
         $filter->add('total');
+        $filter->add('dateCollect');
+        $filter->add('dateDelivery');
     }
 
     /**
@@ -40,8 +45,10 @@ class OrderLaundryAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('user');
-        $list->add('status');
+        $list->add('user.email');
+        $list->add('statut');
         $list->add('total');
+        $list->add('dateCollect');
+        $list->add('dateDelivery');
     }
 }
