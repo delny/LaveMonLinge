@@ -5,8 +5,8 @@ namespace AppBundle\Form;
 use AppBundle\Entity\OptionLaundry;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductType;
-use AppBundle\Form\Model\Card;
 use AppBundle\Form\Model\CardEntry;
+use AppBundle\Form\Type\GenderType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductEntryType extends AbstractType
@@ -23,15 +25,7 @@ class ProductEntryType extends AbstractType
         $productType = $options['productType'];
 
         if($productType->getComputePriceByWeight()) {
-            $builder->add('quantity', ChoiceType::class, [
-                'choices' => [
-                    1 => 1,
-                    2 => 2,
-                    3 => 3,
-                    4 => 4,
-                    5 => 5,
-                ],
-            ]);
+            $builder->add('quantity', GenderType::class);
             $builder->add('optionLaundry', EntityType::class, [
                'class' => OptionLaundry::class,
             ]);
@@ -46,6 +40,7 @@ class ProductEntryType extends AbstractType
                     },
                     'empty_data' => '',
                     'required' => false,
+                    'expanded' => true,
                 ]);
         }
         $listener = function (FormEvent $event) {
@@ -76,4 +71,17 @@ class ProductEntryType extends AbstractType
         $resolver->setAllowedTypes('productType',ProductType::class);
     }
 
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $pictures = [];
+        foreach ($options['productType']->getProducts() as $choice) {
+            $pictures[$choice->getId()] = $choice->getImg();
+        }
+        $view->vars['pictures'] = $pictures;
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'product_entry';
+    }
 }
