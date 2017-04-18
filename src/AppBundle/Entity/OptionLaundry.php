@@ -35,6 +35,11 @@ class OptionLaundry
      */
     private $price;
 
+    public function __toString()
+    {
+        return $this->getLabel();
+    }
+
     /**
      * @return int
      */

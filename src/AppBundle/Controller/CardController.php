@@ -19,8 +19,8 @@ class CardController extends Controller
         $form = $this->createForm(CardType::class, new Card(), ['productType' => $productType]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getManager('app.card_manager')->addToBasket($form->getData());
-            return $this->redirectToRoute('app_showCart');
+            $this->getManager('app.basket_manager')->addToBasket($form->getData());
+            return $this->redirectToRoute('app_showBasket');
         }
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
     }

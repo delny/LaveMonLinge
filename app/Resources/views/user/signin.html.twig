@@ -19,7 +19,7 @@
     {# Génération manuelle et éclatée : #}
     <div class="form-group">
         {# Génération du label. #}
-        {{ form_label(form.email, "email") }}
+        {{ form_label(form.email, "Email :") }}
 
         {# Affichage des erreurs pour ce champ précis. #}
             {% if form_errors(form.email) %}
@@ -34,7 +34,7 @@
     {# Génération manuelle et éclatée : #}
     <div class="form-group">
         {# Génération du label. #}
-        {{ form_label(form.password, "Mot de passe") }}
+        {{ form_label(form.password, "Mot de passe:") }}
 
         {# Affichage des erreurs pour ce champ précis. #}
         {% if form_errors(form.password) %}

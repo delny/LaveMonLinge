@@ -10,25 +10,30 @@
         <thead>
         <tr>
             <th>Nom</th>
-            <th>Quantité</th>
-            <th>Date de collecte</th>
-            <th>Date de livraison</th>
             <th>Prix unitaire</th>
-            <th>Prix total</th>
+            <th>Quantité</th>
+            <th>Options</th>
+            <th>Prix unitaire options</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
-        {% for item in items %}
+        {% for basketEntry in basket %}
             <tr>
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.qte }}</td>
-                <td>02/02/2017</td>
-                <td>02/02/2017</td>
-                <td>{{ item.product.price }}</td>
-                <td>{{ item.qte * item.product.price }}</td>
+                <td>{{ basketEntry.product.name }}</td>
+                <td>{{ basketEntry.product.price }}</td>
+                {% if basketEntry.optionLaundry is null %}
+                    <td>1</td>
+                    <td>no options</td>
+                    <td>no options</td>
+                {% else %}
+                    <td>{{ basketEntry.quantity }}</td>
+                    <td>{{ basketEntry.optionLaundry.label }}</td>
+                    <td>{{ basketEntry.optionLaundry.price }}</td>
+                {% endif %}
+
             </tr>
         {% endfor %}
-
         </tbody>
     </table>
     <section class="row">

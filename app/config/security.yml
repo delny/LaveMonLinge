@@ -41,7 +41,7 @@ security:
 
     access_control:
         # uniquement pour user
-        - { path: ^/cart$, role:  ROLE_USER }
+        - { path: ^/basket$, role:  ROLE_USER }
         - { path: ^/laundry$, role:  ROLE_USER }
         - { path: ^/pressing$, role:  ROLE_USER }
         - { path: ^/form, role:  ROLE_USER }

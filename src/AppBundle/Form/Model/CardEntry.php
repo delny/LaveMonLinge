@@ -13,7 +13,27 @@ class CardEntry
 {
     private $quantity;
 
-    private $products;
+    private $product;
+
+    private $optionLaundry;
+
+    /**
+     * @return mixed
+     */
+    public function getOptionLaundry()
+    {
+        return $this->optionLaundry;
+    }
+
+    /**
+     * @param mixed $optionLaundry
+     * @return CardEntry
+     */
+    public function setOptionLaundry($optionLaundry)
+    {
+        $this->optionLaundry = $optionLaundry;
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -36,18 +56,19 @@ class CardEntry
     /**
      * @return mixed
      */
-    public function getProducts()
+    public function getProduct()
     {
-        return $this->products;
+        return $this->product;
     }
 
     /**
-     * @param mixed $products
+     * @param mixed $product
      * @return CardEntry
      */
-    public function setProducts($products)
+    public function setProduct($product)
     {
-        $this->products = $products;
+        $this->product = $product;
         return $this;
     }
+
 }
