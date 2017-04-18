@@ -154,7 +154,7 @@ class Product
     /**
      * Get type
      *
-     * @return \AppBundle\Entity\ProductType
+     * @return string
      */
     public function getType()
     {

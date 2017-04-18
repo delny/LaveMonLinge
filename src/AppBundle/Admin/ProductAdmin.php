@@ -2,55 +2,79 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\ProductType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 
 class ProductAdmin extends AbstractAdmin
 {
 
+    /**
+     * @param FormMapper $form
+     */
     protected function configureFormFields(FormMapper $form)
     {
+        $productTypeManager = $this->getConfigurationPool()->getContainer()->get('app.producttype_manager');
+        $productTypeList = $productTypeManager->getListTypeProduct();
+        $productTypePressing = $productTypeList[1];
+
         //Fait référence aux formulaires de créations et d'update
         $form->add('name', 'text');
         $form->add('price','number');
-        $form->add('type_id','sonata_type_model', array(
-            'class' => ProductType::class
+
+        $form->add('type',\Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
+            'choices' => $productTypeList,
+            'choice_label' => 'name',
         ));
         $form->add('img','file',array(
             'required' => true
         ));
     }
 
+    /**
+     * @param DatagridMapper $filter
+     */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $filter->add('name');
         $filter->add('price');
-        $filter->add('type_id');
+        //$filter->add('type');
         $filter->add('img');
     }
 
+    /**
+     * @param ListMapper $list
+     */
     protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('name');
         $list->add('price');
-        $list->add('type_id');
+        //$list->add('type');
         $list->add('img');
     }
 
+    /**
+     * @param mixed $image
+     */
     public function prePersist($image)
     {
         $this->manageFileUpload($image);
     }
 
+    /**
+     * @param mixed $image
+     */
     public function preUpdate($image)
     {
         $this->manageFileUpload($image);
     }
 
+    /**
+     * @param $image
+     */
     private function manageFileUpload($image)
     {
         $image->setFile($image->getImg());
