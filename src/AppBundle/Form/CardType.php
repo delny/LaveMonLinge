@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductType;
 use AppBundle\Form\Model\Card;
+use AppBundle\Form\Model\CardEntry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;

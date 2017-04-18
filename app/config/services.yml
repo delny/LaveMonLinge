@@ -25,8 +25,8 @@ services:
         arguments:
           - "@=service('doctrine').getManager()"
 
-    app.card_manager:
-        class: AppBundle\Manager\CardManager
+    app.basket_manager:
+        class: AppBundle\Manager\BasketManager
         arguments:
           - "@session"
     admin.optionlaundry:

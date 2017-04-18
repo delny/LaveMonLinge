@@ -13,7 +13,7 @@ class CardEntry
 {
     private $quantity;
 
-    private $products;
+    private $product;
 
     /**
      * @return mixed
@@ -36,18 +36,19 @@ class CardEntry
     /**
      * @return mixed
      */
-    public function getProducts()
+    public function getProduct()
     {
-        return $this->products;
+        return $this->product;
     }
 
     /**
-     * @param mixed $products
+     * @param mixed $product
      * @return CardEntry
      */
-    public function setProducts($products)
+    public function setProduct($product)
     {
-        $this->products = $products;
+        $this->product = $product;
         return $this;
     }
+
 }

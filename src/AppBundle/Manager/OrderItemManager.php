@@ -18,14 +18,6 @@ class OrderItemManager
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @return User
-     */
-    public function create()
-    {
-        return new OrderItem();
-    }
-
     public function findArray($cart){
         $categories = $this->entityManager->getRepository(OrderItem::class)->findArray($cart);
         return $categories;
