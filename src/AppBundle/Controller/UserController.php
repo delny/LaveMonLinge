@@ -38,6 +38,7 @@ class UserController extends Controller
             //encodage du mot de passe
             $encodedPassword = $this->encode($userNew,$userNew->getPassword());
             $userNew->setPassword($encodedPassword);
+            $userNew->setRoles(['ROLE_USER']);
 
             //ajout du user à la bdd
             $userManager->save($userNew);
