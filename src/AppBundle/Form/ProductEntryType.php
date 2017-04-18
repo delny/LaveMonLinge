@@ -31,16 +31,12 @@ class ProductEntryType extends AbstractType
             ]);
         }else{
             $builder
-                ->add('product', EntityType::class, [
-                    'class' => Product::class,
+                ->add('product', LineType::class, [
                     'query_builder' => function (EntityRepository $er) use ($productType) {
                         return $er->createQueryBuilder('u')
                             ->where('u.type = :productTypeId')
                             ->setParameter('productTypeId', $productType->getId());
                     },
-                    'empty_data' => '',
-                    'required' => false,
-                    'expanded' => true,
                 ]);
         }
         $listener = function (FormEvent $event) {
@@ -69,19 +65,5 @@ class ProductEntryType extends AbstractType
         ));
         $resolver->setRequired(['productType']);
         $resolver->setAllowedTypes('productType',ProductType::class);
-    }
-
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $pictures = [];
-        foreach ($options['productType']->getProducts() as $choice) {
-            $pictures[$choice->getId()] = $choice->getImg();
-        }
-        $view->vars['pictures'] = $pictures;
-    }
-
-    public function getBlockPrefix()
-    {
-        return 'product_entry';
     }
 }
