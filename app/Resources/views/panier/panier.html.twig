@@ -19,11 +19,20 @@
         </thead>
         <tbody>
         {% for basketEntry in basket %}
-            <td>{{ basketEntry.product.name }}</td>
-            <td>{{ basketEntry.product.price }}</td>
-            <td>{{ basketEntry.quantity }}</td>
-            <td>{{ basketEntry.optionLaundry.label }}</td>
-            <td>{{ basketEntry.optionLaundry.price }}</td>
+            <tr>
+                <td>{{ basketEntry.product.name }}</td>
+                <td>{{ basketEntry.product.price }}</td>
+                {% if basketEntry.optionLaundry is null %}
+                    <td>1</td>
+                    <td>no options</td>
+                    <td>no options</td>
+                {% else %}
+                    <td>{{ basketEntry.quantity }}</td>
+                    <td>{{ basketEntry.optionLaundry.label }}</td>
+                    <td>{{ basketEntry.optionLaundry.price }}</td>
+                {% endif %}
+
+            </tr>
         {% endfor %}
         </tbody>
     </table>

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\OptionLaundry;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductType;
+use AppBundle\Form\Model\Card;
 use AppBundle\Form\Model\CardEntry;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -50,22 +51,17 @@ class ProductEntryType extends AbstractType
         $listener = function (FormEvent $event) {
             $form = $event->getForm();
             $data = $event->getData();
+            if(!$data){
+                $data = new CardEntry();
+                $event->setData($data);
+            }
+
             $productType = $form->getConfig()->getOption('productType');
 
             if($productType->getComputePriceByWeight()) {
                 if($productType->getProducts()->count()){
                     $data->setProduct($productType->getProducts()->first());
                 }
-
-                $form->add('quantity', ChoiceType::class, [
-                    'choices' => [
-                        1 => 1,
-                        2 => 2,
-                        3 => 3,
-                        4 => 4,
-                        5 => 5,
-                    ],
-                ]);
             }
         };
         $builder->addEventListener(FormEvents::PRE_SET_DATA, $listener);
@@ -75,7 +71,6 @@ class ProductEntryType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => CardEntry::class,
-            'data' => new CardEntry(),
         ));
         $resolver->setRequired(['productType']);
         $resolver->setAllowedTypes('productType',ProductType::class);
