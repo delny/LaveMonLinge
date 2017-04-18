@@ -17,8 +17,15 @@ class BasketManager
 
 
     public function addToBasket(Card $cards){
-       $this->session->set('cart',$cards);
+       $this->session->set('basket',$cards);
     }
-    
+
+
+    public function getBasket(){
+        if($this->session->has('basket')){
+            $basket = $this->session->get('basket');
+            return $basket;
+        }
+    }
 
 }
