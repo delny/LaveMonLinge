@@ -15,6 +15,26 @@ class CardEntry
 
     private $product;
 
+    private $optionLaundry;
+
+    /**
+     * @return mixed
+     */
+    public function getOptionLaundry()
+    {
+        return $this->optionLaundry;
+    }
+
+    /**
+     * @param mixed $optionLaundry
+     * @return CardEntry
+     */
+    public function setOptionLaundry($optionLaundry)
+    {
+        $this->optionLaundry = $optionLaundry;
+        return $this;
+    }
+
     /**
      * @return mixed
      */

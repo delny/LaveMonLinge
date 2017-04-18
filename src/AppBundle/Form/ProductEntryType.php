@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\OptionLaundry;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ProductType;
 use AppBundle\Form\Model\CardEntry;
@@ -23,9 +24,15 @@ class ProductEntryType extends AbstractType
         if($productType->getComputePriceByWeight()) {
             $builder->add('quantity', ChoiceType::class, [
                 'choices' => [
-                    50 => 50,
-                    3 => 3
+                    1 => 1,
+                    2 => 2,
+                    3 => 3,
+                    4 => 4,
+                    5 => 5,
                 ],
+            ]);
+            $builder->add('optionLaundry', EntityType::class, [
+               'class' => OptionLaundry::class,
             ]);
         }else{
             $builder
@@ -52,8 +59,11 @@ class ProductEntryType extends AbstractType
 
                 $form->add('quantity', ChoiceType::class, [
                     'choices' => [
-                        50 => 50,
-                        3 => 3
+                        1 => 1,
+                        2 => 2,
+                        3 => 3,
+                        4 => 4,
+                        5 => 5,
                     ],
                 ]);
             }
