@@ -50,5 +50,5 @@ security:
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/sigin$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/inscription$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
 

@@ -63,4 +63,12 @@ class UserManager
 
         return $this->getUserById($userId);
     }
+
+    /**
+     * @return array
+     */
+    public function getAllUsers()
+    {
+        return $this->manager->getRepository(User::class)->getAllUsers();
+    }
 }

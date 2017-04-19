@@ -7,7 +7,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 
 class ProductAdmin extends AbstractAdmin
 {
@@ -19,12 +18,10 @@ class ProductAdmin extends AbstractAdmin
     {
         $productTypeManager = $this->getConfigurationPool()->getContainer()->get('app.producttype_manager');
         $productTypeList = $productTypeManager->getListTypeProduct();
-        $productTypePressing = $productTypeList[1];
 
         //Fait référence aux formulaires de créations et d'update
         $form->add('name', 'text');
         $form->add('price','number');
-
         $form->add('type',\Symfony\Component\Form\Extension\Core\Type\ChoiceType::class, array(
             'choices' => $productTypeList,
             'choice_label' => 'name',
@@ -41,7 +38,6 @@ class ProductAdmin extends AbstractAdmin
     {
         $filter->add('name');
         $filter->add('price');
-        //$filter->add('type');
         $filter->add('img');
     }
 
@@ -52,7 +48,6 @@ class ProductAdmin extends AbstractAdmin
     {
         $list->addIdentifier('name');
         $list->add('price');
-        //$list->add('type');
         $list->add('img');
     }
 
