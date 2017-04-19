@@ -55,6 +55,16 @@ class User implements UserInterface
      */
     private $address;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=255)
+     *
+     */
+
+    private $token;
+
     /**
      * @return int
      */
@@ -118,6 +128,8 @@ class User implements UserInterface
     {
         $this->address = $address;
     }
+
+
 
     /**
      * @return bool
@@ -183,4 +195,23 @@ class User implements UserInterface
     {
         $this->address->removeElement($address);
     }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+
+
 }
