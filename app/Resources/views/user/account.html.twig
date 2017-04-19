@@ -16,6 +16,7 @@
         <h1>Votre compte</h1>
         <ul>
             <li>E-mail : {{ app.user.email }}</li>
+            <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
         </ul>
         Vos adresses :
         {% if app.user.address is not empty %}
