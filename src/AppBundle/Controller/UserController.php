@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\AddressType;
+use AppBundle\Form\Model\UserPasswordChange;
+use AppBundle\Form\PasswordChangeType;
 use AppBundle\Form\UserConnectType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -141,6 +143,62 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/passchange", name="app_password_change")
+     */
+    public function changePasswordAction(Request $request)
+    {
+        //recup manager
+        $userManager = $this->getUserManager();
+
+        //on recup instance
+        $userPasswordChange = new UserPasswordChange();
+
+        //on construit le formulaire
+        $form = $this->createForm(PasswordChangeType::class, $userPasswordChange);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid())
+        {
+            $encoder = $this->container->get('security.password_encoder');
+
+            $error = FALSE;
+
+            if (!$encoder->isPasswordValid($this->getUser(), $userPasswordChange->getOldPassword()))
+            {
+                $error = TRUE;
+                //message de notification
+                $this->addFlash(
+                    'danger',
+                    'Le mot de passe n\'est pas correct !'
+                );
+            }
+
+            if ($userPasswordChange->getNewPassword() != $userPasswordChange->getNewPasswordConfirm())
+            {
+                $error = TRUE;
+                //message de notification
+                $this->addFlash(
+                    'danger',
+                    'les nouveaux mots de passe ne correspondent pas !'
+                );
+            }
+
+            if (!$error)
+            {
+                $userManager->changePassword($this->getUser(),$userPasswordChange,$encoder);
+                $this->addFlash(
+                    'success',
+                    'Votre mot de passe a été modifié avec succès'
+                );
+            }
+        }
+
+        return $this->render(':user:passwordChange.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * @return \AppBundle\Manager\UserManager|object
      */
     private function getUserManager()
@@ -148,6 +206,11 @@ class UserController extends Controller
         return $this->container->get('app.user_manager');
     }
 
+    /**
+     * @param $user
+     * @param $plainPassword
+     * @return string
+     */
     private function encode($user,$plainPassword)
     {
         $encoder = $this->container->get('security.password_encoder');

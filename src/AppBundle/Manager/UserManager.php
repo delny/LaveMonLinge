@@ -3,8 +3,11 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Model\UserPasswordChange;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class UserManager
 {
@@ -71,4 +74,13 @@ class UserManager
     {
         return $this->manager->getRepository(User::class)->getAllUsers();
     }
+
+    public function changePassword(User $user, UserPasswordChange $userPasswordChange, UserPasswordEncoder $encoder)
+    {
+        $newPassword = $userPasswordChange->getNewPassword();
+        $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
+        $user->setPassword($newPasswordEncoded);
+        $this->save($user);
+    }
+
 }
