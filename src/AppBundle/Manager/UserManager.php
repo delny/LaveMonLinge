@@ -36,7 +36,7 @@ class UserManager
         {
             $this->manager->persist($user);
         }
-        $this->manager->flush($user);
+        $this->manager->flush();
     }
 
     public function getUserByEmail($email)

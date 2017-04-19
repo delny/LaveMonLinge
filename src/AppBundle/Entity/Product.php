@@ -44,12 +44,6 @@ class Product
      */
     private $price;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string")
-     */
-    private $img;
 
     /**
      * @return mixed
@@ -254,21 +248,6 @@ class Product
         return $this->orderItems;
     }
 
-    /**
-     * @return string
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * @param string $img
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-    }
 
     /**
      * Gestion  ajout image

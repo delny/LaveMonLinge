@@ -45,6 +45,7 @@ security:
         - { path: ^/laundry$, role:  ROLE_USER }
         - { path: ^/pressing$, role:  ROLE_USER }
         - { path: ^/form, role:  ROLE_USER }
+        - { path: ^/account, role: ROLE_USER}
         # accessible en anonyme
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/sigin$, role: IS_AUTHENTICATED_ANONYMOUSLY }

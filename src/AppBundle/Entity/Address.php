@@ -44,6 +44,13 @@ class Address
     private $street;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="street_number", type="integer", length=5)
+     */
+    private $streetNumber;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=255)
@@ -152,5 +159,22 @@ class Address
     {
         $this->user = $user;
     }
+
+    /**
+     * @return int
+     */
+    public function getStreetNumber()
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * @param int $streetNumber
+     */
+    public function setStreetNumber($streetNumber)
+    {
+        $this->streetNumber = $streetNumber;
+    }
+
 
 }
