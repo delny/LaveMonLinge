@@ -2,13 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\AddressType;
 use AppBundle\Form\UserConnectType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Security;
 
 class UserController extends Controller
 {
@@ -98,6 +97,46 @@ class UserController extends Controller
     {
         //renvoie vers la page d'accueil
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/account",name="app_my_account")
+     */
+    public function configAction(Request $request)
+    {
+        //recup manager
+        $addressManager = $this->container->get('app.address_manager');
+
+        //on creer instance de address
+        $address = $addressManager->create();
+
+        //on constuit le formulaire
+        $form = $this->createForm(AddressType::class,$address);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid())
+        {
+            //si le formulaire est valide
+
+            //ajout du user dans l'adresse
+            $address->setUser($this->getUser());
+
+            //ajout de adresse à la bdd
+            $addressManager->save($address);
+
+            //message de notification
+            $this->addFlash(
+                'success',
+                'Votre adresse a bien été ajouté !'
+            );
+
+            //renvoie vers la page d'accueil
+            return $this->redirectToRoute('app_my_account');
+        }
+
+        return $this->render(':user:account.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**
