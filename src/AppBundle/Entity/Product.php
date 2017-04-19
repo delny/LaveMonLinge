@@ -44,30 +44,9 @@ class Product
      */
     private $price;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string")
-     */
-    private $img;
 
-    /**
-     * @return mixed
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
 
-    /**
-     * @param mixed $img
-     * @return Product
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-        return $this;
-    }
+
 
     /**
      * @var TypeClothing $typeClothing
@@ -98,11 +77,11 @@ class Product
         $this->orderItems = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-/*
+
     public function __toString()
     {
         return $this->getName();
-    }*/
+    }
 
     /**
      * Get id
