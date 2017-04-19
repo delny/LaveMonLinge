@@ -13,6 +13,7 @@
         {% if app.user %}
             <div id="navbar" class="navbar-collapse collapse connect">
                 <a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                <a href="{{ path('app_my_account') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
                 <a href="{{ path('app_logout') }}" >Se déconnecter</a>
             </div>
         {% else %}

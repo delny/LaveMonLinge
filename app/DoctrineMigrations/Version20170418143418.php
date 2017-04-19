@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170418071431 extends AbstractMigration
+class Version20170418143418 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,8 +18,7 @@ class Version20170418071431 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE order_item DROP INDEX UNIQ_52EA1F094584665A, ADD INDEX IDX_52EA1F094584665A (product_id)');
-        $this->addSql('ALTER TABLE order_item ADD qte INT NOT NULL');
+        $this->addSql('ALTER TABLE user ADD roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json_array)\'');
     }
 
     /**
@@ -30,7 +29,6 @@ class Version20170418071431 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE order_item DROP INDEX IDX_52EA1F094584665A, ADD UNIQUE INDEX UNIQ_52EA1F094584665A (product_id)');
-        $this->addSql('ALTER TABLE order_item DROP qte');
+        $this->addSql('ALTER TABLE user DROP roles');
     }
 }

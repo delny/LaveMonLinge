@@ -29,4 +29,9 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getSingleResult();
     }
+
+    public function getAllUsers()
+    {
+        return $this->findAll();
+    }
 }

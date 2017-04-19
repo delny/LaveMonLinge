@@ -1,17 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <section class="lavage">
-        <h2>Products</h2>
         {{ form_start(form) }}
-        <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}">
+            <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
 
-        </ul>
+            {{ form_widget(form.products) }}
 
-        {% if form.offsetExists('quantity') %}
-            {{ form_row(form.quantity) }}
-        {% endif %}
-
-        <button type="submit">Commandez</button>
+            <button type="submit" class="btn btn-primary">Commandez</button>
         {{ form_end(form) }}
 
     </section>

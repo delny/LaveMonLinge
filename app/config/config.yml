@@ -7,6 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    product_img_directory: '%kernel.root_dir%/bundles/app/img/productImg'
+    delivery_price: 9
 
 framework:
     #esi: ~
@@ -21,6 +23,9 @@ framework:
     #serializer: { enable_annotations: true }
     templating:
         engines: ['twig']
+        form:
+            resources:
+                - ':form:fields:html:php'
     default_locale: '%locale%'
     trusted_hosts: ~
     trusted_proxies: ~
@@ -38,6 +43,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'form/fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
