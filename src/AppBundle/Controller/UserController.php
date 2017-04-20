@@ -38,24 +38,34 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() AND $form->isValid())
         {
-            //si le formulaire est valide
+            // si email non deja use
+            if (!$userManager->getUserByEmail($userNew->getEmail()))
+            {
+                //encodage du mot de passe
+                $encodedPassword = $this->encode($userNew,$userNew->getPassword());
+                $userNew->setPassword($encodedPassword);
 
-            //encodage du mot de passe
-            $encodedPassword = $this->encode($userNew,$userNew->getPassword());
-            $userNew->setPassword($encodedPassword);
-            $userNew->setRoles(['ROLE_USER']);
+                //ajout du user à la bdd
+                $userManager->save($userNew);
 
-            //ajout du user à la bdd
-            $userManager->save($userNew);
+                //message de notification
+                $this->addFlash(
+                    'success',
+                    'Vous êtes bien inscrit !'
+                );
 
-            //message de notification
-            $this->addFlash(
-                'success',
-                'Vous êtes bien inscrit !'
-            );
+                //renvoie vers la page d'accueil
+                return $this->redirectToRoute('homepage');
+            }
+            else
+            {
+                //message de notification
+                $this->addFlash(
+                    'danger',
+                    'cet email est déjà pris !'
+                );
+            }
 
-            //renvoie vers la page d'accueil
-            return $this->redirectToRoute('homepage');
 
         }
 
