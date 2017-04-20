@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="timeslot")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TimeslotRepository")
  */
-class Timeslot
+class TimeSlot
 {
     /**
      * @var int
@@ -38,10 +38,19 @@ class Timeslot
     /**
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
-     *  mappedBy="timeSlotCollect, timeSlotDelivery"
+     *  mappedBy="timeSlotCollect"
      * )
      */
-    private $orderLaundry;
+    private $orderLaundryCollect;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
+     *  mappedBy="timeSlotDelivery"
+     * )
+     */
+    private $orderLaundryDelivery;
+
 
 
 

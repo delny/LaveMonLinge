@@ -60,7 +60,7 @@ class OrderLaundry
     /**
      * @var OrderItem $orderItems
      * @ORM\OneToMany(
-     *     targetEntity="AppBundle\Entity\orderItem",
+     *     targetEntity="AppBundle\Entity\OrderItem",
      *     mappedBy="orderLaundry"
      * )
      */
@@ -74,16 +74,15 @@ class OrderLaundry
 
 
     /**
-     * @var OrderItem $orderItems
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
-     *     inversedBy="orderLaundry")
+     *     inversedBy="orderLaundryCollect")
      */
     private $timeSlotCollect;
 
     /**
-     * @var OrderItem $orderItems
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
-     *  inversedBy="orderLaundry"
+     *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
+     *  inversedBy="orderLaundryDelivery"
      * )
      */
     private $timeSlotDelivery;
@@ -231,7 +230,7 @@ class OrderLaundry
     /**
      * Add orderItem
      *
-     * @param \AppBundle\Entity\orderItem $orderItem
+     * @param \AppBundle\Entity\OrderItem $orderItem
      *
      * @return OrderLaundry
      */
@@ -245,7 +244,7 @@ class OrderLaundry
     /**
      * Remove orderItem
      *
-     * @param \AppBundle\Entity\orderItem $orderItem
+     * @param \AppBundle\Entity\OrderItem $orderItem
      */
     public function removeOrderItem(\AppBundle\Entity\orderItem $orderItem)
     {

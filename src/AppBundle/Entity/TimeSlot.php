@@ -38,10 +38,19 @@ class TimeSlot
     /**
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
-     *  mappedBy="timeSlotCollect, timeSlotDelivery"
+     *  mappedBy="timeSlotCollect"
      * )
      */
-    private $orderLaundry;
+    private $orderLaundryCollect;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
+     *  mappedBy="timeSlotDelivery"
+     * )
+     */
+    private $orderLaundryDelivery;
+
 
 
 
@@ -50,7 +59,15 @@ class TimeSlot
      */
     public function __construct()
     {
-        $this->orderLaundry = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderLaundryCollect = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orderLaundryDelivery = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    function __toString()
+    {
+        return $this->getSlot();
+
     }
 
     /**
@@ -68,7 +85,7 @@ class TimeSlot
      *
      * @param string $slot
      *
-     * @return Timeslot
+     * @return TimeSlot
      */
     public function setSlot($slot)
     {
@@ -92,7 +109,7 @@ class TimeSlot
      *
      * @param boolean $isAvailable
      *
-     * @return Timeslot
+     * @return TimeSlot
      */
     public function setIsAvailable($isAvailable)
     {
@@ -112,36 +129,70 @@ class TimeSlot
     }
 
     /**
-     * Add orderLaundry
+     * Add orderLaundryCollect
      *
-     * @param \AppBundle\Entity\OrderLaundry $orderLaundry
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundryCollect
      *
-     * @return Timeslot
+     * @return TimeSlot
      */
-    public function addOrderLaundry(\AppBundle\Entity\OrderLaundry $orderLaundry)
+    public function addOrderLaundryCollect(\AppBundle\Entity\OrderLaundry $orderLaundryCollect)
     {
-        $this->orderLaundry[] = $orderLaundry;
+        $this->orderLaundryCollect[] = $orderLaundryCollect;
 
         return $this;
     }
 
     /**
-     * Remove orderLaundry
+     * Remove orderLaundryCollect
      *
-     * @param \AppBundle\Entity\OrderLaundry $orderLaundry
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundryCollect
      */
-    public function removeOrderLaundry(\AppBundle\Entity\OrderLaundry $orderLaundry)
+    public function removeOrderLaundryCollect(\AppBundle\Entity\OrderLaundry $orderLaundryCollect)
     {
-        $this->orderLaundry->removeElement($orderLaundry);
+        $this->orderLaundryCollect->removeElement($orderLaundryCollect);
     }
 
     /**
-     * Get orderLaundry
+     * Get orderLaundryCollect
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOrderLaundry()
+    public function getOrderLaundryCollect()
     {
-        return $this->orderLaundry;
+        return $this->orderLaundryCollect;
+    }
+
+    /**
+     * Add orderLaundryDelivery
+     *
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundryDelivery
+     *
+     * @return TimeSlot
+     */
+    public function addOrderLaundryDelivery(\AppBundle\Entity\OrderLaundry $orderLaundryDelivery)
+    {
+        $this->orderLaundryDelivery[] = $orderLaundryDelivery;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderLaundryDelivery
+     *
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundryDelivery
+     */
+    public function removeOrderLaundryDelivery(\AppBundle\Entity\OrderLaundry $orderLaundryDelivery)
+    {
+        $this->orderLaundryDelivery->removeElement($orderLaundryDelivery);
+    }
+
+    /**
+     * Get orderLaundryDelivery
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderLaundryDelivery()
+    {
+        return $this->orderLaundryDelivery;
     }
 }
