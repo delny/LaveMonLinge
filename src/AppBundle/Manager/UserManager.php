@@ -80,7 +80,7 @@ class UserManager
      */
     public function CreateTokenToResetPassword(User $user)
     {
-        return sha1('L2rm$'.$user->getId().'%u5e4g7e');
+        return sha1('L2rM$'.$user->getId().'%u*5e4g7e');
     }
 
     public function verifyTokenToResetPassword(User $user,$token)
