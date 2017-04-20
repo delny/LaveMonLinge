@@ -4,8 +4,10 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\OrderLaundry;
 use AppBundle\Entity\User;
+use AppBundle\Form\Model\UserPasswordReset;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class UserManager
 {
@@ -75,6 +77,7 @@ class UserManager
 
     /**
      * @param User $user
+     * @return array
      */
     public function getListOrdersByUser(User $user)
     {
@@ -89,4 +92,38 @@ class UserManager
     {
         return $this->manager->getRepository(OrderLaundry::class)->getOrderById($idOrder);
     }
+
+    /**
+     * @return string
+     */
+    public function CreateTokenToResetPassword(User $user)
+    {
+        return sha1('L2rM$'.$user->getId().'%u*5e4g7e');
+    }
+
+    public function verifyTokenToResetPassword(User $user,$token)
+    {
+        $tokenIwant = $this->CreateTokenToResetPassword($user);
+        if ($token == $tokenIwant)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param UserPasswordReset $userPasswordReset
+     * @param UserPasswordEncoder $encoder
+     */
+    public function resetPassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
+    {
+        $newPassword = $userPasswordReset->getNewPassword();
+        $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
+        $user->setPassword($newPasswordEncoded);
+        $this->save($user);
+     }
 }

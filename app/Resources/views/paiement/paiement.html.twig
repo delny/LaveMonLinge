@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>Paiement de votre commande</h1>
+            </div>
+
+            <div id="status">
+                <p>
+                    Vous êtes sur le point de payer une petite fortune.
+                <form action="{{ path('app_payment_send') }}" method="POST">
+                    <!-- TO DO La variable total va devoir etre changé -->
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_3F6hGY6a10YklXQez7CdZbpz"
+                            data-amount= " {{ total }} "
+                            data-email = " {{ app.user.email }}"
+                            data-name="LaveMonLinge"
+                            data-description="Paiement"
+                            data-locale="fr"
+                            data-currency="eur"
+                            data-image="https://www.zipjet.fr/assets/common/images/zipjet-logo-icon.svg">
+                    </script>
+
+
+                </form>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Timeslot
+ *
+ * @ORM\Table(name="timeslot")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TimeslotRepository")
+ */
+class TimeSlot
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slot", type="string", length=255)
+     */
+    private $slot;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="isAvailable", type="boolean")
+     */
+    private $isAvailable;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
+     *  mappedBy="timeSlotCollect"
+     * )
+     */
+    private $orderLaundryCollect;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
+     *  mappedBy="timeSlotDelivery"
+     * )
+     */
+    private $orderLaundryDelivery;
+
+
+
+
+}
