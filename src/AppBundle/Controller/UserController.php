@@ -200,7 +200,7 @@ class UserController extends Controller
                     'success',
                     'Un lien vous a été envoyé pour réinitialiser votre mot de passe!'
                 );
-                return $this->redirectToRoute('homepage');
+                //return $this->redirectToRoute('homepage');
             }
             else
             {
@@ -218,7 +218,6 @@ class UserController extends Controller
     }
 
     /**
-<<<<<<< HEAD
      * @Route("/myorders/{idOrder}", name="app_orderlist_detail")
      */
     public function orderListDetailAction(Request $request,$idOrder)
@@ -266,7 +265,7 @@ class UserController extends Controller
             //on peut rediriger ver changement de mot de passe
             $session = new Session();
             $session->set('idUserToResetPassword', $id);
-            //$_SESSION['idUserToResetPassword'] = $id;
+
             //renvoie vers la page de reset password
             return $this->redirectToRoute('app_reset_paswword');
         }
