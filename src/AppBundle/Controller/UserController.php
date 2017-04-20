@@ -15,7 +15,6 @@ use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
@@ -24,11 +23,9 @@ class UserController extends Controller
      */
     public function inscriptionAction(Request $request)
     {
-        if ($this->getUser())
-        {
-            //renvoie vers la page d'accueil
-            return $this->redirectToRoute('homepage');
-        }
+        // redirige si deja connecte
+        $this->redirectIfUserConnected();
+
         //recup du usermanager
         $userManager = $this->getUserManager();
 
@@ -81,6 +78,9 @@ class UserController extends Controller
      */
     public function connexionAction(Request $request)
     {
+        // redirige si deja connecte
+        $this->redirectIfUserConnected();
+
         $authenticationUtils = $this->container->get('security.authentication_utils');
 
         //recup erreur si erreur il y a
@@ -88,11 +88,6 @@ class UserController extends Controller
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        if ($this->getUser())
-        {
-            //renvoie vers la page d'accueil
-            return $this->redirectToRoute('homepage');
-        }
         //recup manager
         $userManager = $this->getUserManager();
         //on crée instance de user
@@ -164,21 +159,21 @@ class UserController extends Controller
   */
   public function changePasswordAction(Request $request)
   {
-    //recup manager
-    $userManager = $this->getUserManager();
-    //on recup instance
-    $userPasswordChange = new UserPasswordChange();
+      //recup manager
+      $userManager = $this->getUserManager();
 
-    //on construit le formulaire
-    $form = $this->createForm(PasswordChangeType::class, $userPasswordChange);
-    
-    if ($form->isSubmitted() AND $form->isValid())
-        {
-          $encoder = $this->container->get('security.password_encoder');
+      //on recup instance
+      $userPasswordChange = new UserPasswordChange();
 
+      //on construit le formulaire
+      $form = $this->createForm(PasswordChangeType::class, $userPasswordChange);
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() AND $form->isValid())
+      {
           $error = FALSE;
 
-          if (!$encoder->isPasswordValid($this->getUser(), $userPasswordChange->getOldPassword()))
+          if (!$this->getEncoder()->isPasswordValid($this->getUser(), $userPasswordChange->getOldPassword()))
           {
               $error = TRUE;
               //message de notification
@@ -200,9 +195,13 @@ class UserController extends Controller
 
           if (!$error)
           {
-              $userManager->changePassword($this->getUser(),$userPasswordChange,$encoder);
-            }
-        }
+              $userManager->changePassword($this->getUser(),$userPasswordChange,$this->getEncoder());
+              $this->addFlash(
+                  'success',
+                  'Votre mot de passe a été modifié avec succès'
+              );
+          }
+      }
 
         return $this->render(':user:passwordChange.html.twig', array(
           'form' => $form->createView(),
@@ -214,6 +213,9 @@ class UserController extends Controller
      */
     public function forgotPasswordAction(Request $request)
     {
+        // redirige si deja connecte
+        $this->redirectIfUserConnected();
+
         //recup manager
         $userManager = $this->getUserManager();
 
@@ -275,7 +277,7 @@ class UserController extends Controller
         if ($user AND $userManager->verifyTokenToResetPassword($user,$token))
         {
             //on peut rediriger ver changement de mot de passe
-            $session = new Session();
+            $session = $this->get('session');
             $session->set('idUserToResetPassword', $id);
             //$_SESSION['idUserToResetPassword'] = $id;
             //renvoie vers la page de reset password
@@ -293,7 +295,7 @@ class UserController extends Controller
         $userManager = $this->getUserManager();
 
         //recup idUser de session
-        $session = new Session();
+        $session = $this->get('session');
         $idUser = $session->get('idUserToResetPassword');
 
         //recup user to reset password
@@ -313,7 +315,6 @@ class UserController extends Controller
 
         if ($form->isSubmitted() AND $form->isValid())
         {
-            $encoder = $this->container->get('security.password_encoder');
 
             if ($userPasswordReset->getNewPassword() != $userPasswordReset->getNewPasswordConfirm())
             {
@@ -325,7 +326,7 @@ class UserController extends Controller
             }
             else
             {
-                $userManager->resetPassword($user,$userPasswordReset,$encoder);
+                $userManager->resetPassword($user,$userPasswordReset,$this->getEncoder());
 
                 $this->addFlash(
                     'success',
@@ -351,6 +352,11 @@ class UserController extends Controller
         return $this->container->get('app.user_manager');
     }
 
+    private function getEncoder()
+    {
+        return $this->container->get('security.password_encoder');
+    }
+
     /**
      * @param $user
      * @param $plainPassword
@@ -364,6 +370,10 @@ class UserController extends Controller
         return $encoded;
     }
 
+    /**
+     * @param User $user
+     * @param $token
+     */
     private function sendMessageToResetPassword(User $user,$token)
     {
         $message = \Swift_Message::newInstance()
@@ -379,6 +389,17 @@ class UserController extends Controller
                 'text/html'
             );
         $this->get('mailer')->send($message);
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function redirectIfUserConnected()
+    {
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('homepage');
+        }
     }
 
 }
