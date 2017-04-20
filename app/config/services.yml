@@ -39,6 +39,11 @@ services:
         arguments: [~,AppBundle\Entity\Product,~]
         tags:
             - {name: sonata.admin, manager_type: orm, label: Product }
+    admin.orderlaundry:
+        class: AppBundle\Admin\OrderLaundryAdmin
+        arguments: [~,AppBundle\Entity\OrderLaundry,~]
+        tags:
+          - { name: sonata.admin, manager_type: orm, label: OrderLaundry }
 
     app.product_manager:
         class: AppBundle\Manager\ProductManager
@@ -48,4 +53,13 @@ services:
         class: AppBundle\Manager\ProductTypeManager
         arguments:
             - "@=service('doctrine').getManager()"
+    app.address_manager:
+        class: AppBundle\Manager\AddressManager
+        arguments:
+            - "@=service('doctrine').getManager()"
+    app.stripe_manager:
+        class: AppBundle\Manager\StripeManager
+        arguments:
+            - "@=service('doctrine').getManager()"
+
 

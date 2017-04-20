@@ -27,6 +27,7 @@ class CardController extends Controller
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
     }
 
+
     /**
      * @Route("/form/{id}/date", name="app_form_date_card")
      */
@@ -43,6 +44,7 @@ class CardController extends Controller
         }
         return $this->render(':date:date.html.twig', array('form' => $form->createView()));
     }
+
 
     private function getManager($manager){
         return $this->get($manager);

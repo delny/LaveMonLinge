@@ -55,6 +55,22 @@ class User implements UserInterface
      */
     private $address;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="token", type="string", length=255)
+     *
+     */
+
+    private $token;
+
+    /**
+     * @var array
+     * @ORM\Column(name="roles",type="json_array")
+     */
+    private $roles = array();
+
     /**
      * @return int
      */
@@ -119,12 +135,22 @@ class User implements UserInterface
         $this->address = $address;
     }
 
+
+
     /**
      * @return bool
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -183,4 +209,23 @@ class User implements UserInterface
     {
         $this->address->removeElement($address);
     }
+
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+
+
 }

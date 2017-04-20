@@ -4,28 +4,56 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use AppBundle\Entity\User;
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface,ContainerAwareInterface
 {
+    private $container;
+
+    /**
+     * @param ContainerInterface|null $container
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     public function load(ObjectManager $manager)
     {
+        $encoder = $this->container->get('security.password_encoder');
         $datas = [
 
             [
                 'email' =>'test@gmail.com',
-                'password'=> hash('sha512','test'),
+                'password'=> 'test',
             ],
 
 
             [
                 'email' =>'test2@gmail.com',
-                'password'=> hash('sha512','test2'),
+                'password'=> 'test2',
             ],
+            [
+                'email' =>'toto@free.com',
+                'password'=> 'toto',
+            ],
+            [
+                'email' =>'admin@gmail.com',
+                'password'=> 'admin',
+            ],
+
         ];
         foreach ($datas as $i => $data) {
             $user = new User();
             $user->setEmail($data['email']);
-            $user->setPassword($data['password']);
 
+            $encoded = $encoder->encodePassword($user, $data['password']);
+            $user->setPassword($encoded);
+
+            if($i==3) {
+                $user->setRoles(array('ROLE_ADMIN'));
+            }
 
             $manager->persist($user);
             $this->addReference('user-'.$i, $user);

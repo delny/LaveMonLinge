@@ -3,8 +3,10 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\Model\UserPasswordReset;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class UserManager
 {
@@ -36,7 +38,7 @@ class UserManager
         {
             $this->manager->persist($user);
         }
-        $this->manager->flush($user);
+        $this->manager->flush();
     }
 
     public function getUserByEmail($email)
@@ -63,4 +65,42 @@ class UserManager
 
         return $this->getUserById($userId);
     }
+
+    /**
+     * @return array
+     */
+    public function getAllUsers()
+    {
+        return $this->manager->getRepository(User::class)->getAllUsers();
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function CreateTokenToResetPassword(User $user)
+    {
+        return sha1('L2rM$'.$user->getId().'%u*5e4g7e');
+    }
+
+    public function verifyTokenToResetPassword(User $user,$token)
+    {
+        $tokenIwant = $this->CreateTokenToResetPassword($user);
+        if ($token == $tokenIwant)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function resetPassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
+    {
+        $newPassword = $userPasswordReset->getNewPassword();
+        $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
+        $user->setPassword($newPasswordEncoded);
+        $this->save($user);
+     }
 }
