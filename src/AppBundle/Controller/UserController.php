@@ -24,7 +24,10 @@ class UserController extends Controller
     public function inscriptionAction(Request $request)
     {
         // redirige si deja connecte
-        $this->redirectIfUserConnected();
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('homepage');
+        }
 
         //recup du usermanager
         $userManager = $this->getUserManager();
@@ -40,12 +43,8 @@ class UserController extends Controller
             // si email non deja use
             if (!$userManager->getUserByEmail($userNew->getEmail()))
             {
-                //encodage du mot de passe
-                $encodedPassword = $this->encode($userNew,$userNew->getPassword());
-                $userNew->setPassword($encodedPassword);
-
-                //ajout du user à la bdd
-                $userManager->save($userNew);
+                //encodage du mot de passe et ajout dans la bdd
+                $userManager->EncodePasswordAndAddUser($userNew,$this->getEncoder());
 
                 //message de notification
                 $this->addFlash(
@@ -64,8 +63,6 @@ class UserController extends Controller
                     'cet email est déjà pris !'
                 );
             }
-
-
         }
 
         return $this->render(':user:inscription.html.twig', array(
@@ -79,7 +76,10 @@ class UserController extends Controller
     public function connexionAction(Request $request)
     {
         // redirige si deja connecte
-        $this->redirectIfUserConnected();
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('homepage');
+        }
 
         $authenticationUtils = $this->container->get('security.authentication_utils');
 
@@ -130,8 +130,6 @@ class UserController extends Controller
 
         if ($form->isSubmitted() AND $form->isValid())
         {
-            //si le formulaire est valide
-
             //ajout du user dans l'adresse
             $address->setUser($this->getUser());
 
@@ -214,7 +212,10 @@ class UserController extends Controller
     public function forgotPasswordAction(Request $request)
     {
         // redirige si deja connecte
-        $this->redirectIfUserConnected();
+        if ($this->getUser())
+        {
+            return $this->redirectToRoute('homepage');
+        }
 
         //recup manager
         $userManager = $this->getUserManager();
@@ -315,7 +316,6 @@ class UserController extends Controller
 
         if ($form->isSubmitted() AND $form->isValid())
         {
-
             if ($userPasswordReset->getNewPassword() != $userPasswordReset->getNewPasswordConfirm())
             {
                 //message de notification

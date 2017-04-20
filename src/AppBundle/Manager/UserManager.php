@@ -42,11 +42,19 @@ class UserManager
         $this->manager->flush();
     }
 
+    /**
+     * @param $email
+     * @return mixed
+     */
     public function getUserByEmail($email)
     {
         return $this->manager->getRepository(User::class)->getUserByEmail($email);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getUserById($id)
     {
         return $this->manager->getRepository(User::class)->getUserById($id);
@@ -75,12 +83,31 @@ class UserManager
         return $this->manager->getRepository(User::class)->getAllUsers();
     }
 
+    /**
+     * @param User $user
+     * @param UserPasswordChange $userPasswordChange
+     * @param UserPasswordEncoder $encoder
+     */
     public function changePassword(User $user, UserPasswordChange $userPasswordChange, UserPasswordEncoder $encoder)
     {
         $newPassword = $userPasswordChange->getNewPassword();
         $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
         $user->setPassword($newPasswordEncoded);
         $this->save($user);
+    }
+
+    /**
+     * @param User $user
+     * @param UserPasswordEncoder $encoder
+     */
+    public function EncodePasswordAndAddUser(User $userNew, UserPasswordEncoder $encoder)
+    {
+        //encodage du mot de passe
+        $encodedPassword = $encoder->encodePassword($userNew,$userNew->getPassword());
+        $userNew->setPassword($encodedPassword);
+
+        //ajout du user à la bdd
+        $this->save($userNew);
     }
 
     /**
@@ -92,6 +119,11 @@ class UserManager
         return sha1('L2rM$'.$user->getId().'%u*5e4g7e');
     }
 
+    /**
+     * @param User $user
+     * @param $token
+     * @return bool
+     */
     public function verifyTokenToResetPassword(User $user,$token)
     {
         $tokenIwant = $this->CreateTokenToResetPassword($user);
@@ -105,6 +137,11 @@ class UserManager
         }
     }
 
+    /**
+     * @param User $user
+     * @param UserPasswordReset $userPasswordReset
+     * @param UserPasswordEncoder $encoder
+     */
     public function resetPassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
     {
         $newPassword = $userPasswordReset->getNewPassword();
