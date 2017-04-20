@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\TimeSlot;
+use AppBundle\Form\Model\DateChoice;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,24 +16,37 @@ class DateChoiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date', TextType::class,[
+
+        $date = new \DateTime();
+
+        $now = $date->format('H');
+
+        $builder->add('dateCollect', TextType::class,[
                         'required' => true,
                     ])
-                ->add('heureCollecte', EntityType::class,[
+
+                ->add('hourCollect', EntityType::class,[
                     'class' => TimeSlot::class,
                     'required' => true,
-                    'query_builder' => function (EntityRepository $er) {
+                    'query_builder' => function (EntityRepository $er) use ($now){
                         return $er->createQueryBuilder('u')
-                            ->where('u.isAvailable = 1');
+                            ->andWhere('u.isAvailable = 1')
+                            ->andWhere('u.slotStart >= :now')
+                            ->setParameter('now', $now);
                     },
                     'label' => 'Heure de collecte'
                 ])
-                ->add('heureLivraison', EntityType::class,[
+                ->add('dateDelivery', TextType::class,[
+                'required' => true,
+                ])
+                ->add('hourDelivery', EntityType::class,[
                 'class' => TimeSlot::class,
                 'required' => true,
-                'query_builder' => function (EntityRepository $er) {
+                'query_builder' => function (EntityRepository $er) use ($now){
                     return $er->createQueryBuilder('u')
-                        ->where('u.isAvailable = 1');
+                        ->andWhere('u.isAvailable = 1')
+                        ->andWhere('u.slotStart >= :now')
+                        ->setParameter('now', $now);
                 },
                 'label' => 'Heure de livraison'
             ]);
@@ -40,7 +54,9 @@ class DateChoiceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'data_class' => DateChoice::class,
+        ));
     }
 
     public function getBlockPrefix()

@@ -59,3 +59,12 @@
         </div>
     {% endif %}
 {% endblock %}
+{% block _app_bundle_date_choice_type_widget %}
+<div class="col-md-12">
+    <div class="col-md-6">{{ form_row(form.dateCollect) }}
+    {{ form_row(form.hourCollect) }}</div>
+    <div class="col-md-6">{{ form_row(form.dateDelivery) }}
+        {{ form_row(form.hourDelivery) }}
+    </div>
+</div>
+{% endblock %}

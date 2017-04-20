@@ -6,6 +6,7 @@ use AppBundle\Entity\ProductType;
 use AppBundle\Form\CardType;
 use AppBundle\Form\DateChoiceType;
 use AppBundle\Form\Model\Card;
+use AppBundle\Form\Model\DateChoice;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,13 +33,11 @@ class CardController extends Controller
      * @Route("/form/{id}/date", name="app_form_date_card")
      */
     public function formDatePickerAction(Request $request){
-        $form = $this->createForm(DateChoiceType::class);
+        $form = $this->createForm(DateChoiceType::class, new DateChoice());
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // ici entrée en BDD de l'order
 
-            dump($form->getData());
-            die();
             //$this->getManager('app.basket_manager')->addToBasket($form->getData());
             //return $this->redirectToRoute('app_showBasket');
         }

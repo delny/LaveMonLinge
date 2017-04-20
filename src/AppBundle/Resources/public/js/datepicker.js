@@ -3,6 +3,50 @@
  */
 $(function() {
 
+    function DateLocale(d) {
+        //Les traductions des jours en mois (ici juste fr et en mais on peut completer)
+        var tabJours = {
+            'fr': ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
+        };
+        var tabMois = {
+            'fr': ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+        };
+
+        var Jour = tabJours['fr'][d.getDay() - 1];
+        var Mois = tabMois['fr'][d.getMonth()];
+        return Jour + " " + d.getDate() + " " + Mois + " " + d.getFullYear();
+
+    }
+
+
+    $('#app_bundle_date_choice_type_dateCollect').change(function(){
+        var datepickerCollect = $('#app_bundle_date_choice_type_dateCollect').val();
+
+        var dateCollecteAffichage = new Date(datepickerCollect);
+        $('#app_bundle_date_choice_type_dateCollect').val(DateLocale(dateCollecteAffichage));
+
+
+        var dateDelivery = new Date(datepickerCollect);
+        dateDelivery.setDate(dateDelivery.getDate() + 1);
+        dateDelivery.setHours(0,0,0,0);
+
+        var day = dateDelivery.getDay();
+
+        if(day == 0){
+            dateDelivery.setDate(dateDelivery.getDate() + 1 );
+        }
+
+        for (i = 0; i < disabledDays.length; i++) {
+
+            if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
+                dateDelivery.setDate(dateDelivery.getDate() + 1);
+                $('#app_bundle_date_choice_type_dateDelivery').val(DateLocale(dateDelivery));
+            }else{
+                $('#app_bundle_date_choice_type_dateDelivery').val(DateLocale(dateDelivery));
+            }
+
+        }
+    });
     function JoursFeries(an) {
         var JourAn = new Date(an, "00", "1")
         var FeteTravail = new Date(an, "4", "1")
@@ -26,7 +70,7 @@ $(function() {
         var Ascension = new Date(an, MoisPaques - 1, JourPaques + 39)
         var Pentecote = new Date(an, MoisPaques - 1, JourPaques + 49)
         var LundiPentecote = new Date(an, MoisPaques - 1, JourPaques + 50)
-        return new Array(JourAn, LundiPaques, FeteTravail, Victoire1945, Ascension, LundiPentecote, FeteNationale, Assomption, Toussaint, Armistice, Noel)
+        return [JourAn, LundiPaques, FeteTravail, Victoire1945, Ascension, LundiPentecote, FeteNationale, Assomption, Toussaint, Armistice, Noel];
     }
 
     var disabledDays = JoursFeries(2017);
@@ -57,7 +101,7 @@ $(function() {
         }
     }
 
-    $('#app_bundle_date_choice_type_date').datepicker({
+    $('#app_bundle_date_choice_type_dateCollect').datepicker({
         altField: "#datepicker",
         closeText: 'Fermer',
         prevText: 'Précédent',

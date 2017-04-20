@@ -10,38 +10,103 @@ namespace AppBundle\Form\Model;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-class Card
+class DateChoice
 {
+    /**
+     * @Assert\NotBlank()
+     */
+    private $dateCollect;
 
     /**
-     * @var array
+     * @Assert\NotBlank()
      */
-    private $products;
+    private $dateDelivery;
 
-    public function __construct()
+    /**
+     * @Assert\NotBlank()
+     */
+    private $hourCollect;
+
+    /**
+     * @Assert\NotBlank()
+     */
+    private $hourDelivery;
+
+    /**
+     * @return mixed
+     */
+    public function getDateCollect()
     {
-        $this->products = [
-            new CardEntry()
-        ];
+        return $this->dateCollect;
     }
 
     /**
-     * @return array
+     * @param mixed $dateCollect
+     * @return DateChoice
      */
-    public function getProducts()
+    public function setDateCollect($dateCollect)
     {
-        return $this->products;
-    }
-
-    /**
-     * @param array $products
-     * @return Card
-     */
-    public function setProducts($products)
-    {
-        $this->products = $products;
+        $this->dateCollect = $dateCollect;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDateDelivery()
+    {
+        return $this->dateDelivery;
+    }
+
+    /**
+     * @param mixed $dateDelivery
+     * @return DateChoice
+     */
+    public function setDateDelivery($dateDelivery)
+    {
+        $this->dateDelivery = $dateDelivery;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHourCollect()
+    {
+        return $this->hourCollect;
+    }
+
+    /**
+     * @param mixed $hourCollect
+     * @return DateChoice
+     */
+    public function setHourCollect($hourCollect)
+    {
+        $this->hourCollect = $hourCollect;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHourDelivery()
+    {
+        return $this->hourDelivery;
+    }
+
+    /**
+     * @param mixed $hourDelivery
+     * @return DateChoice
+     */
+    public function setHourDelivery($hourDelivery)
+    {
+        $this->hourDelivery = $hourDelivery;
+        return $this;
+    }
+
+
+
+
 
 
 

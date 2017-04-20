@@ -24,9 +24,16 @@ class TimeSlot
     /**
      * @var string
      *
-     * @ORM\Column(name="slot", type="string", length=255)
+     * @ORM\Column(name="slotStart", type="string", length=255)
      */
-    private $slot;
+    private $slotStart;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slotEnd", type="string", length=255)
+     */
+    private $slotEnd;
 
     /**
      * @var bool
@@ -54,6 +61,15 @@ class TimeSlot
 
 
 
+
+
+    function __toString()
+    {
+        return $this->getSlotStart(). '-' . $this->getSlotEnd();
+
+    }
+
+
     /**
      * Constructor
      */
@@ -61,13 +77,6 @@ class TimeSlot
     {
         $this->orderLaundryCollect = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orderLaundryDelivery = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-
-    function __toString()
-    {
-        return $this->getSlot();
-
     }
 
     /**
@@ -81,27 +90,51 @@ class TimeSlot
     }
 
     /**
-     * Set slot
+     * Set slotStart
      *
-     * @param string $slot
+     * @param string $slotStart
      *
      * @return TimeSlot
      */
-    public function setSlot($slot)
+    public function setSlotStart($slotStart)
     {
-        $this->slot = $slot;
+        $this->slotStart = $slotStart;
 
         return $this;
     }
 
     /**
-     * Get slot
+     * Get slotStart
      *
      * @return string
      */
-    public function getSlot()
+    public function getSlotStart()
     {
-        return $this->slot;
+        return $this->slotStart;
+    }
+
+    /**
+     * Set slotEnd
+     *
+     * @param string $slotEnd
+     *
+     * @return TimeSlot
+     */
+    public function setSlotEnd($slotEnd)
+    {
+        $this->slotEnd = $slotEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get slotEnd
+     *
+     * @return string
+     */
+    public function getSlotEnd()
+    {
+        return $this->slotEnd;
     }
 
     /**

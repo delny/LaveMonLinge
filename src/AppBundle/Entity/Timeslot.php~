@@ -24,9 +24,16 @@ class TimeSlot
     /**
      * @var string
      *
-     * @ORM\Column(name="slot", type="string", length=255)
+     * @ORM\Column(name="slotStart", type="string", length=255)
      */
-    private $slot;
+    private $slotStart;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slotEnd", type="string", length=255)
+     */
+    private $slotEnd;
 
     /**
      * @var bool
@@ -52,6 +59,15 @@ class TimeSlot
     private $orderLaundryDelivery;
 
 
+
+
+
+
+    function __toString()
+    {
+        return $this->getSlot();
+
+    }
 
 
 }
