@@ -57,4 +57,9 @@ services:
         class: AppBundle\Manager\AddressManager
         arguments:
             - "@=service('doctrine').getManager()"
+    app.stripe_manager:
+        class: AppBundle\Manager\StripeManager
+        arguments:
+            - "@=service('doctrine').getManager()"
+
 

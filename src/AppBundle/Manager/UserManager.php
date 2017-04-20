@@ -7,6 +7,9 @@ use AppBundle\Form\Model\UserPasswordChange;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use AppBundle\Form\Model\UserPasswordReset;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class UserManager
@@ -83,4 +86,33 @@ class UserManager
         $this->save($user);
     }
 
+    /**
+     * @param User $user
+     * @return string
+     */
+    public function CreateTokenToResetPassword(User $user)
+    {
+        return sha1('L2rM$'.$user->getId().'%u*5e4g7e');
+    }
+
+    public function verifyTokenToResetPassword(User $user,$token)
+    {
+        $tokenIwant = $this->CreateTokenToResetPassword($user);
+        if ($token == $tokenIwant)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function resetPassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
+    {
+        $newPassword = $userPasswordReset->getNewPassword();
+        $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
+        $user->setPassword($newPasswordEncoded);
+        $this->save($user);
+     }
 }
