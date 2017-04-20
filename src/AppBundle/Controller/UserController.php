@@ -271,7 +271,7 @@ class UserController extends Controller
             }
             else
             {
-                $userManager->changePassword($user,$userPasswordReset,$encoder);
+                $userManager->resetPassword($user,$userPasswordReset,$encoder);
                 $this->addFlash(
                     'success',
                     'Votre mot de passe a été modifié avec succès'

@@ -96,11 +96,11 @@ class UserManager
         }
     }
 
-    public function changePassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
-     {
-         $newPassword = $userPasswordReset->getNewPassword();
-         $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
-         $user->setPassword($newPasswordEncoded);
-         $this->save($user);
+    public function resetPassword(User $user, UserPasswordReset $userPasswordReset, UserPasswordEncoder $encoder)
+    {
+        $newPassword = $userPasswordReset->getNewPassword();
+        $newPasswordEncoded = $encoder->encodePassword($user,$newPassword);
+        $user->setPassword($newPasswordEncoded);
+        $this->save($user);
      }
 }
