@@ -383,23 +383,11 @@ class UserController extends Controller
             ->setBody(
                 $this->render(
                 // app/Resources/views/Emails/registration.html.twig
-                    ':Email:emailResetPassword.twig.html',
+                    ':Email:EmailResetPassword.html.twig',
                     array('id' => $user->getId(), 'token' => $token)
                 ),
                 'text/html'
             );
         $this->get('mailer')->send($message);
     }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    private function redirectIfUserConnected()
-    {
-        if ($this->getUser())
-        {
-            return $this->redirectToRoute('homepage');
-        }
-    }
-
 }
