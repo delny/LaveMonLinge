@@ -80,4 +80,13 @@ class UserManager
     {
         return $this->manager->getRepository(OrderLaundry::class)->getListOrdersByUser($user);
     }
+
+    /**
+     * @param $idOrder
+     * @return mixed
+     */
+    public function getOrderById($idOrder)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->getOrderById($idOrder);
+    }
 }

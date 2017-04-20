@@ -24,4 +24,18 @@ class OrderLaundryRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @param $idOrder
+     * @return mixed
+     */
+    public function getOrderById($idOrder)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->andWhere('o.id = :idOrder')
+            ->setParameter(':idOrder', $idOrder)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

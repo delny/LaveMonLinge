@@ -157,6 +157,29 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/myorders/{idOrder}", name="app_orderlist_detail")
+     */
+    public function orderListDetailAction(Request $request,$idOrder)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //recup order
+        $order = $userManager->getOrderById($idOrder);
+
+        if ($order)
+        {
+            return $this->render(':user:orderDetail.html.twig', array(
+                'order' => $order,
+            ));
+        }
+        else
+        {
+            return $this->redirectToRoute('app_orderlist');
+        }
+    }
+
+    /**
      * @return \AppBundle\Manager\UserManager|object
      */
     private function getUserManager()
