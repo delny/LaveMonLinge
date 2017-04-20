@@ -2,12 +2,18 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use AppBundle\Form\AddressType;
+use AppBundle\Form\ForgotPasswordType;
+use AppBundle\Form\Model\UserOnlyEmail;
+use AppBundle\Form\Model\UserPasswordReset;
+use AppBundle\Form\ResetPasswordType;
 use AppBundle\Form\UserConnectType;
 use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserController extends Controller
 {
@@ -141,6 +147,138 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/forgotpassword", name="app_forgot_password")
+     */
+    public function forgotPasswordAction(Request $request)
+    {
+        //recup manager
+        $userManager = $this->getUserManager();
+
+        //instance de user
+        $userToReset = new UserOnlyEmail();
+
+        //consctuction formulaire
+        $form = $this->createForm(ForgotPasswordType::class,$userToReset);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid())
+        {
+            $user = $userManager->getUserByEmail($userToReset->getEmail());
+            if ($user)
+            {
+                $token = $userManager->CreateTokenToResetPassword($user);
+                $this->sendMessageToResetPassword($user,$token);
+                //message de notification
+                $this->addFlash(
+                    'success',
+                    'Un lien vous a été envoyé pour réinitialiser votre mot de passe!'
+                );
+                return $this->redirectToRoute('homepage');
+            }
+            else
+            {
+                //message de notification
+                $this->addFlash(
+                    'danger',
+                    'l\'email renseignée est inconnue !'
+                );
+            }
+        }
+
+        return $this->render(':user:forgotPassword.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route(
+     *     "/verifyresetpassword/{id}/{token}",
+     *     defaults={"id": "null","token": "null"},
+     *     requirements={
+     *     "id": "\d+"
+     *      }
+     * )
+     *
+     */
+    public function verifResetPasswordAction($id,$token)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //recup user by id
+        $user = $userManager->getUserById($id);
+
+        if ($user AND $userManager->verifyTokenToResetPassword($user,$token))
+        {
+            //on peut rediriger ver changement de mot de passe
+            $session = new Session();
+            $session->set('idUserToResetPassword', $id);
+            //$_SESSION['idUserToResetPassword'] = $id;
+            //renvoie vers la page de reset password
+            return $this->redirectToRoute('app_reset_paswword');
+        }
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/resetpassword", name="app_reset_paswword")
+     */
+    public function resetPasswordAction(Request $request)
+    {
+        //appel manager
+        $userManager = $this->getUserManager();
+
+        //recup idUser de session
+        $session = new Session();
+        $idUser = $session->get('idUserToResetPassword');
+
+        //recup user to reset password
+        $user = $userManager->getUserById($idUser);
+
+        if(!$user)
+        {
+            return $this->redirectToRoute('homepage');
+        }
+
+        //instance de model
+        $userPasswordReset = new UserPasswordReset();
+
+        //formulaire
+        $form = $this->createForm(ResetPasswordType::class,$userPasswordReset);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() AND $form->isValid())
+        {
+            $encoder = $this->container->get('security.password_encoder');
+
+            if ($userPasswordReset->getNewPassword() != $userPasswordReset->getNewPasswordConfirm())
+            {
+                //message de notification
+                $this->addFlash(
+                    'danger',
+                        'les nouveaux mots de passe ne correspondent pas !'
+                );
+            }
+            else
+            {
+                $userManager->changePassword($user,$userPasswordReset,$encoder);
+                $this->addFlash(
+                    'success',
+                    'Votre mot de passe a été modifié avec succès'
+                );
+                $session->set('idUserToResetPassword',null);
+                return $this->redirectToRoute('homepage');
+            }
+        }
+
+        return $this->render(':user:resetPassword.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /*Fonctions en privées utilisées par les actions ci-dessus*/
+
+    /**
      * @return \AppBundle\Manager\UserManager|object
      */
     private function getUserManager()
@@ -154,6 +292,23 @@ class UserController extends Controller
         $encoded = $encoder->encodePassword($user, $plainPassword);
 
         return $encoded;
+    }
+
+    private function sendMessageToResetPassword(User $user,$token)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
+            ->setBody(
+                $this->render(
+                // app/Resources/views/Emails/registration.html.twig
+                    ':Email:emailResetPassword.twig.html',
+                    array('id' => $user->getId(), 'token' => $token)
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
     }
 
 }
