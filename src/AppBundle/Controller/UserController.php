@@ -173,6 +173,7 @@ class UserController extends Controller
     }
 
 
+    /**
      * @Route("/forgotpassword", name="app_forgot_password")
      */
     public function forgotPasswordAction(Request $request)
