@@ -22,16 +22,16 @@ class OrderLaundry
     private $id;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="date_collect", type="datetime")
+     *
+     * @ORM\Column(name="date_collect", type="date")
      */
     private $dateCollect;
 
     /**
-     * @var \DateTime
      *
-     * @ORM\Column(name="date_delivery", type="datetime")
+     *
+     * @ORM\Column(name="date_delivery", type="date")
      */
     private $dateDelivery;
 
@@ -72,7 +72,24 @@ class OrderLaundry
      */
     private $user;
 
+
+    /**
+     * @var OrderItem $orderItems
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
+     *     inversedBy="orderLaundry")
+     */
+    private $timeSlotCollect;
+
+    /**
+     * @var OrderItem $orderItems
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
+     *  inversedBy="orderLaundry"
+     * )
+     */
+    private $timeSlotDelivery;
+
    
+
     /**
      * Constructor
      */
@@ -267,5 +284,53 @@ class OrderLaundry
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set timeSlotCollect
+     *
+     * @param \AppBundle\Entity\Timeslot $timeSlotCollect
+     *
+     * @return OrderLaundry
+     */
+    public function setTimeSlotCollect(\AppBundle\Entity\Timeslot $timeSlotCollect = null)
+    {
+        $this->timeSlotCollect = $timeSlotCollect;
+
+        return $this;
+    }
+
+    /**
+     * Get timeSlotCollect
+     *
+     * @return \AppBundle\Entity\Timeslot
+     */
+    public function getTimeSlotCollect()
+    {
+        return $this->timeSlotCollect;
+    }
+
+    /**
+     * Set timeSlotDelivery
+     *
+     * @param \AppBundle\Entity\Timeslot $timeSlotDelivery
+     *
+     * @return OrderLaundry
+     */
+    public function setTimeSlotDelivery(\AppBundle\Entity\Timeslot $timeSlotDelivery = null)
+    {
+        $this->timeSlotDelivery = $timeSlotDelivery;
+
+        return $this;
+    }
+
+    /**
+     * Get timeSlotDelivery
+     *
+     * @return \AppBundle\Entity\Timeslot
+     */
+    public function getTimeSlotDelivery()
+    {
+        return $this->timeSlotDelivery;
     }
 }

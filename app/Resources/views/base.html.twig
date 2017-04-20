@@ -25,7 +25,6 @@
     <![endif]-->
 {{ include('menu.html.twig') }}
     <div class="container">
-
         <div class="row">
             <div class="col-xs-12">
                 {% if app.session.started and app.session.flashBag.peekAll is not empty %}
@@ -47,8 +46,12 @@
             </div>
         </div>
 
-
         {% block content %}{% endblock %}
+
+        <footer>
+            <p>&copy; Lave Mon Linge 2017</p>
+        </footer>
+
         {% block javascript %}
             <!--[if lt IE 9]>
             <script src="{{ asset('bundles/app/js/vendor/html5-3.6-respond-1.4.2.min.js')}}"></script>
@@ -56,8 +59,5 @@
             <script src="{{ asset('bundles/app/js/vendor/jquery-1.11.2.min.js') }}"></script>
             <script src="{{ asset('bundles/app/js/main.js') }}"></script>
         {% endblock %}
-        <footer>
-            <p>&copy; Lave Mon Linge 2017</p>
-        </footer>
     </div>
 </body>

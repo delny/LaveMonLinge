@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="timeslot")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\TimeslotRepository")
  */
-class Timeslot
+class TimeSlot
 {
     /**
      * @var int
@@ -35,11 +35,28 @@ class Timeslot
      */
     private $isAvailable;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderLaundry",
+     *  mappedBy="timeSlotCollect, timeSlotDelivery"
+     * )
+     */
+    private $orderLaundry;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orderLaundry = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -87,11 +104,44 @@ class Timeslot
     /**
      * Get isAvailable
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsAvailable()
     {
         return $this->isAvailable;
     }
-}
 
+    /**
+     * Add orderLaundry
+     *
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundry
+     *
+     * @return Timeslot
+     */
+    public function addOrderLaundry(\AppBundle\Entity\OrderLaundry $orderLaundry)
+    {
+        $this->orderLaundry[] = $orderLaundry;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderLaundry
+     *
+     * @param \AppBundle\Entity\OrderLaundry $orderLaundry
+     */
+    public function removeOrderLaundry(\AppBundle\Entity\OrderLaundry $orderLaundry)
+    {
+        $this->orderLaundry->removeElement($orderLaundry);
+    }
+
+    /**
+     * Get orderLaundry
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderLaundry()
+    {
+        return $this->orderLaundry;
+    }
+}

@@ -18,6 +18,13 @@ class Card
      */
     private $products;
 
+    public function __construct()
+    {
+        $this->products = [
+            new CardEntry()
+        ];
+    }
+
     /**
      * @return array
      */

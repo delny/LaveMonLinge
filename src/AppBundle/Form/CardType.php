@@ -26,7 +26,7 @@ class CardType extends AbstractType
                 'entry_options' => [
                   'productType' => $options['productType'],
                 ],
-                'allow_add' => true,
+                'allow_add' => !$options['productType']->getComputePriceByWeight(),
             ]);
     }
 
