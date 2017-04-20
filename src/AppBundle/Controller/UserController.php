@@ -225,7 +225,6 @@ class UserController extends Controller
 
         //consctuction formulaire
         $form = $this->createForm(ForgotPasswordType::class,$userToReset);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid())
@@ -235,6 +234,7 @@ class UserController extends Controller
             {
                 $token = $userManager->CreateTokenToResetPassword($user);
                 $this->sendMessageToResetPassword($user,$token);
+
                 //message de notification
                 $this->addFlash(
                     'success',
