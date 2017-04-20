@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\OrderLaundry;
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -70,5 +71,13 @@ class UserManager
     public function getAllUsers()
     {
         return $this->manager->getRepository(User::class)->getAllUsers();
+    }
+
+    /**
+     * @param User $user
+     */
+    public function getListOrdersByUser(User $user)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->getListOrdersByUser($user);
     }
 }

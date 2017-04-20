@@ -141,6 +141,22 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/myorders", name="app_orderlist")
+     */
+    public function orderListAction(Request $request)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //list orders
+        $listOrders = $userManager->getListOrdersByUser($this->getUser());
+
+        return $this->render(':user:orderList.html.twig', array(
+            'orders' => $listOrders,
+        ));
+    }
+
+    /**
      * @return \AppBundle\Manager\UserManager|object
      */
     private function getUserManager()

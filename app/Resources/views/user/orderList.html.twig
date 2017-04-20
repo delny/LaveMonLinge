@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Vos commandes{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="container">
+        <h1>Liste de vos commandes</h1>
+        {% if orders is not empty %}
+            <div class="orderlist">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Statut</th>
+                        <th>Date collecte</th>
+                        <th>Date Livraison</th>
+                        <th>Prix</th>
+                    </tr>
+                    </thead>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.statut }}</td>
+                            <td>{{ order.dateCollect | date("m/d/Y") }}</td>
+                            <td>{{ order.dateDelivery | date("m/d/Y") }}</td>
+                            <td>{{ order.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <p>Aucune Commande !'(</p>
+        {% endif %}
+
+    </div>
+{% endblock %}
