@@ -17,7 +17,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('u.email = :email')
             ->setParameter(':email', $email)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function getUserById($id)
@@ -27,7 +27,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('u.id = :id')
             ->setParameter(':id', $id)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function getAllUsers()
