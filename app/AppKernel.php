@@ -20,6 +20,9 @@ class AppKernel extends Kernel
 
 
 
+
+
+
             // Bundles liés à SonataAdmin
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),

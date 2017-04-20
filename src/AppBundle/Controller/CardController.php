@@ -25,6 +25,8 @@ class CardController extends Controller
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
     }
 
+
+
     private function getManager($manager){
         return $this->get($manager);
     }
