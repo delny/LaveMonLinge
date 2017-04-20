@@ -1,23 +1,61 @@
 {% block _card_products_entry_product_entry_widget %}
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4>
-                        {{ label }}
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    {% if form.parent.vars.choices[form.vars.value] is defined %}
-                        <img src="{{ asset('bundles/app/img/'~form.parent.vars.choices[form.vars.value].data.img) }}" alt="" />
-                    {% endif %}
+    <div class="col-md-6">
+        <div>
+            <div class="text-center">
+                <h4>
+                    {{ label }}
+                </h4>
+            </div>
+            <div class="text-center">
+                {% if form.parent.vars.choices[form.vars.value] is defined %}
+                    <img src="{{ asset('bundles/app/img/'~form.parent.vars.choices[form.vars.value].data.img) }}" alt="" />
+                {% endif %}
 
-                    <p>
-                        {{- form_widget(form) -}}
-                    </p>
+                <div>
+                    <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                    <span class="text-success">SELECTIONNER</span>
                 </div>
             </div>
         </div>
+    </div>
 {% endblock %}
 
-{% block _card_products_entry_product_entry_label %}
+{% block _card_products_entry_product_entry_label '' %}
+{% block _card_products_entry_product_label '' %}
+{% block _card_products_entry_label '' %}
+
+{% block _card_products_widget %}
+    {% set isCollection = true %}
+
+    {% if value|length %}
+        {% set entry =  value|first %}
+        {% if entry.product is not empty %}
+            {% set isCollection = false %}
+        {% endif %}
+    {% endif %}
+
+    {% if isCollection %}
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{- form_widget(form) -}}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ asset('bundles/app/img/'~entry.product.img) }}" alt="" />
+                        </div>
+                        <div class="col-md-8">
+                            {{- form_widget(form) -}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

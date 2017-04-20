@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for basketEntry in basket %}
+        {% for basketEntry in basket.products %}
             <tr>
                 <td>{{ basketEntry.product.name }}</td>
                 <td>{{ basketEntry.product.price }}</td>
