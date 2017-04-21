@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170419122950 extends AbstractMigration
+class Version20170421080947 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -18,7 +18,8 @@ class Version20170419122950 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user ADD roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json_array)\'');
+        $this->addSql('ALTER TABLE timeslot ADD slot_end VARCHAR(255) NOT NULL, CHANGE slot slot_start VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE user CHANGE token token VARCHAR(255) NOT NULL');
     }
 
     /**
@@ -29,6 +30,7 @@ class Version20170419122950 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user DROP roles');
+        $this->addSql('ALTER TABLE timeslot ADD slot VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci, DROP slot_start, DROP slot_end');
+        $this->addSql('ALTER TABLE user CHANGE token token VARCHAR(255) DEFAULT NULL COLLATE utf8_unicode_ci');
     }
 }

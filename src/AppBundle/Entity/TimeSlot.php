@@ -24,9 +24,16 @@ class TimeSlot
     /**
      * @var string
      *
-     * @ORM\Column(name="slot", type="string", length=255)
+     * @ORM\Column(name="slot_start", type="string", length=255)
      */
-    private $slot;
+    private $slotStart;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slot_end", type="string", length=255)
+     */
+    private $slotEnd;
 
     /**
      * @var bool
@@ -51,7 +58,23 @@ class TimeSlot
      */
     private $orderLaundryDelivery;
 
+    /**
+     * @return string
+     */
+    public function getSlotStart()
+    {
+        return $this->slotStart;
+    }
 
+    /**
+     * @param string $slotStart
+     * @return TimeSlot
+     */
+    public function setSlotStart($slotStart)
+    {
+        $this->slotStart = $slotStart;
+        return $this;
+    }
 
 
     /**
@@ -66,7 +89,7 @@ class TimeSlot
 
     function __toString()
     {
-        return $this->getSlot();
+        return $this->getSlotStart().'-'.$this->getSlotEnd();
 
     }
 
@@ -78,30 +101,6 @@ class TimeSlot
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set slot
-     *
-     * @param string $slot
-     *
-     * @return TimeSlot
-     */
-    public function setSlot($slot)
-    {
-        $this->slot = $slot;
-
-        return $this;
-    }
-
-    /**
-     * Get slot
-     *
-     * @return string
-     */
-    public function getSlot()
-    {
-        return $this->slot;
     }
 
     /**
@@ -195,4 +194,23 @@ class TimeSlot
     {
         return $this->orderLaundryDelivery;
     }
+
+    /**
+     * @return string
+     */
+    public function getSlotEnd()
+    {
+        return $this->slotEnd;
+    }
+
+    /**
+     * @param string $slotEnd
+     * @return TimeSlot
+     */
+    public function setSlotEnd($slotEnd)
+    {
+        $this->slotEnd = $slotEnd;
+        return $this;
+    }
+
 }
