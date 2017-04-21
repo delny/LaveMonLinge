@@ -35,7 +35,7 @@
                                 {{ order.dateDelivery | date("d")}}
                                 {{ order.dateDelivery | date("F") | trans}}
                                 {{ order.dateDelivery | date("Y")}}
-                                -- {{ order.getTimeSlotDelivery }}
+                                -- {{ order.getTimeSlotDelivery}}
                             </td>
                             <td>{{ order.total | number_format(2,'.',',') }} €</td>
                         </tr>

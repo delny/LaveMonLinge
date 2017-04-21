@@ -243,21 +243,6 @@ class Product
         return $this->typeClothing;
     }
 
-    /**
-     * @return string
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * @param string $img
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-    }
 
 
 
@@ -293,22 +278,6 @@ class Product
     public function getOrderItems()
     {
         return $this->orderItems;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
-     * @param string $img
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
     }
 
 
