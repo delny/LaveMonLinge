@@ -32,7 +32,7 @@ a:hover {
     margin-top: 2%;
 }
 
-.connect a {
+.connect li {
     border: 1px solid #3498db;
     border-radius: 10px;
     padding: 1%;
