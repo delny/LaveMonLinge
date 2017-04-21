@@ -18,6 +18,7 @@ class BasketManager
 
     public function addToBasket(Card $cards){
        $this->session->set('basket',$cards);
+
     }
 
 

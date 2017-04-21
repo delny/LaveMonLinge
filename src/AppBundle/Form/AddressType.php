@@ -27,8 +27,8 @@ class AddressType extends AbstractType
                 'type', ChoiceType::class, [
                  'choices' => [
                      'Facturation' => 'Facturation',
-                     'Récupération' => 'Récupération',
-                     'Remise' => 'Remise',
+                     'Collecte' => 'Colecte',
+                     'Livraison' => 'Livraison',
                  ]
                 ]);
     }

@@ -19,13 +19,14 @@
         </thead>
         <tbody>
         {% for basketEntry in basket.products %}
+
             <tr>
                 <td>{{ basketEntry.product.name }}</td>
                 <td>{{ basketEntry.product.price }}</td>
                 {% if basketEntry.optionLaundry is null %}
                     <td>1</td>
-                    <td>no options</td>
-                    <td>no options</td>
+                    <td>Pas d'options disponibles</td>
+                    <td>Pas d'options disponibles</td>
                 {% else %}
                     <td>{{ basketEntry.quantity }}</td>
                     <td>{{ basketEntry.optionLaundry.label }}</td>
@@ -37,8 +38,8 @@
         </tbody>
     </table>
     <section class="row">
-        <article class="col-md-4">
-            <h3>Adresse facturation</h3>
+        <article class="col-md-3">
+            <h3>Adresse de collecte</h3>
             <address>
                 <ul>
                     <li>Toto</li>
@@ -48,8 +49,8 @@
                 </ul>
             </address>
         </article>
-        <article class="col-md-4">
-            <h3>Adresse livraison</h3>
+        <article class="col-md-3">
+            <h3>Adresse de facturation</h3>
             <address>
                 <ul>
                     <li>Toto</li>
@@ -59,7 +60,18 @@
                 </ul>
             </address>
         </article>
-        <article class="col-md-4">
+        <article class="col-md-3">
+            <h3>Adresse de livraison</h3>
+            <address>
+                <ul>
+                    <li>Toto</li>
+                    <li>25 rue de toto</li>
+                    <li>58457 Toto</li>
+                    <li>TOTO</li>
+                </ul>
+            </address>
+        </article>
+        <article class="col-md-3">
             Total: 45 €
         </article>
     </section>

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -45,8 +46,15 @@ class Product
     private $price;
 
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="priceIfMultiple", type="integer")
+     *
+     * )
+     */
 
-
+    private $priceIfMultiple;
 
     /**
      * @var TypeClothing $typeClothing
@@ -160,6 +168,24 @@ class Product
     }
 
     /**
+     * @return int
+     */
+    public function getPriceIfMultiple()
+    {
+        return $this->priceIfMultiple;
+    }
+
+    /**
+     * @param int $priceIfMultiple
+     */
+    public function setPriceIfMultiple($priceIfMultiple)
+    {
+        $this->priceIfMultiple = $priceIfMultiple;
+    }
+
+
+
+    /**
      * Set type
      *
      * @param \AppBundle\Entity\ProductType $type
@@ -216,6 +242,24 @@ class Product
     {
         return $this->typeClothing;
     }
+
+    /**
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param string $img
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+    }
+
+
 
     /**
      * Add orderItem

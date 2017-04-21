@@ -53,6 +53,3 @@ class LoadOptionLaundryData extends AbstractFixture implements OrderedFixtureInt
         return 4;
     }
 }
-{
-
-}
