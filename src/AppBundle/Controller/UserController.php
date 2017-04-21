@@ -207,6 +207,23 @@ class UserController extends Controller
   }
   
     /**
+     * @Route("/myorders", name="app_orderlist")
+     */
+    public function orderListAction(Request $request)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //list orders
+        $listOrders = $userManager->getListOrdersByUser($this->getUser());
+
+        return $this->render(':user:orderList.html.twig', array(
+            'orders' => $listOrders,
+        ));
+    }
+
+
+    /**
      * @Route("/forgotpassword", name="app_forgot_password")
      */
     public function forgotPasswordAction(Request $request)
@@ -240,7 +257,7 @@ class UserController extends Controller
                     'success',
                     'Un lien vous a été envoyé pour réinitialiser votre mot de passe!'
                 );
-                return $this->redirectToRoute('homepage');
+                //return $this->redirectToRoute('homepage');
             }
             else
             {
@@ -256,6 +273,31 @@ class UserController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/myorders/{idOrder}", name="app_orderlist_detail")
+     */
+    public function orderListDetailAction(Request $request,$idOrder)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //recup order
+        $order = $userManager->getOrderById($idOrder);
+
+        if ($order)
+        {
+            return $this->render(':user:orderDetail.html.twig', array(
+                'order' => $order,
+            ));
+        }
+        else
+        {
+            return $this->redirectToRoute('app_orderlist');
+        }
+    }
+
+
 
     /**
      * @Route(
@@ -280,7 +322,7 @@ class UserController extends Controller
             //on peut rediriger ver changement de mot de passe
             $session = $this->get('session');
             $session->set('idUserToResetPassword', $id);
-            //$_SESSION['idUserToResetPassword'] = $id;
+
             //renvoie vers la page de reset password
             return $this->redirectToRoute('app_reset_paswword');
         }

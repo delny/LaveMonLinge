@@ -1,6 +1,8 @@
 <?php
 
+
 namespace AppBundle\Repository;
+use AppBundle\Entity\User;
 
 /**
  * OrderLaundryRepository
@@ -10,4 +12,30 @@ namespace AppBundle\Repository;
  */
 class OrderLaundryRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param User $user
+     */
+    public function getListOrdersByUser(User $user)
+    {
+       return $this->createQueryBuilder('o')
+            ->select('o')
+            ->andWhere('o.user = :user')
+            ->setParameter(':user',$user)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param $idOrder
+     * @return mixed
+     */
+    public function getOrderById($idOrder)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->andWhere('o.id = :idOrder')
+            ->setParameter(':idOrder', $idOrder)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

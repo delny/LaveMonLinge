@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\OrderLaundry;
 use AppBundle\Entity\User;
 use AppBundle\Form\Model\UserPasswordChange;
 use Doctrine\ORM\EntityManagerInterface;
@@ -97,7 +98,7 @@ class UserManager
     }
 
     /**
-     * @param User $user
+     * @param User $userNew
      * @param UserPasswordEncoder $encoder
      */
     public function EncodePasswordAndAddUser(User $userNew, UserPasswordEncoder $encoder)
@@ -112,6 +113,23 @@ class UserManager
 
     /**
      * @param User $user
+     * @return array
+     */
+    public function getListOrdersByUser(User $user)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->getListOrdersByUser($user);
+    }
+
+    /**
+     * @param $idOrder
+     * @return mixed
+     */
+    public function getOrderById($idOrder)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->getOrderById($idOrder);
+    }
+
+    /**
      * @return string
      */
     public function CreateTokenToResetPassword(User $user)
