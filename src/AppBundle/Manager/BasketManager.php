@@ -3,6 +3,7 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Form\Model\Card;
+use AppBundle\Form\Model\DateChoice;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 
@@ -21,12 +22,12 @@ class BasketManager
 
     }
 
-
     public function getBasket(){
         if($this->session->has('basket')){
             $basket = $this->session->get('basket');
             return $basket;
         }
     }
+
 
 }

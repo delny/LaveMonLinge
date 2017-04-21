@@ -22,7 +22,6 @@ class CardController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getManager('app.basket_manager')->addToBasket($form->getData());
-
             return $this->redirectToRoute('app_form_date_card', ['id' => $productType->getId()]);
         }
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
@@ -33,14 +32,14 @@ class CardController extends Controller
      * @Route("/form/{id}/date", name="app_form_date_card")
      */
     public function formDatePickerAction(Request $request){
-        $form = $this->createForm(DateChoiceType::class,new DateChoice());
+        $basket = $this->getManager('app.basket_manager')->getBasket();
+        $basket->setHourCollect(null);
+        $basket->setHourDelivery(null);
+        $form = $this->createForm(DateChoiceType::class,$basket);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // ici entrée en BDD de l'order
-
-
-            //$this->getManager('app.basket_manager')->addToBasket($form->getData());
-            //return $this->redirectToRoute('app_showBasket');
+            $this->getManager('app.basket_manager')->addToBasket($form->getData());
+            return $this->redirectToRoute('app_saveBasket');
         }
         return $this->render(':date:date.html.twig', array('form' => $form->createView()));
     }

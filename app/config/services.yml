@@ -62,4 +62,9 @@ services:
         arguments:
             - "@=service('doctrine').getManager()"
 
-
+    app.order_manager:
+        class: AppBundle\Manager\OrderManager
+        arguments:
+            - "@=service('doctrine').getManager()"
+            - "%price_delivery%"
+            - "@app.basket_manager"

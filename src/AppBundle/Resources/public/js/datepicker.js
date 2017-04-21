@@ -23,7 +23,7 @@ $(function() {
         var datepickerCollect = $('#app_bundle_date_choice_type_dateCollect').val();
 
         var dateCollecteAffichage = new Date(datepickerCollect);
-        $('#app_bundle_date_choice_type_dateCollect').val(DateLocale(dateCollecteAffichage));
+        $('#app_bundle_date_choice_type_dateCollect').html(DateLocale(dateCollecteAffichage));
 
 
         var dateDelivery = new Date(datepickerCollect);
@@ -36,13 +36,15 @@ $(function() {
             dateDelivery.setDate(dateDelivery.getDate() + 1 );
         }
 
+        var t = dateDelivery.toLocaleDateString();
+        var x = t.replace(/\//g, '-');
         for (i = 0; i < disabledDays.length; i++) {
 
             if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
                 dateDelivery.setDate(dateDelivery.getDate() + 1);
-                $('#app_bundle_date_choice_type_dateDelivery').val(DateLocale(dateDelivery));
+                $('#app_bundle_date_choice_type_dateDelivery').val(x);
             }else{
-                $('#app_bundle_date_choice_type_dateDelivery').val(DateLocale(dateDelivery));
+                $('#app_bundle_date_choice_type_dateDelivery').val(x);
             }
 
         }
