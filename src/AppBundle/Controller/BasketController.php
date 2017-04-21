@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Manager\BasketManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +14,10 @@ class BasketController extends Controller
      */
     public function showBasketAction(){
         $basket = $this->getManager('app.basket_manager')->getBasket();
+
+
+
+
         return $this->render(':panier:panier.html.twig', ['basket' => $basket]);
     }
 
