@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\AddressType;
+use AppBundle\Form\Model\UserPasswordChange;
+use AppBundle\Form\PasswordChangeType;
 use AppBundle\Form\ForgotPasswordType;
 use AppBundle\Form\Model\UserOnlyEmail;
 use AppBundle\Form\Model\UserPasswordReset;
@@ -156,6 +158,74 @@ class UserController extends Controller
         ));
     }
 
+  
+  /**
+  * @Route("/passchange", name="app_password_change")
+  */
+  public function changePasswordAction(Request $request)
+  {
+    //recup manager
+    $userManager = $this->getUserManager();
+    //on recup instance
+    $userPasswordChange = new UserPasswordChange();
+
+    //on construit le formulaire
+    $form = $this->createForm(PasswordChangeType::class, $userPasswordChange);
+    
+    if ($form->isSubmitted() AND $form->isValid())
+        {
+          $encoder = $this->container->get('security.password_encoder');
+
+          $error = FALSE;
+
+          if (!$encoder->isPasswordValid($this->getUser(), $userPasswordChange->getOldPassword()))
+          {
+              $error = TRUE;
+              //message de notification
+              $this->addFlash(
+                  'danger',
+                  'Le mot de passe n\'est pas correct !'
+              );
+          }
+
+          if ($userPasswordChange->getNewPassword() != $userPasswordChange->getNewPasswordConfirm())
+          {
+              $error = TRUE;
+              //message de notification
+              $this->addFlash(
+                  'danger',
+                  'les nouveaux mots de passe ne correspondent pas !'
+              );
+          }
+
+          if (!$error)
+          {
+              $userManager->changePassword($this->getUser(),$userPasswordChange,$encoder);
+            }
+        }
+
+        return $this->render(':user:passwordChange.html.twig', array(
+          'form' => $form->createView(),
+        ));
+  }
+  
+    /**
+     * @Route("/myorders", name="app_orderlist")
+     */
+    public function orderListAction(Request $request)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //list orders
+        $listOrders = $userManager->getListOrdersByUser($this->getUser());
+
+        return $this->render(':user:orderList.html.twig', array(
+            'orders' => $listOrders,
+        ));
+    }
+
+
     /**
      * @Route("/forgotpassword", name="app_forgot_password")
      */
@@ -169,6 +239,7 @@ class UserController extends Controller
 
         //consctuction formulaire
         $form = $this->createForm(ForgotPasswordType::class,$userToReset);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() AND $form->isValid())
@@ -183,7 +254,7 @@ class UserController extends Controller
                     'success',
                     'Un lien vous a été envoyé pour réinitialiser votre mot de passe!'
                 );
-                return $this->redirectToRoute('homepage');
+                //return $this->redirectToRoute('homepage');
             }
             else
             {
@@ -199,6 +270,31 @@ class UserController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/myorders/{idOrder}", name="app_orderlist_detail")
+     */
+    public function orderListDetailAction(Request $request,$idOrder)
+    {
+        //manager
+        $userManager = $this->getUserManager();
+
+        //recup order
+        $order = $userManager->getOrderById($idOrder);
+
+        if ($order)
+        {
+            return $this->render(':user:orderDetail.html.twig', array(
+                'order' => $order,
+            ));
+        }
+        else
+        {
+            return $this->redirectToRoute('app_orderlist');
+        }
+    }
+
+
 
     /**
      * @Route(
@@ -223,7 +319,7 @@ class UserController extends Controller
             //on peut rediriger ver changement de mot de passe
             $session = new Session();
             $session->set('idUserToResetPassword', $id);
-            //$_SESSION['idUserToResetPassword'] = $id;
+
             //renvoie vers la page de reset password
             return $this->redirectToRoute('app_reset_paswword');
         }
@@ -272,6 +368,7 @@ class UserController extends Controller
             else
             {
                 $userManager->resetPassword($user,$userPasswordReset,$encoder);
+
                 $this->addFlash(
                     'success',
                     'Votre mot de passe a été modifié avec succès'
@@ -296,6 +393,11 @@ class UserController extends Controller
         return $this->container->get('app.user_manager');
     }
 
+    /**
+     * @param $user
+     * @param $plainPassword
+     * @return string
+     */
     private function encode($user,$plainPassword)
     {
         $encoder = $this->container->get('security.password_encoder');

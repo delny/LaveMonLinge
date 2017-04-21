@@ -49,6 +49,12 @@ a:hover {
 .form-signin label, .form-inscription label {
     width:150px;
 }
+.form-passwordchange {
+    text-align: center;
+}
+.form-passwordchange label {
+    width: 250px;
+}
 .welcome {
     text-align: center;
 }

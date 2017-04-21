@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Vos commandes{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="container">
+        <h1>Détail d'une commande</h1>
+<a href="{{ path('app_orderlist') }}">Retour à la liste</a>
+        <p>Récapitulatif de la commande</p>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Statut</th>
+                <th>Date collecte</th>
+                <th>Date Livraison</th>
+                <th>Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="60"><a href="#"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
+                        <a href="{{ path('app_orderlist_detail', {'idOrder': order.id }) }}"><span class="glyphicon glyphicon-plus"></span></a></td>
+                    <td>{{ order.statut }}</td>
+                    <td>{{ order.dateCollect | date("d/m/Y") }}</td>
+                    <td>{{ order.dateDelivery | date("d/m/Y") }}</td>
+                    <td>{{ order.total | number_format(2,'.',',') }} €</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Détail de la commande</p>
+    {% if order.orderItems is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>nom</th>
+                <th>prix</th>
+                <th>quantité</th>
+                <th>statut</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.orderItems %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price | number_format(2,'.',',') }} €</td>
+                    <td>{{ item.qte }}</td>
+                    <td>{{ item.statut }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> Commande Vide  !'(</p>
+    {% endif %}
+
+    </div>
+{% endblock %}
