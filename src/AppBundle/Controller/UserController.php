@@ -211,6 +211,10 @@ class UserController extends Controller
      */
     public function orderListAction(Request $request)
     {
+        $translated = $this->get('translator')->trans('April');
+        //dump($translated);
+        //exit();
+
         //manager
         $userManager = $this->getUserManager();
 
