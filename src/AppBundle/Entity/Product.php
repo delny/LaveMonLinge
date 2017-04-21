@@ -251,6 +251,22 @@ class Product
         return $this->orderItems;
     }
 
+    /**
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param string $img
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+    }
+
 
     /**
      * Gestion  ajout image

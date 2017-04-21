@@ -12,15 +12,28 @@
         </div>
         {% if app.user %}
             <div id="navbar" class="navbar-collapse collapse connect">
-                <a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
-                <a href="{{ path('app_my_account') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
-                <a href="{{ path('app_logout') }}" >Se déconnecter</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            {{ app.user.getEmail }}<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ path('app_my_account') }}">Paramètres <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+                            <li><a href="{{ path('app_orderlist') }}">Mes commandes <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ path('app_logout') }}" >Se déconnecter <span class="glyphicon glyphicon-log-out"></span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+                </ul>
             </div>
         {% else %}
             <div id="navbar" class="navbar-collapse collapse connect">
-                <a href="{{ path('app_connexion') }}" >Connexion</a>
-                <a href="{{ path('app_inscription') }}" >Inscription</a>
-                <a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('app_connexion') }}" >Connexion</a></li>
+                    <li><a href="{{ path('app_inscription') }}" >Inscription</a></li>
+                    <li><a href="{{ path('app_showBasket') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a></li>
+                </ul>
             </div>
         {% endif %}
         <!--/.navbar-collapse -->

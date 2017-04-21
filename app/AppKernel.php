@@ -18,10 +18,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new AppBundle\AppBundle(),
 
-
-
-
-
+            //snappy bundle pour generer des pdf
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 
             // Bundles liés à SonataAdmin
             new Sonata\CoreBundle\SonataCoreBundle(),

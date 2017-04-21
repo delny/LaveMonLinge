@@ -32,10 +32,22 @@ a:hover {
     margin-top: 2%;
 }
 
-.connect a {
+.connect > ul > li {
     border: 1px solid #3498db;
     border-radius: 10px;
-    padding: 1%;
+    margin:0px 4px;
+}
+.connect > ul > li > a {
+    padding: 8px;
+}
+.dropdown-menu a {
+    color:#337AB7!important;
+}
+.dropdown-menu a:hover {
+    color:#3498DB!important;
+}
+.connect a:hover {
+    background-color: inherit!important;
 }
 
 .pressing img {
