@@ -37,8 +37,7 @@ class CardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // ici entrée en BDD de l'order
 
-            dump($form->getData());
-            die();
+
             //$this->getManager('app.basket_manager')->addToBasket($form->getData());
             //return $this->redirectToRoute('app_showBasket');
         }
