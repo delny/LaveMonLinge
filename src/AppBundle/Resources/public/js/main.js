@@ -16,7 +16,7 @@ jQuery(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find(':input').length);
 
-    $addTagLink.on('click', function(e) {
+    $addTagLink.on('click', function (e) {
         // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
