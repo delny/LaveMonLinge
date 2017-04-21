@@ -211,10 +211,6 @@ class UserController extends Controller
      */
     public function orderListAction(Request $request)
     {
-        $translated = $this->get('translator')->trans('April');
-        //dump($translated);
-        //exit();
-
         //manager
         $userManager = $this->getUserManager();
 
@@ -261,7 +257,7 @@ class UserController extends Controller
                     'success',
                     'Un lien vous a été envoyé pour réinitialiser votre mot de passe!'
                 );
-                //return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('homepage');
             }
             else
             {
