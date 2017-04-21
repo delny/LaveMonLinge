@@ -84,9 +84,12 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+
 #snappyBundle - generation pdf
 knp_snappy:
+    temporary_folder: "/bundles/app/pdf"
     pdf:
         enabled: true
-        binary: ../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64
+        binary: C:\wkhtmltopdf\bin\wkhtmltopdf.exe
+        options: []
 
