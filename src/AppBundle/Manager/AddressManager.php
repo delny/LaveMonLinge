@@ -34,4 +34,11 @@ class AddressManager
         }
         $this->manager->flush();
     }
+
+    public function getAddressByUser($id){
+        $address = $this->manager->getRepository(Address::class)->getAddressByUser($id);
+
+        return $address;
+
+    }
 }

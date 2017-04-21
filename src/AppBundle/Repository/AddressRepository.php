@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class AddressRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getAddressByUser($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->andWhere('a.user_id= :id')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

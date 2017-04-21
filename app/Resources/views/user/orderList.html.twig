@@ -5,7 +5,6 @@
 
 {% block content %}
 
-
     <div class="container">
         <h1>Historique de vos commandes</h1>
         {% if orders is not empty %}
@@ -23,11 +22,21 @@
                     <tbody>
                     {% for order in orders %}
                         <tr>
-                            <td width="60"><a href="#"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
+                            <td width="60"><a href="{{ path('app_order_pdf', {'idOrder': order.id}) }}"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
                                 <a href="{{ path('app_orderlist_detail', {'idOrder': order.id }) }}"><span class="glyphicon glyphicon-plus"></span></a></td>
                             <td>{{ order.statut }}</td>
-                            <td>{{ order.dateCollect | date("d/m/Y") }}</td>
-                            <td>{{ order.dateDelivery | date("d/m/Y") }}</td>
+                            <td>
+                                {{ order.dateCollect | date("d")}}
+                                {{ order.dateCollect | date("F") | trans}}
+                                {{ order.dateCollect | date("Y")}}
+                                -- {{ order.getTimeSlotCollect }}
+                            </td>
+                            <td>
+                                {{ order.dateDelivery | date("d")}}
+                                {{ order.dateDelivery | date("F") | trans}}
+                                {{ order.dateDelivery | date("Y")}}
+                                -- {{ order.getTimeSlotDelivery }}
+                            </td>
                             <td>{{ order.total | number_format(2,'.',',') }} €</td>
                         </tr>
                     {% endfor %}
