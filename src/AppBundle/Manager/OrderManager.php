@@ -50,6 +50,24 @@ class OrderManager
 
     }
 
+    public function saveOrderLaundry(OrderLaundry $orderLaundry)
+    {
+        if ($orderLaundry->getId() === null)
+        {
+            $this->manager->persist($orderLaundry);
+        }
+        $this->manager->flush();
+    }
+
+    public function saveOrderItem(OrderItem $orderItem)
+    {
+        if ($orderItem->getId() === null)
+        {
+            $this->manager->persist($orderItem);
+        }
+        $this->manager->flush();
+    }
+
     public function getOrderLaundryById($id)
     {
         return $this->manager->getRepository(OrderLaundry::class)->find($id);

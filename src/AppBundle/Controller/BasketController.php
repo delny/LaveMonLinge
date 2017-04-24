@@ -32,7 +32,7 @@ class BasketController extends Controller
             $products = $basket->getProducts();
 
             $i=0;
-            $tab = [];
+            $total = 0;
             foreach ($products as $product)
             {
                 $item = $product->getProduct();
@@ -44,10 +44,17 @@ class BasketController extends Controller
                 $orderItem->setQte($quantity);
                 $orderItem->setStatut('En attente');
                 $orderItem->setOrderLaundry($orderLaundry);
-                array_push($tab,$orderItem);
+
+                $this->getOrderManager()->saveOrderItem($orderItem);
+
+                $total += $orderItem->getQte() * $orderItem->getProduct()->getPrice();
             }
-            dump($tab);
-            exit();
+
+            //mis a jour orderlaundry
+            $orderLaundry->setTotal($total + $orderLaundry->getPriceDelivery());
+
+            //redirection
+            $this->redirectToRoute('app_payment');
         }
 
         return $this->render(':panier:panier.html.twig', [
