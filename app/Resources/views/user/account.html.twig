@@ -13,39 +13,36 @@
     <script type="text/javascript" src="{{ asset('bundles/app/js/autocomplete.js') }}"></script>
 
     <div class="container">
-        <h1>Votre compte</h1>
-        <ul>
-            <li>E-mail : {{ app.user.email }}</li>
-            <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
-        </ul>
+        -
+        -        {% if app.request.attributes.get('_route') == "app_my_account" %}
+            -            <h1>Votre compte</h1>
+            -            <ul>
+                -                <li>E-mail : {{ app.user.email }}</li>
+                -                <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
+                -            </ul>
+            -        {% endif %}
+        +        <h1>Votre compte</h1>
+        +        <ul>
+            +            <li>E-mail : {{ app.user.email }}</li>
+            +            <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
+            +        </ul>
         Vos adresses :
         {% if app.user.address is not empty %}
             <ul>
-            {% for address in app.user.address %}
-                <li> Type : {{ address.type }}<br />Adresse : {{ address.streetNumber }}, {{ address.street }} {{ address.cp }} - {{ address.city }}</li>
-            {% endfor %}
+                @@ -29,7 +26,7 @@
+                {% endfor %}
             </ul>
-            {% else %}
-            <p>Aucune adresse renseigné ! :'(</p>
+        {% else %}
+            -            <p>Aucune adresse renseignée !</p>
+            +            <p>Aucune adresse renseigné ! :'(</p>
         {% endif %}
 
         <h2>Ajouter une adresse</h2>
-        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
-
-        {# Les erreurs générales du formulaire. #}
-        {{ form_errors(form) }}
-
-        <label>Votre adresse : </label>
-        <input id="user_input_autocomplete_address" placeholder="Entrez votre adresse">
-
-        {# génération rapide car ce sont des input de type hidden#}
-        {{ form_row(form.streetNumber) }}
-        {{ form_row(form.street) }}
-        {{ form_row(form.cp) }}
+        @@ -48,18 +45,23 @@
         {{ form_row(form.city) }}
 
         {# Génération automatique des champs pas encore écrits.
-         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
++         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
          et tous les champs cachés (type « hidden »). #}
         {{ form_rest(form) }}
 
