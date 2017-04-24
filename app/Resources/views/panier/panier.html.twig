@@ -29,43 +29,21 @@
             </tbody>
         </table>
         <div ng-if="!basket.length">
-            Aucune commande snif :'(
+           Chargement du panier en cours ...
         </div>
 
     <section class="row">
-        <article class="col-md-3">
-            <h3>Adresse de collecte</h3>
-            <address>
-                <ul>
-                    <li>Toto</li>
-                    <li>25 rue de toto</li>
-                    <li>58457 Toto</li>
-                    <li>TOTO</li>
-                </ul>
-            </address>
-        </article>
-        <article class="col-md-3">
-            <h3>Adresse de facturation</h3>
-            <address>
-                <ul>
-                    <li>Toto</li>
-                    <li>25 rue de toto</li>
-                    <li>58457 Toto</li>
-                    <li>TOTO</li>
-                </ul>
-            </address>
-        </article>
-        <article class="col-md-3">
-            <h3>Adresse de livraison</h3>
-            <address>
-                <ul>
-                    <li>Toto</li>
-                    <li>25 rue de toto</li>
-                    <li>58457 Toto</li>
-                    <li>TOTO</li>
-                </ul>
-            </address>
-        </article>
+        {% for address in app.user.address %}
+            <article class="col-md-3">
+                <h3>Adresse de {{ address.type }}</h3>
+                <address>
+                    <ul>
+                        <li>{{ address.streetNumber }} {{ address.street }}</li>
+                        <li>{{ address.cp }} {{ address.city }}</li>
+                    </ul>
+                </address>
+            </article>
+        {% endfor %}
         <article class="col-md-3">
             Total: {[{getTotalHT() | currency:'€'}]}
         </article>
