@@ -46,6 +46,13 @@ class OrderManager
 
         $this->manager->flush();
 
+        return $orderLaundry->getId();
+
+    }
+
+    public function getOrderLaundryById($id)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->find($id);
     }
 
 }

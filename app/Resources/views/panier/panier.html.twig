@@ -4,8 +4,10 @@
 
 {% block content %}
     <div ng-app="MyApp" ng-controller="BasketController">
-
     <h2>Ma commande</h2>
+
+        <form method="post" action="{{ path('app_showBasket') }}">
+
         <div ng-if="!basket.length">
             Chargement du panier en cours ...
         </div>
@@ -25,7 +27,7 @@
             <tr ng-repeat="donnee in basket">
                 <td><p ng-bind="donnee.nom"></p></td>
                 <td>{[{donnee.prix | currency:'€'}]}</td>
-                <td><input type="number" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
+                <td><input type="number" name="{[{ $index }]}" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
                 <td>{[{(donnee.option) ? donnee.option : 'Pas d\'options disponibles'}]} </td>
                 <td>{[{(donnee.optionPrice) ? donnee.optionPrice : 'Pas d\'options disponibles'}]} </td>
                 <td><button ng-click="delCommand(donnee)">X</button></td>
@@ -50,8 +52,9 @@
         </article>
     </section>
     <section class="buy row">
-        <button class=" btn btn-success">Payer</button>
+        <button  type="submit" class=" btn btn-success">Payer</button>
     </section>
+        </form>
     <!--debut angular js -->
         <script src="{{ asset('bundles/app/js/vendor/angular/angular.js') }}"></script>
         <script src="{{ asset('bundles/app/js/vendor/angular-route/angular-route.js') }}"></script>
