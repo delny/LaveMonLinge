@@ -13,11 +13,14 @@
     <script type="text/javascript" src="{{ asset('bundles/app/js/autocomplete.js') }}"></script>
 
     <div class="container">
-        <h1>Votre compte</h1>
-        <ul>
-            <li>E-mail : {{ app.user.email }}</li>
-            <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
-        </ul>
+
+        {% if app.request.attributes.get('_route') == "app_my_account" %}
+            <h1>Votre compte</h1>
+            <ul>
+                <li>E-mail : {{ app.user.email }}</li>
+                <li>Mot de passe : <a href="{{ path('app_password_change') }}">Changez votre mot de passe</a></li>
+            </ul>
+        {% endif %}
         Vos adresses :
         {% if app.user.address is not empty %}
             <ul>
@@ -26,7 +29,7 @@
             {% endfor %}
             </ul>
             {% else %}
-            <p>Aucune adresse renseigné ! :'(</p>
+            <p>Aucune adresse renseignée !</p>
         {% endif %}
 
         <h2>Ajouter une adresse</h2>
@@ -45,7 +48,6 @@
         {{ form_row(form.city) }}
 
         {# Génération automatique des champs pas encore écrits.
-         Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
          et tous les champs cachés (type « hidden »). #}
         {{ form_rest(form) }}
 
@@ -53,7 +55,11 @@
         {# Fermeture de la balise <form> du formulaire HTML #}
         {{ form_end(form) }}
 
+        {% if (app.request.attributes.get('_route') == "app_address") and (app.user.address.count == 3) %}
+            <a href = {{ path('app_saveBasket') }}> <button type="button" class ="btn btn-default">  Finaliser ma commande  </button> </a>
 
+
+        {% endif %}
 
     </div>
 {% endblock %}

@@ -76,16 +76,13 @@ class OrderLaundry
     /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
-     *     inversedBy="orderLaundryCollect",
-     *     cascade={"persist"})
+     *     inversedBy="orderLaundryCollect")
      */
     private $timeSlotCollect;
 
     /**
      *  @ORM\ManyToOne(targetEntity="AppBundle\Entity\TimeSlot",
-     *  inversedBy="orderLaundryDelivery",
-     *  cascade={"persist"}
-     * )
+     *  inversedBy="orderLaundryDelivery")
      */
     private $timeSlotDelivery;
 

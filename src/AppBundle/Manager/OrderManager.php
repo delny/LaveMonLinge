@@ -36,8 +36,8 @@ class OrderManager
         $orderLaundry->setDateCollect(new \DateTime($card->getDateCollect()));
         $orderLaundry->setDateDelivery(new \DateTime($card->getDateDelivery()));
         $orderLaundry->setStatut('en attente');
-        $orderLaundry->setTimeSlotCollect($card->getHourCollect());
-        $orderLaundry->setTimeSlotDelivery($card->getHourDelivery());
+        $orderLaundry->setTimeSlotCollect($this->manager->merge($card->getHourCollect()));
+        $orderLaundry->setTimeSlotDelivery($this->manager->merge($card->getHourDelivery()));
         $orderLaundry->setUser($user);
         $orderLaundry->setPriceDelivery($this->priceDelivery);
         $orderLaundry->setTotal(0);
