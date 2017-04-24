@@ -37,6 +37,35 @@
         {% endfor %}
         </tbody>
     </table>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>réference</th>
+                <th>libellé</th>
+                <th>prix unitaire HT</th>
+                <th>quantité</th>
+                <th>montants HT et TTC</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="donnee in basket">
+                <td>{[{$index}]}</td>
+                <td>{[{donnee.reference}]} </td>
+                <td>{[{donnee.libelle}]} </td>
+                <td>{[{donnee.prix | currency:'€'}]} HT </td>
+                <td><input type="number" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
+                <td>{[{getHTPrice(donnee)| currency:'€'}]} HT -- {[{getTTCPrice(donnee) | currency:'€'}]} TTC</td>
+                <td><button ng-click="delCommand(donnee)">X</button></td>
+            </tr>
+            <tr>
+                <td colspan="5">Total</td>
+                <td>{[{getTotalHT() | currency:'€'}]} HT -- {[{getTotalTTC() | currency:'€'}]} TTC</td>
+            </tr>
+            </tbody>
+        </table>
+
     <section class="row">
         <article class="col-md-3">
             <h3>Adresse de collecte</h3>
@@ -79,16 +108,19 @@
         <button class=" btn btn-success">Payer</button>
     </section>
     <!--debut angular js -->
-    <script src="{{ asset('bundles/app/js/vendor/angular/angular.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/vendor/angular-route/angular-route.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/vendor/angular-sanitize/angular-sanitize.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/vendor/angular/angular.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/vendor/angular-route/angular-route.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/vendor/angular-sanitize/angular-sanitize.js') }}"></script>
 
-    <script src="{{ asset('bundles/app/js/vendor/angular-i18n/angular-locale_fr-fr.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/vendor/angular-i18n/angular-locale_fr-fr.js') }}"></script>
 
-    <script src="{{ asset('bundles/app/js/angular/app.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/angular/app.js') }}"></script>
 
-    <script src="{{ asset('bundles/app/js/angular/Basket/basket.js') }}"></script>
-    <script src="{{ asset('bundles/app/js/angular/Basket/Controller/BasketController.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/angular/Basket/basket.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/angular/Basket/Controller/BasketController.js') }}"></script>
+
+        <script src="{{ asset('bundles/app/js/angular/Basket/Service/PanierService.js') }}"></script>
+        <script src="{{ asset('bundles/app/js/angular/Basket/Service/TVAService.js') }}"></script>
 
     </div>
     <!--fin angular js -->
