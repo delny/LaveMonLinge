@@ -92,8 +92,6 @@ class Product
     }
 
 
-
-
     /**
      * Get id
      *

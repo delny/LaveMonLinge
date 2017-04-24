@@ -60,12 +60,12 @@ class OrderLaundryAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('user.email');
-        $list->add('statut');
-        $list->add('total');
-        $list->add('dateCollect');
-        $list->add('dateDelivery');
-        $list->add('priceDelivery');
+        $list->addIdentifier('user.email');
+        $list->addIdentifier('statut');
+        $list->addIdentifier('total');
+        $list->addIdentifier('dateCollect');
+        $list->addIdentifier('dateDelivery');
+        $list->addIdentifier('priceDelivery');
     }
 
     public function validate(ErrorElement $errorElement, $object)
