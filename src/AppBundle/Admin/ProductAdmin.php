@@ -27,7 +27,8 @@ class ProductAdmin extends AbstractAdmin
             'choice_label' => 'name',
         ));
         $form->add('img','file',array(
-            'required' => true
+            'required' => true,
+            'data_class' => null,
         ));
     }
 
