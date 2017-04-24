@@ -55,7 +55,11 @@
         {# Fermeture de la balise <form> du formulaire HTML #}
         {{ form_end(form) }}
 
-        <button type="button" class ="btn btn-default">Finaliser votre commande</button>
+        {% if (app.request.attributes.get('_route') == "app_address") and (app.user.address.count == 3) %}
+            <a href = {{ path('app_saveBasket') }}> <button type="button" class ="btn btn-default">  Finaliser ma commande  </button> </a>
+
+
+        {% endif %}
 
     </div>
 {% endblock %}

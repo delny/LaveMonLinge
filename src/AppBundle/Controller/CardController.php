@@ -39,7 +39,7 @@ class CardController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getManager('app.basket_manager')->addToBasket($form->getData());
-            return $this->redirectToRoute('app_saveBasket');
+            return $this->redirectToRoute('app_saveBa');
         }
         return $this->render(':date:date.html.twig', array('form' => $form->createView()));
     }
