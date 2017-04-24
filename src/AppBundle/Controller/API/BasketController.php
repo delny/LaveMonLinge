@@ -16,6 +16,13 @@ class BasketController extends FOSRestController
      */
     public function getBasketAction (Request $request)
     {
+        $basket = $this->getBasketManager()->getBasket();
+        if(!$basket)
+        {
+            // si le panier n'existe pas encore, on return un tableau vide
+            return new JsonResponse();
+        }
+
         $products = $this->getBasketManager()->getBasket()->getProducts();
 
         //dump($products);

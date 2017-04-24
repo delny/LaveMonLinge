@@ -6,7 +6,7 @@
     <div ng-app="MyApp" ng-controller="BasketController">
 
     <h2>Ma commande</h2>
-        <table class="table">
+        <table class="table" ng-if="basket.length">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -28,6 +28,9 @@
             </tr>
             </tbody>
         </table>
+        <div ng-if="!basket.length">
+            Aucune commande snif :'(
+        </div>
 
     <section class="row">
         <article class="col-md-3">
