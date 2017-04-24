@@ -3,6 +3,7 @@
 namespace AppBundle\Manager;
 
 
+use AppBundle\Entity\OrderLaundry;
 use AppBundle\Entity\User;
 use AppBundle\Form\Model\UserPasswordChange;
 use Doctrine\ORM\EntityManagerInterface;
