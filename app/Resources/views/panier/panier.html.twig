@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="donnee in basket">
-                <td>{[{donnee.nom}]} </td>
+                <td><p ng-bind="donnee.nom"></p></td>
                 <td>{[{donnee.prix | currency:'€'}]}</td>
                 <td><input type="number" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
                 <td>{[{(donnee.option) ? donnee.option : 'Pas d\'options disponibles'}]} </td>
