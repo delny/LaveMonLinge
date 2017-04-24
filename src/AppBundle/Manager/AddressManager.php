@@ -37,8 +37,6 @@ class AddressManager
 
     public function getAddressByUserAndType($id,$type){
         $address = $this->manager->getRepository(Address::class)->getAddressByUserAndType($id,$type);
-
         return $address;
-
     }
 }
