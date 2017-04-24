@@ -213,7 +213,7 @@ class Product
     }
 
 
-    
+
 
     /**
      * Add typeClothing
