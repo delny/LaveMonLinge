@@ -2,9 +2,7 @@
 {% block content %}
     <section class="lavage">
         {{ form_start(form) }}
-            {% if form.products.vars.prototype is defined %}
                 <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
-            {% endif %}
 
             {{ form_widget(form.products) }}
 
