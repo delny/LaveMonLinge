@@ -6,6 +6,10 @@
     <div ng-app="MyApp" ng-controller="BasketController">
 
     <h2>Ma commande</h2>
+        <div ng-if="!basket.length">
+            Chargement du panier en cours ...
+        </div>
+
         <table class="table" ng-if="basket.length">
             <thead>
             <tr>
@@ -28,9 +32,6 @@
             </tr>
             </tbody>
         </table>
-        <div ng-if="!basket.length">
-           Chargement du panier en cours ...
-        </div>
 
     <section class="row">
         {% for address in app.user.address %}
