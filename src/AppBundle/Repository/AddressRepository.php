@@ -12,8 +12,9 @@ class AddressRepository extends \Doctrine\ORM\EntityRepository
 {
 
     public function getAddressByUserAndType($id,$type)
-    {
-        return $this->createQueryBuilder('a')
+
+{
+    return $this->createQueryBuilder('a')
             ->select('a')
             ->andWhere('a.user= :id')
             ->andWhere('a.type= :type')
@@ -21,5 +22,5 @@ class AddressRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(':type', $type)
             ->getQuery()
             ->getOneOrNullResult();
-    }
+      }
 }
