@@ -23,6 +23,16 @@ jQuery(document).ready(function() {
         // add a new tag form (see next code block)
         addTagForm($collectionHolder, $newLinkLi);
     });
+
+    $(window).scroll(function() {
+        if ($(".navbar").offset().top > 490) {
+            $('#custom-nav').addClass('affix');
+            $(".navbar-fixed-top").addClass("top-nav-collapse");
+        } else {
+            $('#custom-nav').removeClass('affix');
+            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        }
+    });
 });
 
 function addTagForm($collectionHolder, $newLinkLi) {
@@ -43,3 +53,4 @@ function addTagForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
+

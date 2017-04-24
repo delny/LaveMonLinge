@@ -2,63 +2,104 @@
 {% block title %}Lave Mon Linge{% endblock %}
 
 {% block content %}
-    {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
-<!--
-<div class="welcome">
-    <section class="container row">
-        <h1>Lave Mon Linge</h1>
-        <p>Lave mon linge récupère votre linge sale chez vous puis vous le dépose super propre ! </p>
-        {% if app.user %}
-            <p>Cliquez ci-dessous pour profiter de ce service trop génial !!</p>
-            <a href="#choicelaundrypressing"><button class="btn btn-default btn-welcome">Accéder au service</button></a>
-        {% else %}
-            <p>Incriver-vous dès maintenant pour profiter de ce service trop génial !!</p>
-            <a href="{{ path('app_inscription') }}"><button class="btn btn-default btn-welcome">Incrivez-vous</button></a>
-            <p>Déjà un compte ? <a href="{{ path('app_connexion') }}">Connectez-vous</a></p>
-        {% endif %}
+    <div class="header">
+        <section class="container header_down wow fadeInUp">
+            <div class="col-md-offset-1 col-md-10">
+                <article class="col-md-4">
+                    <article class="col-md-3">
+                        <img src="{{ asset('bundles/app/img/phone_header.png')}}" alt="">
+
+                    </article>
+                    <article class="col-md-9 header_down_presentation">
+                        <h3>facile a utiliser</h3>
+                        <p class="header_down_presentation_presentation">Choissisez les dates et horaires</p>
+                    </article>
+                </article>
+                <article class="col-md-4">
+                    <article class="col-md-3">
+                        <img src="{{ asset('bundles/app/img/shirt_header.png')}}" alt="">
+
+                    </article>
+                    <article class="col-md-9 header_down_presentation">
+                        <h3 >facile a utiliser</h3>
+                        <p class="header_down_presentation_presentation">Choissisez les dates et horaires</p>
+                    </article>
+                </article>
+                <article class="col-md-4">
+                    <article class="col-md-3">
+                        <img src="{{ asset('bundles/app/img/hour_header.png')}}" alt="">
+
+                    </article>
+                    <article class="col-md-9 header_down_presentation">
+                        <h3>facile a utiliser</h3>
+                        <p class="header_down_presentation_presentation">Choissisez les dates et horaires</p>
+                    </article>
+                </article>
+            </div>
+        </section>
+    </div>
+    <section class="container second">
+        <h2 class="wow fadeInUp"> Comment ca marche</h2>
+        <h3 class="wow fadeInUp">Commandez en seulement 3 étapes</h3>
+        <section class="row presentation_section">
+            <article class="col-md-6 wow fadeInLeft presentation">
+                <ul>
+                    <li>
+                        <p>Choix des vetements</p>
+                    </li>
+                    <li>
+                        <p>Collecte</p>
+                    </li>
+                    <li>
+                        <p>Linge propre</p>
+                    </li>
+                </ul>
+            </article>
+            <article class="col-md-6 wow fadeInRight">
+                <figure>
+                    <img class="img-responsive" src="{{ asset('bundles/app/img/img.jpg')}}" alt="">
+                </figure>
+            </article>
+        </section>
     </section>
-    <section class="container row">
-        <h2>Comment fonctionne notre service ?</h2>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="logo-welcome"><p><span class="glyphicon glyphicon-pencil"></span></p></div>
-            <div>
-                <h3>Choix des vetements</h3>
-                <p>Renseignez les différents vêtements que vous souhaitez faire nettoyer.</p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="logo-welcome"><p><span class="glyphicon glyphicon-send"></span></p></div>
-            <div>
-                <h3>On vient chercher vos vêtements</h3>
-                <p>Un transporteur récupère dans l'adresse de votre choix votre linge qui a besoin d'un petit nettoyage ;)</p>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-            <div class="logo-welcome"><p><span class="glyphicon glyphicon-log-in"></span></p></div>
-            <div>
-                <h3>On rapporte vos vêtements </h3>
-                <p>un transporteur dépose dans l'adresse de votre choix votre linge propre comme jamais, nettoyé par nos soins.</p>
-            </div>
-        </div>
+    <section class="third container">
+        <h2 class="wow fadeInUp"> Pressing & linge au kilo </h2>
+        <h3 class="wow fadeInUp">Commandez en seulement 3 étapes</h3>
+        <section class="row choices">
+            <article class="col-md-6">
+                <figure>
+                    <img src="{{ asset('bundles/app/img/laverie.png')}}" alt="">
+                    <figcaption>
+                        <h3>Linge nettoyé et plié</h3>
+                        <p>
+                            Tarifé au kilo, notre service de linge au kilo convient parfaitement pour votre linge quotidien. Vos articles seront lavés ensemble à 30°C, séchés au sèche-linge puis pliés. Chaque sac de linge est tarifé au maximum de 7 kg par sac.
+                        </p>
+                        <p>
+                            1 x Linge au kilo (max 7kg) 15e
+                            2eme sac et plus 10e
+                        </p>
+                        <a href="{{ path('app_form_card', {'id':idLaverie }) }}" class="button">Choississez le nombre de sacs</a>
+                    </figcaption>
+                </figure>
+            </article>
+            <article class="col-md-6">
+                <figure>
+                    <img src="{{ asset('bundles/app/img/pressing.png')}}" alt="">
+                    <figcaption>
+                        <h3>Pressing & Repassage</h3>
+                        <p>
+                            Tarifé à la pièce, notre service de nettoyage à sec et repassage s'effectue par article. Chaque article est nettoyé à sec, repassé et rendu sur cintre individuellement.
+                        </p>
+                        <p>
+                            1 x Linge au kilo (max 7kg) 15e
+                            2eme sac et plus 10e
+                        </p>
+                        <a href="{{ path('app_form_card', {'id':idPressing }) }}" class="button">Choississez vos vetements</a>
+                    </figcaption>
+                </figure>
+            </article>
+        </section>
     </section>
-    <section id="choicelaundrypressing">
-        <h2>Pressing ou Laverie</h2>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="logo-choice"><a href="{{ path('app_form_card', {'id':idLaverie }) }}"><img src="{{ asset('bundles/app/img/choices/lavelinge.png') }}" /></a></div>
-            <div>
-                <h3>Linge Nettoyé & Plié</h3>
-                <p>Tarifé au sac, notre service de linge au sac convient parfaitement pour votre linge quotidien.
-                    Vos articles seront lavés ensemble à 30°C, séchés au sèche-linge puis pliés. Chaque sac de linge est tarifé au maximum de 7 kg par sac.</p>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="logo-choice"><a href="{{ path('app_form_card', {'id':idPressing}) }}"><img src="{{ asset('bundles/app/img/choices/pressing.png') }}" /></a></div>
-            <div>
-                <h3>Pressing & Repassage</h3>
-                <p>Tarifé à la pièce, notre service de nettoyage à sec et repassage s'effectue par article.
-                    Chaque article est nettoyé à sec, repassé et rendu sur cintre individuellement.</p>
-            </div>
-        </div>
-    </section>
-</div>-->
+
+
 {% endblock %}

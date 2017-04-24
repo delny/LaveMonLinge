@@ -19,6 +19,8 @@
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('bundles/adesignscalendar/css/fullcalendar/fullcalendar.css') }}" />
         <link rel="stylesheet" href="{{ asset('bundles/app/css/calendar.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/animate.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
     {% endblock %}
 
 </head>
@@ -48,12 +50,18 @@
                 {% endif %}
             </div>
         </div>
+    </div>
 
-        {% block content %}{% endblock %}
 
-        <footer>
-            <p>&copy; Lave Mon Linge 2017</p>
-        </footer>
+    {% block content %}{% endblock %}
+
+    <footer class="container-fluid">
+        <section class="container">
+            <article class="col-md-6">tel</article>
+            <article class="col-md-6">mail</article>
+            <article class="col-md-12">Horaires</article>
+        </section>
+    </footer>
 
         {% block javascript %}
             <!--[if lt IE 9]>
@@ -70,7 +78,7 @@
             <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/jquery/jquery-1.8.2.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+            <script src="{{ asset('bundles/app/js/vendor/wow.js') }}"></script>
         {% endblock %}
-    </div>
 </body>
 </html>

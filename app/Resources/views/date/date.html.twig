@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block content %}
+    <section class="container p80">
+
     {{ form_start(form) }}
 
     {{ form_widget(form) }}
 
     <div class="text-right">
-        <button type="submit" class="btn btn-primary btn-block btn-lg">Commander</button>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Choisir ses adresses</button>
     </div>
 
     {{ form_end(form) }}
-
+    </section>
 {% endblock %}
