@@ -2,15 +2,13 @@
 
 angular
     .module('BasketApp')
-    .provider('PanierService', [
-        '$http',
-        function ($http) {
+    .provider('PanierService', function () {
         var MyBig = 1000;
         return {
             setBig : function (limit) {
                 MyBig = limit;
             },
-            $get : function (TVAService) {
+            $get : function (TVAService,$http) {
                 var Service = {};
                 var Data = [];
                 var url = 'http://localhost:8000/api/getbasket';
@@ -42,7 +40,9 @@ angular
                         reference: product.id,
                         nom: product.name,
                         prix: product.price,
-                        quantite:quantite
+                        quantite:product.quantite,
+                        option: product.option,
+                        optionPrice: product.optionPrice
                     });
                 };
 
@@ -55,7 +55,7 @@ angular
                     return Data.filter(function (ligne) {
                         return ligne.reference === ref
                     }).reduce(function (previous,ligne) {
-                        return previous = previous + ligne.quantite*ligne.prix;
+                        return previous = previous + ligne.quantite*ligne.prix + ligne.optionPrice;
                     },0);
                 };
 
@@ -69,7 +69,7 @@ angular
 
                 Service.getTotalHT = function () {
                     return Data.reduce(function (previous,ligne) {
-                        return previous = previous + ligne.quantite*ligne.prix;
+                        return previous = previous + ligne.quantite*ligne.prix + ligne.optionPrice;
                     },0);
                 };
 
@@ -86,4 +86,4 @@ angular
                 return Service;
             }
         }
-    }]);
+    });

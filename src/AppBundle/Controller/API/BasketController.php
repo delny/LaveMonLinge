@@ -18,17 +18,29 @@ class BasketController extends FOSRestController
     {
         $products = $this->getBasketManager()->getBasket()->getProducts();
 
+        //dump($products);
+        //exit();
+
         $formatted = [];
 
         foreach ($products as $product)
         {
+            $option = ($product->getOptionLaundry()) ? $product->getOptionLaundry()->getLabel() : null;
+            $optionPrice = ($product->getOptionLaundry()) ? $product->getOptionLaundry()->getPrice() : null;
+            $quantite = ($product->getQuantity()) ? $product->getQuantity()->getPrice() : 1;
+
             $formatted[] = [
                 'id' => $product->getProduct()->getId(),
                 'name' => $product->getProduct()->getName(),
                 'price' => $product->getProduct()->getPrice(),
-                'quantite' => $product->getQuantity(),
+                'quantite' => $quantite,
+                'option' => $option,
+                'optionPrice' => $optionPrice
             ];
         }
+
+        //dump($formatted);
+        //exit();
 
         return new JsonResponse($formatted);
 

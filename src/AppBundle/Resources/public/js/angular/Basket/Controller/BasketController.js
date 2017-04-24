@@ -1,6 +1,3 @@
-/**
- * Created by Utilisateur on 24/04/2017.
- */
 'use strict';
 
 angular.module('BasketApp')
@@ -26,7 +23,12 @@ angular.module('BasketApp')
 
             PanierService.getList().then(function (data) {
                 for (var product in data) {
-                    PanierService.addPanier(product);
+                    PanierService.addPanier(data[product],1);
                 }
-            })
+            });
+
+            $scope.delCommand = function(produit) {
+                var id = $scope.basket.indexOf(produit);
+                $scope.basket.splice(id,1);
+            };
         }]);

@@ -40,28 +40,22 @@
         <table class="table">
             <thead>
             <tr>
-                <th>id</th>
-                <th>réference</th>
-                <th>libellé</th>
+                <th>Nom</th>
                 <th>prix unitaire HT</th>
                 <th>quantité</th>
-                <th>montants HT et TTC</th>
+                <th>Options</th>
+                <th>Prix unitaire options</th>
                 <th>Supprimer</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="donnee in basket">
-                <td>{[{$index}]}</td>
-                <td>{[{donnee.reference}]} </td>
-                <td>{[{donnee.libelle}]} </td>
-                <td>{[{donnee.prix | currency:'€'}]} HT </td>
+                <td>{[{donnee.nom}]} </td>
+                <td>{[{donnee.prix | currency:'€'}]}</td>
                 <td><input type="number" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
-                <td>{[{getHTPrice(donnee)| currency:'€'}]} HT -- {[{getTTCPrice(donnee) | currency:'€'}]} TTC</td>
+                <td>{[{donnee.option}]} </td>
+                <td>{[{donnee.optionPrice}]} </td>
                 <td><button ng-click="delCommand(donnee)">X</button></td>
-            </tr>
-            <tr>
-                <td colspan="5">Total</td>
-                <td>{[{getTotalHT() | currency:'€'}]} HT -- {[{getTotalTTC() | currency:'€'}]} TTC</td>
             </tr>
             </tbody>
         </table>
@@ -101,7 +95,7 @@
             </address>
         </article>
         <article class="col-md-3">
-            Total: 45 €
+            Total: {[{getTotalHT() | currency:'€'}]}
         </article>
     </section>
     <section class="buy row">
