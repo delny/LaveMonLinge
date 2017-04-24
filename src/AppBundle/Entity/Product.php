@@ -91,6 +91,24 @@ class Product
         return $this->getName();
     }
 
+    /**
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * @param string $img
+     * @return Product
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+        return $this;
+    }
+
 
 
 
