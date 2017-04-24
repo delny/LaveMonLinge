@@ -6,37 +6,6 @@
     <div ng-app="MyApp" ng-controller="BasketController">
 
     <h2>Ma commande</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prix unitaire</th>
-            <th>Quantité</th>
-            <th>Options</th>
-            <th>Prix unitaire options</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for basketEntry in basket.products %}
-
-            <tr>
-                <td>{{ basketEntry.product.name }}</td>
-                <td>{{ basketEntry.product.price }}</td>
-                {% if basketEntry.optionLaundry is null %}
-                    <td>1</td>
-                    <td>Pas d'options disponibles</td>
-                    <td>Pas d'options disponibles</td>
-                {% else %}
-                    <td>{{ basketEntry.quantity }}</td>
-                    <td>{{ basketEntry.optionLaundry.label }}</td>
-                    <td>{{ basketEntry.optionLaundry.price }}</td>
-                {% endif %}
-
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
         <table class="table">
             <thead>
             <tr>
@@ -53,8 +22,8 @@
                 <td>{[{donnee.nom}]} </td>
                 <td>{[{donnee.prix | currency:'€'}]}</td>
                 <td><input type="number" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
-                <td>{[{donnee.option}]} </td>
-                <td>{[{donnee.optionPrice}]} </td>
+                <td>{[{(donnee.option) ? donnee.option : 'Pas d\'options disponibles'}]} </td>
+                <td>{[{(donnee.optionPrice) ? donnee.optionPrice : 'Pas d\'options disponibles'}]} </td>
                 <td><button ng-click="delCommand(donnee)">X</button></td>
             </tr>
             </tbody>
