@@ -3,7 +3,7 @@
 {% block title %}Ma commande{% endblock %}
 
 {% block content %}
-
+    <div ng-app="MyApp" ng-controller="BasketController">
 
     <h2>Ma commande</h2>
     <table class="table">
@@ -78,4 +78,18 @@
     <section class="buy row">
         <button class=" btn btn-success">Payer</button>
     </section>
+    <!--debut angular js -->
+    <script src="{{ asset('bundles/app/js/vendor/angular/angular.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/vendor/angular-route/angular-route.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/vendor/angular-sanitize/angular-sanitize.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/js/vendor/angular-i18n/angular-locale_fr-fr.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/js/angular/app.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/js/angular/Basket/basket.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/angular/Basket/Controller/BasketController.js') }}"></script>
+
+    </div>
+    <!--fin angular js -->
 {% endblock %}
