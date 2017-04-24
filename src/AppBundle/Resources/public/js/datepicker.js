@@ -3,6 +3,54 @@
  */
 $(function() {
 
+
+
+
+    $('#app_bundle_date_choice_type_dateCollect').change(function(){
+        var datepickerCollect = $('#app_bundle_date_choice_type_dateCollect').val();
+
+        var datepickerCollectAffichage = format(datepickerCollect);
+        $('#app_bundle_date_choice_type_dateCollect').val(datepickerCollectAffichage);
+
+        var dateCollecteAffichage = new Date(datepickerCollect);
+        $('#app_bundle_date_choice_type_dateCollect').html(DateLocale(dateCollecteAffichage));
+
+
+        var dateDelivery = new Date(datepickerCollect);
+        dateDelivery.setDate(dateDelivery.getDate() + 3);
+        dateDelivery.setHours(0,0,0,0);
+
+        var day = dateDelivery.getDay();
+
+        if(day == 0){
+            dateDelivery.setDate(dateDelivery.getDate() + 1 );
+        }
+        
+        for (i = 0; i < disabledDays.length; i++) {
+            if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
+                dateDelivery.setDate(dateDelivery.getDate() + 1);
+                $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+            }else{
+                $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+            }
+
+        }
+    });
+
+    function format(inputDate) {
+        var date = new Date(inputDate);
+        if (!isNaN(date.getTime())) {
+            var day = date.getDate().toString();
+            var month = (date.getMonth() + 1).toString();
+            // Months use 0 index.
+
+            return (day[1] ? day : '0' + day[0]) + '-' +
+                (month[1] ? month : '0' + month[0]) + '-' +
+                date.getFullYear();
+        }
+    }
+
+
     function DateLocale(d) {
         //Les traductions des jours en mois (ici juste fr et en mais on peut completer)
         var tabJours = {
@@ -19,36 +67,6 @@ $(function() {
     }
 
 
-    $('#app_bundle_date_choice_type_dateCollect').change(function(){
-        var datepickerCollect = $('#app_bundle_date_choice_type_dateCollect').val();
-
-        var dateCollecteAffichage = new Date(datepickerCollect);
-        $('#app_bundle_date_choice_type_dateCollect').html(DateLocale(dateCollecteAffichage));
-
-
-        var dateDelivery = new Date(datepickerCollect);
-        dateDelivery.setDate(dateDelivery.getDate() + 1);
-        dateDelivery.setHours(0,0,0,0);
-
-        var day = dateDelivery.getDay();
-
-        if(day == 0){
-            dateDelivery.setDate(dateDelivery.getDate() + 1 );
-        }
-
-        var t = dateDelivery.toLocaleDateString();
-        var x = t.replace(/\//g, '-');
-        for (i = 0; i < disabledDays.length; i++) {
-
-            if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
-                dateDelivery.setDate(dateDelivery.getDate() + 1);
-                $('#app_bundle_date_choice_type_dateDelivery').val(x);
-            }else{
-                $('#app_bundle_date_choice_type_dateDelivery').val(x);
-            }
-
-        }
-    });
     function JoursFeries(an) {
         var JourAn = new Date(an, "00", "1")
         var FeteTravail = new Date(an, "4", "1")
