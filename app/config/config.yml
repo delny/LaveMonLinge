@@ -86,6 +86,9 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+sonata_admin:
+    title:  'Lave mon linge'
+    title_logo: https://www.zipjet.fr/assets/common/images/zipjet-logo-icon.svg
 
 #snappyBundle - generation pdf
 knp_snappy:
