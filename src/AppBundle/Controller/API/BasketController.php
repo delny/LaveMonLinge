@@ -40,6 +40,7 @@ class BasketController extends FOSRestController
                 'id' => $product->getProduct()->getId(),
                 'name' => $product->getProduct()->getName(),
                 'price' => $product->getProduct()->getPrice(),
+                'priceMultiple' => $product->getProduct()->getPriceIfMultiple(),
                 'quantite' => $quantite,
                 'option' => $option,
                 'optionPrice' => $optionPrice

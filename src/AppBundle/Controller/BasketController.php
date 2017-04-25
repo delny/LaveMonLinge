@@ -22,7 +22,6 @@ class BasketController extends Controller
         $form = $request->request->all();
         $session = $this->get('session');
         $idOrderLaundry = ($session->get('idOrderLaundry')) ? $session->get('idOrderLaundry') : FALSE;
-        dump($idOrderLaundry);
 
         if (!empty($form) AND $idOrderLaundry)
         {
@@ -57,7 +56,18 @@ class BasketController extends Controller
 
                 $this->getOrderManager()->saveOrderItem($orderItem);
 
-                $total += $orderItem->getQte() * $orderItem->getProduct()->getPrice();
+                //gestion prix multiple
+                if ($orderItem->getProduct()->getPriceIfMultiple())
+                {
+                    $price = $orderItem->getProduct()->getPrice() + ($quantity-1)*$orderItem->getProduct()->getPriceIfMultiple();
+                }
+                else
+                {
+                    $price = $orderItem->getProduct()->getPrice() * $quantity;
+                }
+
+                $total += $price;
+
 
             }
 
