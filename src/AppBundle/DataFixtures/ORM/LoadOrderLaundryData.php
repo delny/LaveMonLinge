@@ -18,6 +18,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>48,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-0'),
             ],
 
@@ -30,6 +31,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>19,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-1'),
             ],
 
@@ -41,6 +43,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>24,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -52,6 +55,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>35,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -63,6 +67,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>47,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -74,6 +79,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>67,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -85,6 +91,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>35,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -96,6 +103,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>98,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -107,6 +115,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>124,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -118,6 +127,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>75,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
 
@@ -129,6 +139,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
                 'statut'=>'Expédié',
                 'prixLivraison'=>9,
                 'total'=>26,
+                'isPay' => 0,
                 'user'=>$this->getReference('user-2'),
             ],
         ];
@@ -139,6 +150,7 @@ class LoadOrderLaundryData extends AbstractFixture implements OrderedFixtureInte
             $order->setStatut($data['statut']);
             $order->setPriceDelivery($data['prixLivraison']);
             $order->setTotal($data['total']);
+            $order->setIsPay($data['isPay']);
             $order->setUser($data['user']);
             $order->setTimeSlotCollect($data['timeSlotCollect']);
             $order->setTimeSlotDelivery($data['timeSlotDelivery']);

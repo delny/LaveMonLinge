@@ -12,8 +12,8 @@ class LoadOptionLaundryData extends AbstractFixture implements OrderedFixtureInt
     {
         $datas = [
             [
-                'label'=>'Livraison',
-                'price'=>9,
+                'label'=>'Lavage à la main',
+                'price'=>19,
 
 
             ],
