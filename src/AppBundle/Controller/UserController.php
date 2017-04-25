@@ -248,6 +248,7 @@ class UserController extends Controller
         //recup order
         $order = $userManager->getOrderById($idOrder);
 
+
         if ($order)
         {
             return $this->render(':user:orderDetail.html.twig', array(

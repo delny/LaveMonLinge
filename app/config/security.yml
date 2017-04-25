@@ -46,6 +46,7 @@ security:
         - { path: ^/pressing$, role:  ROLE_USER }
         - { path: ^/form, role:  ROLE_USER }
         - { path: ^/account, role: ROLE_USER}
+        - { path: ^/address, role: ROLE_USER}
         - { path: ^/myorders, role: ROLE_USER}
         - { path: ^/pdf, role: ROLE_USER}
         - { path: ^/api/, role: ROLE_USER}
