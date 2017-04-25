@@ -21,6 +21,7 @@ class DateChoiceType extends AbstractType
 
         $builder->add('dateCollect', TextType::class,[
                         'required' => true,
+                        'label' => 'Date de collecte',
                     ])
                 ->add('hourCollect', EntityType::class,[
                     'class' => TimeSlot::class,
@@ -33,6 +34,7 @@ class DateChoiceType extends AbstractType
                 ])
                 ->add('dateDelivery', TextType::class,[
                     'required' => true,
+                    'label' => 'Date de livraison',
                 ])
                 ->add('hourDelivery', EntityType::class,[
                 'class' => TimeSlot::class,

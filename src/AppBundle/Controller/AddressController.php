@@ -50,7 +50,7 @@ class AddressController extends Controller
                 //message de notification
                 $this->addFlash(
                     'success',
-                    'Votre adresse a bien été ajouté !'
+                    'Votre adresse a bien été enregistré !'
                 );
 
                 //renvoie vers la page du compte

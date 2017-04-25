@@ -6,7 +6,7 @@
 {% block content %}
 
 
-    <div class="container">
+    <div class="container p80">
         <h1>Détails d'une commande</h1>
 <a href="{{ path('app_orderlist') }}">Retour à la liste</a>
         <p>Récapitulatif de la commande</p>
@@ -67,6 +67,11 @@
             {% endfor %}
             </tbody>
         </table>
+<<<<<<< HEAD
+    {% else %}
+        <p> Commande Vide...</p>
+=======
+>>>>>>> e17571594fb41d4e5458562b8d19063a44e71d30
     {% endif %}
 
     </div>
