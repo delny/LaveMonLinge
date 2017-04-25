@@ -37,6 +37,7 @@ class BasketController extends Controller
             {
                 $item = $product->getProduct();
 
+
                 //suite chiffre aleatoire unique pour chaque sac
                 do
                 {
@@ -66,7 +67,7 @@ class BasketController extends Controller
                     $price = $orderItem->getProduct()->getPrice() * $quantity;
                 }
 
-                $total += $price;
+                $total += $price + $product->getOptionLaundry()->getPrice();
 
 
             }
