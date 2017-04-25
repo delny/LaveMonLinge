@@ -29,10 +29,11 @@ class AddressController extends Controller
 
 
         if ($form->isSubmitted() AND $form->isValid()) {
+            $iduser = $this->getUser()->getId();
+            $type = $form->getNormData()->getType();
 
             if ($form->getNormData()->getCp() === null || $form->getNormData()->getCity() === null || $form->getNormData()->getStreet() === null ||
-                $form->getNormData()->getStreetNumber() === null
-            ) {
+                $form->getNormData()->getStreetNumber() === null) {
                 $this->addFlash(
                     'warning',
                     'Il y a une erreur dans l\'addresse que vous venez de soumettre.'
@@ -40,21 +41,24 @@ class AddressController extends Controller
                 );
 
             } else {
+                if (!$addressManager->getAddressByUserAndType($iduser, $type)) {
 
-                //ajout du user dans l'adresse
-                $address->setUser($this->getUser());
+                    //ajout du user dans l'adresse
+                    $address->setUser($this->getUser());
 
-                //ajout de adresse à la bdd
-                $addressManager->save($address);
+                    //ajout de adresse à la bdd
+                    $addressManager->save($address);
 
-                //message de notification
-                $this->addFlash(
-                    'success',
-                    'Votre adresse a bien été ajouté !'
-                );
+                    //message de notification
+                    $this->addFlash(
+                        'success',
+                        'Votre adresse a bien été ajouté !'
+                    );
+                }
 
-                //renvoie vers la page du compte
-                return $this->redirectToRoute('app_my_account');
+                    //renvoie vers la page du compte
+                    return $this->redirectToRoute('app_my_account');
+
             }
         }
 
