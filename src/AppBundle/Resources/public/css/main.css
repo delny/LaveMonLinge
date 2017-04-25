@@ -346,3 +346,9 @@ button[type=submit]:hover{
 .p20{
     padding-top: 20px;
 }
+
+.flashmsg {
+    position: absolute;
+    left:25%;
+    z-index: 1;
+}
