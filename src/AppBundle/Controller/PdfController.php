@@ -55,11 +55,14 @@ class PdfController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        $orderItem->getOptions()->initialize();
+        $option = $orderItem->getOptions()->unwrap()[0];
 
         $html = $this->renderView(':pdf:sacBill.html.twig',[
                 'order' => $order,
                 'item' => $orderItem,
                 'countOrderItem' => $order->getOrderItems()->count(),
+                'option' => $option,
             ]);
 
         $filename = sprintf('test-%s.pdf', date('Y-m-d'));

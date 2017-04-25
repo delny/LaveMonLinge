@@ -42,6 +42,8 @@
                         <th>quantité</th>
                         <th>statut</th>
                         <th>Code Barre</th>
+                        <th>Option</th>
+                        <th>Prix</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,9 @@
                             <td>{{ item.qte }}</td>
                             <td>{{ item.statut }}</td>
                             <td>{{ item.barcode }}</td>
+                            <td>{{ option.label }}</td>
+                            <td>{{ option.price| number_format(2,'.',',') }} €</td>
+                            <td></td>
                         </tr>
 
                     </tbody>
