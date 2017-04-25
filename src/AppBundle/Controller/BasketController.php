@@ -84,6 +84,11 @@ class BasketController extends Controller
              return $this->redirectToRoute('app_payment');
         }
 
+        if($idOrderLaundry == false){
+            return $this->redirectToRoute('homepage');
+
+        }
+
         return $this->render(':panier:panier.html.twig', [
             'basket' => $basket,
         ]);
