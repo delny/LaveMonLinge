@@ -14,14 +14,23 @@ jQuery(document).ready(function() {
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
+    $collectionHolder.data('index', $collectionHolder.find('li').length);
     $addTagLink.on('click', function (e) {
         // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
         // add a new tag form (see next code block)
         addTagForm($collectionHolder, $newLinkLi);
+    });
+
+    $(window).scroll(function() {
+        if ($(".navbar").offset().top > 490) {
+            $('#custom-nav').addClass('affix');
+            $(".navbar-fixed-top").addClass("top-nav-collapse");
+        } else {
+            $('#custom-nav').removeClass('affix');
+            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        }
     });
 });
 
@@ -43,3 +52,4 @@ function addTagForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
+
