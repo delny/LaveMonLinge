@@ -42,6 +42,7 @@ class OrderManager
         $orderLaundry->setUser($user);
         $orderLaundry->setPriceDelivery($this->priceDelivery);
         $orderLaundry->setTotal(0);
+        $orderLaundry->setIsPay(0);
 
         $this->manager->persist($orderLaundry);
 

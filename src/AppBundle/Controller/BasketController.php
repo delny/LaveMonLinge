@@ -41,7 +41,7 @@ class BasketController extends Controller
                 //suite chiffre aleatoire unique pour chaque sac
                 do
                 {
-                    $barcode = mt_rand();
+                    $barcode = mt_rand(1000000000,9999999999);
                 }
                 while($this->getOrderManager()->getOrderItemByBarcode($barcode));
 
