@@ -36,6 +36,8 @@ class BasketController extends Controller
             foreach ($products as $product)
             {
                 $item = $product->getProduct();
+                $optionLaundry = $product->getOptionLaundry();
+
 
                 //suite chiffre aleatoire unique pour chaque sac
                 do
@@ -53,6 +55,8 @@ class BasketController extends Controller
                 $orderItem->setStatut('En attente');
                 $orderItem->setOrderLaundry($orderLaundry);
                 $orderItem->setBarcode($barcode);
+                $orderItem->addOption($this->get('doctrine')->getManager()->merge($optionLaundry));
+
 
                 $this->getOrderManager()->saveOrderItem($orderItem);
 
@@ -66,7 +70,7 @@ class BasketController extends Controller
                     $price = $orderItem->getProduct()->getPrice() * $quantity;
                 }
 
-                $total += $price;
+                $total += $price + $product->getOptionLaundry()->getPrice();
 
 
             }
