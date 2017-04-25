@@ -1,11 +1,15 @@
 {% block _card_products_entry_widget %}
+    {% if form.vars.value.product == null %}
+        <div class="well">
+            {{ block('form_row') }}
+            <div class="clearfix"></div>
+        </div>
+        {% else %}
+            <div class="col-md-12 text-center"><img src="{{ asset('bundles/app/img/'~form.vars.value.product.img) }}" alt="" /></div>
 
-            <div class="well">
-                {{ block('form_row') }}
-                <div class="clearfix"></div>
-            </div>
+            {{ block('form_row') }}
 
-
+    {% endif %}
 {% endblock %}
 
 {% block _card_products_entry_product_entry_widget %}
@@ -49,14 +53,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{ asset('bundles/app/img/'~entry.product.img) }}" alt="" />
-                        </div>
-                        <div class="col-md-8">
-                            {{- form_widget(form) -}}
-                        </div>
-                    </div>
+                    {{- form_widget(form) -}}
                 </div>
             </div>
         </div>

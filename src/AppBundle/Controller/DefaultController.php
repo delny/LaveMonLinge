@@ -17,7 +17,7 @@ class DefaultController extends Controller
         $idProducts = [];
         foreach ($listTypeProduct as $key => $typeProduct)
         {
-            $idProducts[$typeProduct->getName()] = $typeProduct->getId();
+            $idProducts[$typeProduct->getName()] = $typeProduct->getName();
         }
         extract($idProducts);
         // retour de la vue

@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CardController extends Controller
 {
     /**
-     * @Route("/form/{id}", name="app_form_card")
+     * @Route("/form/{name}", name="app_form_card")
      */
     public function formAction(Request $request, ProductType $productType)
     {
@@ -25,14 +25,14 @@ class CardController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getManager('app.basket_manager')->addToBasket($form->getData());
-            return $this->redirectToRoute('app_form_date_card', ['id' => $productType->getId()]);
+            return $this->redirectToRoute('app_form_date_card', ['name' => $productType->getName()]);
         }
         return $this->render(':lavage:list.html.twig', array('form' => $form->createView()));
     }
 
 
     /**
-     * @Route("/form/{id}/date", name="app_form_date_card")
+     * @Route("/form/{name}/date", name="app_form_date_card")
      */
     public function formDatePickerAction(Request $request){
         $basket = $this->getManager('app.basket_manager')->getBasket();
@@ -44,6 +44,8 @@ class CardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $dateCollect =$form->getData()->getDateCollect();
             $dateDelivery = $form->getData()->getDateDelivery();
+            $dateCollectString = strtotime($dateCollect);
+            $dateCollectFormated = date('d', $dateCollectString);
             $dateDeliveryString = strtotime($dateDelivery);
             $dateDeliveryFormated = date('d-m-Y', $dateDeliveryString);
             $dateDeliveryWeekEnd = date('w',strtotime($dateDeliveryFormated));
@@ -51,8 +53,15 @@ class CardController extends Controller
 
             $joursFeries = $this->JoursFeries(2017);
             $type = $form->getData()->getProducts()[0]->getProduct()->getType()->getName();
+            $hourNow = date('H:i');
+            $dateNow = date('d');
 
-            if($type == "pressing"){
+            $hourCollect = $form->getData()->getHourCollect()->getSlotStart();
+            if($dateNow == $dateCollectFormated && $type == "pressing"){
+                if($hourNow > $hourCollect){
+                    $this->get('session')->getFlashBag()->add('danger', 'l\'heure de collecte doit etre superieure a l\'heure actuelle');
+                    return $this->redirect($_SERVER['HTTP_REFERER']);
+                }
                 $test = strtotime($dateCollect. ' + 5 days');
                 $t = date('d-m-Y', $test);
                 if($dateDelivery > $t){
