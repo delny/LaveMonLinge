@@ -2,11 +2,14 @@
 
 {% block title %}Vos commandes{% endblock %}
 
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
 {% block content %}
 
 
-    <div class="container p80">
+    <div class="container p150">
         <h1>Détails d'une commande</h1>
 <a href="{{ path('app_orderlist') }}">Retour à la liste</a>
         <p>Récapitulatif de la commande</p>

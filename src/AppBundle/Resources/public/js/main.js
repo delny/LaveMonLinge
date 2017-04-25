@@ -1,4 +1,3 @@
-
 var $collectionHolder;
 
 // setup an "add a tag" link
@@ -7,7 +6,7 @@ var $newLinkLi = $('<li></li>').append($addTagLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of tags
-    $collectionHolder = $('ul.products');
+    $collectionHolder = $('#card_products');
 
     // add the "add a tag" anchor and li to the tags ul
     $collectionHolder.append($newLinkLi);
@@ -16,6 +15,7 @@ jQuery(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionHolder.data('index', $collectionHolder.find('li').length);
     $addTagLink.on('click', function (e) {
+        console.log($collectionHolder.find('li').length -1);
         // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
@@ -23,13 +23,19 @@ jQuery(document).ready(function() {
         addTagForm($collectionHolder, $newLinkLi);
     });
 
+    new WOW().init();
+
+
     $(window).scroll(function() {
-        if ($(".navbar").offset().top > 490) {
-            $('#custom-nav').addClass('affix');
-            $(".navbar-fixed-top").addClass("top-nav-collapse");
-        } else {
-            $('#custom-nav').removeClass('affix');
-            $(".navbar-fixed-top").removeClass("top-nav-collapse");
+        var pathArray = window.location.pathname.split( '/' );
+        if(pathArray[1] == ""){
+            if ($(".navbar").offset().top > 490) {
+                $('#custom-nav').addClass('affix');
+                $(".navbar-fixed-top").addClass("top-nav-collapse");
+            } else {
+                $('#custom-nav').removeClass('affix');
+                $(".navbar-fixed-top").removeClass("top-nav-collapse");
+            }
         }
     });
 });
@@ -52,4 +58,3 @@ function addTagForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<li></li>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
-

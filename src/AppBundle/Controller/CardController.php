@@ -24,6 +24,7 @@ class CardController extends Controller
         $form = $this->createForm(CardType::class, new Card(), ['productType' => $productType]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getManager('app.basket_manager')->addToBasket($form->getData());
             return $this->redirectToRoute('app_form_date_card', ['name' => $productType->getName()]);
         }

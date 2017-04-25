@@ -2,7 +2,10 @@
 
 {% block title %}Connectez-vous{% endblock %}
 
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
 {% block content %}
 
     <section class="col-md-offset-4 col-md-4 form">

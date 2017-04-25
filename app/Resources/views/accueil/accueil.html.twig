@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %}Lave Mon Linge{% endblock %}
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/custom_nav.css') }}" />
+{% endblock %}
 {% block content %}
     <div class="header">
         <section class="container header_down wow fadeInUp">
@@ -43,17 +46,33 @@
         <h3 class="wow fadeInUp">Commandez en seulement 3 étapes</h3>
         <section class="row presentation_section">
             <article class="col-md-6 wow fadeInLeft presentation">
-                <ul>
-                    <li>
-                        <p>Choix des vêtements</p>
-                    </li>
-                    <li>
-                        <p>Collecte</p>
-                    </li>
-                    <li>
-                        <p>Linge propre</p>
-                    </li>
-                </ul>
+                <article class="col-md-12">
+                    <article class="col-md-2">
+                        <img class="presentation_img" src="{{ asset('bundles/app/img/pointer.svg')}}" alt="">
+                    </article>
+                    <article class="col-md-10 ">
+                        <p>Commandez via notre site internet</p>
+                        <p class="header_down_presentation_presentation">Choisissez les dates et les horaires de votre choix.</p>
+                    </article>
+                </article>
+                <article class="col-md-12">
+                    <article class="col-md-2">
+                        <img class="presentation_img" src="{{ asset('bundles/app/img/delivery-truck.svg')}}" alt="">
+                    </article>
+                    <article class="col-md-10 ">
+                        <p>Rencontrez votre chauffeur</p>
+                        <p class="header_down_presentation_presentation">Nous collectons et livrons vos vêtements chez vous.</p>
+                    </article>
+                </article>
+                <article class="col-md-12">
+                    <article class="col-md-2">
+                        <img class="presentation_img" src="{{ asset('bundles/app/img/clean_shirt.png')}}" alt="">
+                    </article>
+                    <article class="col-md-10 ">
+                        <p>Votre linge propre vous est rendu</p>
+                        <p class="header_down_presentation_presentation">Votre linge propre vous est rendu en 72h.</p>
+                    </article>
+                </article>
             </article>
             <article class="col-md-6 wow fadeInRight">
                 <figure>
@@ -66,7 +85,7 @@
         <h2 class="wow fadeInUp"> Pressing & linge au sac </h2>
         <h3 class="wow fadeInUp">Commandez en seulement 3 étapes</h3>
         <section class="row choices">
-            <article class="col-md-6">
+            <article class="col-md-6 wow fadeInLeft">
                 <figure>
                     <img src="{{ asset('bundles/app/img/laverie.png')}}" alt="">
                     <figcaption>
@@ -82,7 +101,7 @@
                     </figcaption>
                 </figure>
             </article>
-            <article class="col-md-6">
+            <article class="col-md-6 wow fadeInRight">
                 <figure>
                     <img src="{{ asset('bundles/app/img/pressing.png')}}" alt="">
                     <figcaption>

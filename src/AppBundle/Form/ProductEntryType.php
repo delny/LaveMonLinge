@@ -26,10 +26,12 @@ class ProductEntryType extends AbstractType
 
         if($productType->getComputePriceByWeight()) {
             $builder->add('quantity', ChoiceType::class, [
-                'choices' => array_combine(range(1, 10), range(1, 10))
+                'choices' => array_combine(range(1, 10), range(1, 10)),
+                'label' => 'Quantité',
             ]);
             $builder->add('optionLaundry', EntityType::class, [
                'class' => OptionLaundry::class,
+                'label' => 'Options',
             ]);
         }else{
             $builder

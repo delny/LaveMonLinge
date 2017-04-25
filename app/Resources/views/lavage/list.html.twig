@@ -2,17 +2,22 @@
 
 {% block title %} Mon choix de vêtements{%  endblock %}
 
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
+
 {% block content %}
 
-    <section class="container p80">
+    <section class="container p150">
         {{ form_start(form) }}
-                <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
+        {{ form_widget(form.products) }}
+        <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
 
-            {{ form_widget(form.products) }}
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Choisir ses dates</button>
+        </div>
 
-            <div class="text-right">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Choisir ses dates</button>
-            </div>
         {{ form_end(form) }}
     </section>
 {% endblock %}
