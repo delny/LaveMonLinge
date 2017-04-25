@@ -54,6 +54,7 @@ class BasketController extends Controller
 
             //mis a jour orderlaundry
             $orderLaundry->setTotal($total + $orderLaundry->getPriceDelivery());
+            $orderLaundry->setIsPay(0);
             $this->getOrderManager()->saveOrderLaundry($orderLaundry);
 
             //redirection

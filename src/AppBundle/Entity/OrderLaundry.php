@@ -86,6 +86,11 @@ class OrderLaundry
      */
     private $timeSlotDelivery;
 
+    /**
+     * @ORM\Column(name="is_pay", type="integer")
+     */
+    private $isPay;
+
    
 
     /**
@@ -331,4 +336,24 @@ class OrderLaundry
     {
         return $this->timeSlotDelivery;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIsPay()
+    {
+        return $this->isPay;
+    }
+
+    /**
+     * @param mixed $isPay
+     * @return OrderLaundry
+     */
+    public function setIsPay($isPay)
+    {
+        $this->isPay = $isPay;
+        return $this;
+    }
+
+
 }
