@@ -322,3 +322,21 @@ button[type=submit]:hover{
     font-size: 18px;
 
 }
+
+footer{
+    color:#8492a6;
+}
+.phone{
+    text-align: right;
+}
+.mail{
+    text-align: left;
+}
+.hours{
+    text-align: center;
+}
+
+.foot_content{
+    padding-top:40px;
+    padding-bottom:60px;
+}
