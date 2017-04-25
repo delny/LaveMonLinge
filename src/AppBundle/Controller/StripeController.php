@@ -23,10 +23,13 @@ class StripeController extends Controller
 
     public function prepareAction()
     {
-        //A remplacer plus tard par le total récupéré une fois la commande réalisée
-        $total = 10;
-        $total .= "00";
-        //Pour mettre le montant exact dans Sprite qui sera en centimes
+        $orderManager = $this->container->get("app.order_manager");
+        $idorder = $this->get('session')->get('idOrderLaundry');
+
+        //Le prix en base est en euros mais le pix affiché par stripe est en centimes
+        $total = $orderManager->getOrderLaundryById($idorder)->getTotal() *100;
+
+
 
         return $this->render(':paiement:paiement.html.twig', [
             'total' => $total,
@@ -52,9 +55,13 @@ class StripeController extends Controller
         if($request->getMethod() == 'POST') {
             $email = $_POST['stripeEmail'];
             $token = $_POST['stripeToken'];
-            // A changer dynamiquement
-            $amount = 1000;
+
         }
+
+        $orderManager = $this->container->get("app.order_manager");
+        $idorder = $this->get('session')->get('idOrderLaundry');
+        //Le prix en base est en euros mais le pix affiché par stripe est en centimes
+        $amount = $orderManager->getOrderLaundryById($idorder)->getTotal() *100;
 
 
         $user = $this->getUser();
@@ -82,7 +89,7 @@ class StripeController extends Controller
             $this->get('app.user_manager')->save($user);
 
             $this->addFlash("success", "Paiement accepté  !");
-            return $this->redirectToRoute("app_payment");
+            return $this->redirectToRoute("app_my_account");
         } catch (\Stripe\Error\Card $e) {
 
             $this->addFlash("error", "Paiement refusé .");
