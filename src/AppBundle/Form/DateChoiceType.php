@@ -27,9 +27,7 @@ class DateChoiceType extends AbstractType
                     'required' => true,
                     'query_builder' => function (EntityRepository $er) use ($hourNow) {
                         return $er->createQueryBuilder('u')
-                            ->andWhere('u.isAvailable = 1')
-                            ->andWhere('u.slotStart >= :now')
-                            ->setParameter('now', $hourNow);
+                            ->andWhere('u.isAvailable = 1');
                     },
                     'label' => 'Heure de collecte'
                 ])
