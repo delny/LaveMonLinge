@@ -24,4 +24,9 @@ class ProductManager
         $bag = $this->entityManager->getRepository(Product::class)->findAll();
         return $bag;
     }
+
+    public function getAllProducts()
+    {
+        $this->entityManager->getRepository(Product::class)->findAll();
+    }
 }
