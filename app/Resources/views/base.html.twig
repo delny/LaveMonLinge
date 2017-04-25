@@ -32,11 +32,12 @@
     <![endif]-->
 {{ include('menu.html.twig') }}
 
-    <div class="container p80">
+
+    <div class="container flashmsg">
         <div class="row">
             <div class="col-xs-12">
                 {% if app.session.started and app.session.flashBag.peekAll is not empty %}
-                    <div class="messages">
+                    <div class="messages p80">
                         {% for type, messages in app.session.flashBag.all %}
                             {% for message in messages %}
                                 {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
@@ -59,7 +60,7 @@
     {% block content %}{% endblock %}
 
     <footer class="container-fluid">
-        <section class="container p20">
+        <section class="container">
 
             <article class="col-md-6"> <i class="fa fa-phone" aria-hidden="true"></i>  04 67 XX XX XX</article>
             <article class="col-md-6"> <i class="fa fa-envelope" aria-hidden="true"></i>   Lavemonlinge@xxx.fr</article>
