@@ -79,4 +79,8 @@ class OrderManager
         return $this->manager->getRepository(OrderLaundry::class)->find($id);
     }
 
+    public function getOrderItemByBarcode($barcode)
+    {
+        return $this->manager->getRepository(OrderItem::class)->getOrderItemByBarcode($barcode);
+    }
 }

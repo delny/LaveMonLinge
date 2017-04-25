@@ -16,6 +16,7 @@ class BasketController extends Controller
      * @Route("/basket", name="app_showBasket")
      */
     public function showBasketAction(Request $request){
+
         $basket = $this->getManager('app.basket_manager')->getBasket();
 
         $form = $request->request->all();
@@ -37,6 +38,13 @@ class BasketController extends Controller
             {
                 $item = $product->getProduct();
 
+                //suite chiffre aleatoire unique pour chaque sac
+                do
+                {
+                    $barcode = mt_rand();
+                }
+                while($this->getOrderManager()->getOrderItemByBarcode($barcode));
+
                 $quantity = $form[$i];
                 $i++;
 
@@ -45,6 +53,7 @@ class BasketController extends Controller
                 $orderItem->setQte($quantity);
                 $orderItem->setStatut('En attente');
                 $orderItem->setOrderLaundry($orderLaundry);
+                $orderItem->setBarcode($barcode);
 
                 $this->getOrderManager()->saveOrderItem($orderItem);
 
