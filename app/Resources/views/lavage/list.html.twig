@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
+{% block title %} Mon choix de vêtements{%  endblock %}
 {% block content %}
+
     <section class="container p80">
         {{ form_start(form) }}
                 <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
