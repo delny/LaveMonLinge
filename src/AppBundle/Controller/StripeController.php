@@ -60,8 +60,10 @@ class StripeController extends Controller
 
         $orderManager = $this->container->get("app.order_manager");
         $idorder = $this->get('session')->get('idOrderLaundry');
+
+        $order= $orderManager->getOrderLaundryById($idorder);
         //Le prix en base est en euros mais le pix affiché par stripe est en centimes
-        $amount = $orderManager->getOrderLaundryById($idorder)->getTotal() *100;
+        $amount =  $order->getTotal()*100;
 
 
         $user = $this->getUser();
@@ -87,6 +89,10 @@ class StripeController extends Controller
 
             $user->setToken($id);
             $this->get('app.user_manager')->save($user);
+
+            $order->setIsPay(1);
+
+            $orderManager->saveOrderLaundry($order);
 
             $this->addFlash("success", "Paiement accepté  !");
             return $this->redirectToRoute("homepage");

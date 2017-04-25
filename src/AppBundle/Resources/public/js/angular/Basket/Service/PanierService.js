@@ -70,7 +70,11 @@ angular
 
                 Service.getTotalHT = function () {
                     return Data.reduce(function (previous,ligne) {
-                        return previous = previous + ligne.quantite*ligne.prix + ligne.optionPrice;
+                        if (ligne.prixMultiple) {
+                            return previous = previous + ligne.prix + (ligne.quantite-1)*ligne.prixMultiple + ligne.optionPrice;
+                        } else {
+                            return previous = previous + ligne.quantite*ligne.prix + ligne.optionPrice;
+                        }
                     },0);
                 };
 
