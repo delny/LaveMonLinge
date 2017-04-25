@@ -36,11 +36,12 @@ class BasketController extends Controller
             foreach ($products as $product)
             {
                 $item = $product->getProduct();
+
                 $quantity = $form[$i];
                 $i++;
 
                 $orderItem = new OrderItem();
-                $orderItem->setProduct($item);
+                $orderItem->setProduct($this->get('doctrine')->getManager()->merge($item));
                 $orderItem->setQte($quantity);
                 $orderItem->setStatut('En attente');
                 $orderItem->setOrderLaundry($orderLaundry);
@@ -48,13 +49,15 @@ class BasketController extends Controller
                 $this->getOrderManager()->saveOrderItem($orderItem);
 
                 $total += $orderItem->getQte() * $orderItem->getProduct()->getPrice();
+
             }
 
             //mis a jour orderlaundry
             $orderLaundry->setTotal($total + $orderLaundry->getPriceDelivery());
+            $this->getOrderManager()->saveOrderLaundry($orderLaundry);
 
             //redirection
-            $this->redirectToRoute('app_payment');
+             return $this->redirectToRoute('app_payment');
         }
 
         return $this->render(':panier:panier.html.twig', [

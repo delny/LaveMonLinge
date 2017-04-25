@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\OrderItem;
 use AppBundle\Entity\OrderLaundry;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\User;
 use AppBundle\Form\Model\Card;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,8 +57,13 @@ class OrderManager
         {
             $this->manager->persist($orderLaundry);
         }
+        else
+        {
+            $this->manager->merge($orderLaundry);
+        }
         $this->manager->flush();
     }
+
 
     public function saveOrderItem(OrderItem $orderItem)
     {
