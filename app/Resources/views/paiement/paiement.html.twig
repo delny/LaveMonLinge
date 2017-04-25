@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Paiement{% endblock %}
+
 {% block content %}
     <div id="wrapper">
         <div id="container">
@@ -9,10 +11,13 @@
 
             <div id="status">
                 <p>
-                    Vous êtes sur le point de payer une petite fortune.
+                    Vous êtes sur le point de payer votre commande
+
                 <form action="{{ path('app_payment_send') }}" method="POST">
                     <!-- TO DO La variable total va devoir etre changé -->
                     <script
+
+
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="pk_test_3F6hGY6a10YklXQez7CdZbpz"
                             data-amount= " {{ total }} "

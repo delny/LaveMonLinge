@@ -16,12 +16,12 @@ class BasketController extends Controller
      * @Route("/basket", name="app_showBasket")
      */
     public function showBasketAction(Request $request){
+
         $basket = $this->getManager('app.basket_manager')->getBasket();
 
         $form = $request->request->all();
         $session = $this->get('session');
         $idOrderLaundry = ($session->get('idOrderLaundry')) ? $session->get('idOrderLaundry') : FALSE;
-        dump($idOrderLaundry);
 
         if (!empty($form) AND $idOrderLaundry)
         {
@@ -37,6 +37,13 @@ class BasketController extends Controller
             {
                 $item = $product->getProduct();
 
+                //suite chiffre aleatoire unique pour chaque sac
+                do
+                {
+                    $barcode = mt_rand(1000000000,9999999999);
+                }
+                while($this->getOrderManager()->getOrderItemByBarcode($barcode));
+
                 $quantity = $form[$i];
                 $i++;
 
@@ -45,15 +52,28 @@ class BasketController extends Controller
                 $orderItem->setQte($quantity);
                 $orderItem->setStatut('En attente');
                 $orderItem->setOrderLaundry($orderLaundry);
+                $orderItem->setBarcode($barcode);
 
                 $this->getOrderManager()->saveOrderItem($orderItem);
 
-                $total += $orderItem->getQte() * $orderItem->getProduct()->getPrice();
+                //gestion prix multiple
+                if ($orderItem->getProduct()->getPriceIfMultiple())
+                {
+                    $price = $orderItem->getProduct()->getPrice() + ($quantity-1)*$orderItem->getProduct()->getPriceIfMultiple();
+                }
+                else
+                {
+                    $price = $orderItem->getProduct()->getPrice() * $quantity;
+                }
+
+                $total += $price;
+
 
             }
 
             //mis a jour orderlaundry
             $orderLaundry->setTotal($total + $orderLaundry->getPriceDelivery());
+            $orderLaundry->setIsPay(0);
             $this->getOrderManager()->saveOrderLaundry($orderLaundry);
 
             //redirection

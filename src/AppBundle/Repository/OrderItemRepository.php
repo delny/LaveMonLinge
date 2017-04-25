@@ -18,4 +18,14 @@ class OrderItemRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('array', $array);
         return $qb->getQuery()->getResult();
     }
+
+    public function getOrderItemByBarcode($barcode)
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o')
+            ->andWhere('o.barcode = :barcode')
+            ->setParameter(':barcode', $barcode)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
