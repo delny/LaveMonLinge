@@ -26,6 +26,7 @@
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "doctrine/orm": "^2.5",
+        "friendsofsymfony/rest-bundle": "^2.1",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "h4cc/wkhtmltopdf-amd64": "^0.12.3",
         "incenteev/composer-parameter-handler": "^2.0",

@@ -48,6 +48,7 @@ security:
         - { path: ^/account, role: ROLE_USER}
         - { path: ^/myorders, role: ROLE_USER}
         - { path: ^/pdf, role: ROLE_USER}
+        - { path: ^/api/, role: ROLE_USER}
         # accessible en anonyme
         - { path: ^/$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/sigin$, role: IS_AUTHENTICATED_ANONYMOUSLY }

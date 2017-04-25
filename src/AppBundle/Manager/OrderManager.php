@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\OrderItem;
 use AppBundle\Entity\OrderLaundry;
+use AppBundle\Entity\Product;
 use AppBundle\Entity\User;
 use AppBundle\Form\Model\Card;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,6 +47,36 @@ class OrderManager
 
         $this->manager->flush();
 
+        return $orderLaundry->getId();
+
+    }
+
+    public function saveOrderLaundry(OrderLaundry $orderLaundry)
+    {
+        if ($orderLaundry->getId() === null)
+        {
+            $this->manager->persist($orderLaundry);
+        }
+        else
+        {
+            $this->manager->merge($orderLaundry);
+        }
+        $this->manager->flush();
+    }
+
+
+    public function saveOrderItem(OrderItem $orderItem)
+    {
+        if ($orderItem->getId() === null)
+        {
+            $this->manager->persist($orderItem);
+        }
+        $this->manager->flush();
+    }
+
+    public function getOrderLaundryById($id)
+    {
+        return $this->manager->getRepository(OrderLaundry::class)->find($id);
     }
 
 }

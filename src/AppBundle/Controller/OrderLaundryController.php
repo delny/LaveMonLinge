@@ -14,7 +14,9 @@ class OrderLaundryController extends Controller
 
         $basket = $this->getManager('app.basket_manager')->getBasket();
         $user = $this->getUser();
-        $this->getManager('app.order_manager')->save($basket, $user);
+        $idOrderLaundry = $this->getManager('app.order_manager')->save($basket, $user);
+        $session = $this->get('session');
+        $session->set('idOrderLaundry', $idOrderLaundry);
         return $this->redirectToRoute('app_showBasket');
     }
 
