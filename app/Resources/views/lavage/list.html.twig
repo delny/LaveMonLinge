@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    <section class="lavage">
+    <section class="container p80">
         {{ form_start(form) }}
             {% if form.products.vars.prototype is defined %}
                 <ul class="products" data-prototype="{{ form_widget(form.products.vars.prototype)|e('html_attr') }}"></ul>
@@ -9,7 +9,7 @@
             {{ form_widget(form.products) }}
 
             <div class="text-right">
-                <button type="submit" class="btn btn-primary btn-block btn-lg">Commander</button>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Choisir ses dates</button>
             </div>
         {{ form_end(form) }}
     </section>
