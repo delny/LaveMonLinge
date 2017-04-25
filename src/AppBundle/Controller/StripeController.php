@@ -89,7 +89,7 @@ class StripeController extends Controller
             $this->get('app.user_manager')->save($user);
 
             $this->addFlash("success", "Paiement accepté  !");
-            return $this->redirectToRoute("app_my_account");
+            return $this->redirectToRoute("homepage");
         } catch (\Stripe\Error\Card $e) {
 
             $this->addFlash("error", "Paiement refusé .");

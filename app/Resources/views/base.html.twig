@@ -31,7 +31,8 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 {{ include('menu.html.twig') }}
-    <div class="container">
+
+    <div class="container p80">
         <div class="row">
             <div class="col-xs-12">
                 {% if app.session.started and app.session.flashBag.peekAll is not empty %}
@@ -58,7 +59,7 @@
     {% block content %}{% endblock %}
 
     <footer class="container-fluid">
-        <section class="container">
+        <section class="container p20">
 
             <article class="col-md-6"> <i class="fa fa-phone" aria-hidden="true"></i>  04 67 XX XX XX</article>
             <article class="col-md-6"> <i class="fa fa-envelope" aria-hidden="true"></i>   Lavemonlinge@xxx.fr</article>
