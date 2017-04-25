@@ -59,6 +59,13 @@ class AddressController extends Controller
                     //renvoie vers la page du compte
                     return $this->redirectToRoute('app_my_account');
 
+                //message de notification
+                $this->addFlash(
+                    'success',
+                    'Votre adresse a bien été enregistré !'
+                );
+
+
             }
         }
 

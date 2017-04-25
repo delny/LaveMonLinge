@@ -6,7 +6,7 @@
 {% block content %}
 
 
-    <div class="container">
+    <div class="container p80">
         <h1>Détails d'une commande</h1>
 <a href="{{ path('app_orderlist') }}">Retour à la liste</a>
         <p>Récapitulatif de la commande</p>
@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td width="60"><a href="#"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
+                    <td width="60"><a href="{{ path('app_order_pdf', {'idOrder': order.id}) }}"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
                         <a href="{{ path('app_orderlist_detail', {'idOrder': order.id }) }}"><span class="glyphicon glyphicon-plus"></span></a></td>
                     <td>{{ order.statut }}</td>
                     <td>
@@ -46,25 +46,32 @@
         <table class="table">
             <thead>
             <tr>
+                <th></th>
                 <th>nom</th>
                 <th>prix</th>
                 <th>quantité</th>
                 <th>statut</th>
+                <th>Code Barre</th>
             </tr>
             </thead>
             <tbody>
             {% for item in order.orderItems %}
                 <tr>
+                    <td width="60"><a href="{{ path('app_orderitem_pdf', {'idOrderItem': item.id}) }}"><img src="{{ asset('bundles/app/img/icons/pdficon_small.png') }}"></a>
                     <td>{{ item.product.name }}</td>
                     <td>{{ item.product.price | number_format(2,'.',',') }} €</td>
                     <td>{{ item.qte }}</td>
                     <td>{{ item.statut }}</td>
+                    <td>{{ item.barcode }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+<<<<<<< HEAD
     {% else %}
-        <p> Commande Vide  !'(</p>
+        <p> Commande Vide...</p>
+=======
+>>>>>>> e17571594fb41d4e5458562b8d19063a44e71d30
     {% endif %}
 
     </div>

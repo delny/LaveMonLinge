@@ -17,23 +17,46 @@ $(function() {
 
 
         var dateDelivery = new Date(datepickerCollect);
-        dateDelivery.setDate(dateDelivery.getDate() + 3);
-        dateDelivery.setHours(0,0,0,0);
 
-        var day = dateDelivery.getDay();
+        var pathArray = window.location.pathname.split( '/' );
 
-        if(day == 0){
-            dateDelivery.setDate(dateDelivery.getDate() + 1 );
-        }
-        
-        for (i = 0; i < disabledDays.length; i++) {
-            if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
-                dateDelivery.setDate(dateDelivery.getDate() + 1);
-                $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
-            }else{
-                $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+        if(pathArray[2] == "laverie"){
+            dateDelivery.setDate(dateDelivery.getDate() + 3);
+            dateDelivery.setHours(0,0,0,0);
+
+            var day = dateDelivery.getDay();
+
+            if(day == 0){
+                dateDelivery.setDate(dateDelivery.getDate() + 1 );
             }
 
+            for (i = 0; i < disabledDays.length; i++) {
+                if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
+                    dateDelivery.setDate(dateDelivery.getDate() + 1);
+                    $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+                }else{
+                    $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+                }
+            }
+        }else if(pathArray[2] == "pressing"){
+            console.log('ok');
+            dateDelivery.setDate(dateDelivery.getDate() + 5);
+            dateDelivery.setHours(0,0,0,0);
+
+            var day2 = dateDelivery.getDay();
+
+            if(day2 == 0){
+                dateDelivery.setDate(dateDelivery.getDate() + 1 );
+            }
+
+            for (i = 0; i < disabledDays.length; i++) {
+                if(dateDelivery.valueOf() == disabledDays[i].valueOf()){
+                    dateDelivery.setDate(dateDelivery.getDate() + 1);
+                    $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+                }else{
+                    $('#app_bundle_date_choice_type_dateDelivery').val(format(dateDelivery));
+                }
+            }
         }
     });
 

@@ -21,20 +21,20 @@ class DateChoiceType extends AbstractType
 
         $builder->add('dateCollect', TextType::class,[
                         'required' => true,
+                        'label' => 'Date de collecte',
                     ])
                 ->add('hourCollect', EntityType::class,[
                     'class' => TimeSlot::class,
                     'required' => true,
                     'query_builder' => function (EntityRepository $er) use ($hourNow) {
                         return $er->createQueryBuilder('u')
-                            ->andWhere('u.isAvailable = 1')
-                            ->andWhere('u.slotStart >= :now')
-                            ->setParameter('now', $hourNow);
+                            ->andWhere('u.isAvailable = 1');
                     },
                     'label' => 'Heure de collecte'
                 ])
                 ->add('dateDelivery', TextType::class,[
                     'required' => true,
+                    'label' => 'Date de livraison',
                 ])
                 ->add('hourDelivery', EntityType::class,[
                 'class' => TimeSlot::class,

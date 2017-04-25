@@ -28,7 +28,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-            <p>Aucune adresse renseignée.(</p>
+            <p>Aucune adresse renseignée.</p>
         {% endif %}
 
         <h2>Ajouter une adresse</h2>
@@ -57,7 +57,7 @@
 
 
         {% if (app.request.attributes.get('_route') == "app_address") and (app.user.address.count == 3) %}
-            <a href = {{ path('app_saveBasket') }}> <button type="button" class ="btn btn-default">  Finaliser ma commande  </button> </a>
+            <a href = {{ path('app_saveBasket') }}> <button type="submit" class ="btn btn-default">  Finaliser ma commande  </button> </a>
 
 
         {% endif %}
