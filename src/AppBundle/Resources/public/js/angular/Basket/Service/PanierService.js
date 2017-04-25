@@ -40,6 +40,7 @@ angular
                         reference: product.id,
                         nom: product.name,
                         prix: product.price,
+                        prixMultiple: product.priceMultiple,
                         quantite:product.quantite,
                         option: product.option,
                         optionPrice: product.optionPrice

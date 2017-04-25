@@ -34,12 +34,13 @@ class BasketController extends FOSRestController
         {
             $option = ($product->getOptionLaundry()) ? $product->getOptionLaundry()->getLabel() : null;
             $optionPrice = ($product->getOptionLaundry()) ? $product->getOptionLaundry()->getPrice() : null;
-            $quantite = ($product->getQuantity()) ? $product->getQuantity()->getPrice() : 1;
+            $quantite = ($product->getQuantity()) ? $product->getQuantity() : 1;
 
             $formatted[] = [
                 'id' => $product->getProduct()->getId(),
                 'name' => $product->getProduct()->getName(),
                 'price' => $product->getProduct()->getPrice(),
+                'priceMultiple' => $product->getProduct()->getPriceIfMultiple(),
                 'quantite' => $quantite,
                 'option' => $option,
                 'optionPrice' => $optionPrice

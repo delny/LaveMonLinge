@@ -16,7 +16,7 @@
             <thead>
             <tr>
                 <th>Nom</th>
-                <th>prix unitaire HT</th>
+                <th>prix unitaire</th>
                 <th>quantité</th>
                 <th>Options</th>
                 <th>Prix unitaire options</th>
@@ -26,10 +26,11 @@
             <tbody>
             <tr ng-repeat="donnee in basket">
                 <td><p ng-bind="donnee.nom"></p></td>
-                <td>{[{donnee.prix | currency:'€'}]}</td>
+                <td ng-if="donnee.prixMultiple"> {[{ donnee.prix | currency:'€'}]} le 1<sup>er</sup> et {[{ donnee.prixMultiple | currency:'€'}]} les suivants</td>
+                <td ng-if="!donnee.prixMultiple">{[{ donnee.prix | currency:'€'}]}</td>
                 <td><input type="number" name="{[{ $index }]}" min="0" ng-model="donnee.quantite" class="modifquantite" /></td>
                 <td>{[{(donnee.option) ? donnee.option : 'Pas d\'options disponibles'}]} </td>
-                <td>{[{(donnee.optionPrice) ? donnee.optionPrice : 'Pas d\'options disponibles'}]} </td>
+                <td>{[{(donnee.optionPrice | currency:'€') ? donnee.optionPrice : 'Pas d\'options disponibles'}]} </td>
                 <td><button ng-click="delCommand(donnee)">X</button></td>
             </tr>
             </tbody>

@@ -42,6 +42,7 @@ class OrderManager
         $orderLaundry->setUser($user);
         $orderLaundry->setPriceDelivery($this->priceDelivery);
         $orderLaundry->setTotal(0);
+        $orderLaundry->setIsPay(0);
 
         $this->manager->persist($orderLaundry);
 
@@ -79,4 +80,8 @@ class OrderManager
         return $this->manager->getRepository(OrderLaundry::class)->find($id);
     }
 
+    public function getOrderItemByBarcode($barcode)
+    {
+        return $this->manager->getRepository(OrderItem::class)->getOrderItemByBarcode($barcode);
+    }
 }

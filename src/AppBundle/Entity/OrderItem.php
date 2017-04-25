@@ -60,6 +60,11 @@ class OrderItem
     private $orderLaundry;
 
     /**
+     * @ORM\Column(name="barcode", type="integer")
+     */
+    private $barcode;
+
+    /**
      * @return int
      */
     public function getId()
@@ -153,6 +158,24 @@ class OrderItem
     public function setQte($qte)
     {
         $this->qte = $qte;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarcode()
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * @param mixed $barcode
+     * @return OrderItem
+     */
+    public function setBarcode($barcode)
+    {
+        $this->barcode = $barcode;
+        return $this;
     }
 
 
