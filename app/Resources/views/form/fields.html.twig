@@ -1,6 +1,15 @@
+{% block _card_products_entry_widget %}
+
+            <div class="well">
+                {{ block('form_row') }}
+                <div class="clearfix"></div>
+            </div>
+
+
+{% endblock %}
+
 {% block _card_products_entry_product_entry_widget %}
     <div class="col-md-6">
-
         <div>
             <div class="text-center">
                 <h4>
@@ -27,7 +36,6 @@
 
 {% block _card_products_widget %}
     {% set isCollection = true %}
-
     {% if value|length %}
         {% set entry =  value|first %}
         {% if entry.product is not empty %}
@@ -36,13 +44,7 @@
     {% endif %}
 
     {% if isCollection %}
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    {{- form_widget(form) -}}
-                </div>
-            </div>
-        </div>
+        {{- form_widget(form) -}}
     {% else %}
         <div class="col-md-12">
             <div class="panel panel-default">
