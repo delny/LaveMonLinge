@@ -30,34 +30,10 @@
 
         <div class="container">
             <div class="title">Lave mon linge</div>
-            <h1>Facture de la commande N°{{ order.id }}</h1>
-            <div>
-                <h2>Informations client : </h2>
-                <ul>
-                    <li>email : {{ order.user.getEmail }}</li>
-                </ul>
-            </div>
+            <h1>Sac N° {{ item.id }}</h1>
             <h2>Récapitulatif de la commande</h2>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>Statut</th>
-                    <th>Date collecte</th>
-                    <th>Date Livraison</th>
-                    <th>Prix</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ order.statut }}</td>
-                    <td>{{ order.dateCollect | date("d/m/Y") }} -- {{ order.getTimeSlotCollect }}</td>
-                    <td>{{ order.dateDelivery | date("d/m/Y") }} -- {{ order.getTimeSlotDelivery }}</td>
-                    <td>{{ order.total | number_format(2,'.',',') }} €</td>
-                </tr>
-                </tbody>
-            </table>
-            <h2>Détail de la commande</h2>
-            {% if order.orderItems is not empty %}
+            <p>N° commande {{order.id }}</p>
+            <p>nombres de sacs {{ countOrderItem }}</div>
                 <table class="table">
                     <thead>
                     <tr>
@@ -69,7 +45,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for item in order.orderItems %}
                         <tr>
                             <td>{{ item.product.name }}</td>
                             <td>{{ item.product.price | number_format(2,'.',',') }} €</td>
@@ -77,10 +52,9 @@
                             <td>{{ item.statut }}</td>
                             <td>{{ item.barcode }}</td>
                         </tr>
-                    {% endfor %}
+
                     </tbody>
                 </table>
-            {% endif %}
 
         </div>
     {% endblock %}

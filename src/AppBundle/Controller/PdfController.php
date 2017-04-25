@@ -30,9 +30,41 @@ class PdfController extends Controller
         $snappy = $this->get('knp_snappy.pdf');
         $snappy->setOption('encoding', 'UTF-8');
 
-        //dump($html);
-        //exit();
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'.pdf"'
+            ]
+        );
+    }
 
+    /**
+     * @Route("/pdf/item/{idOrderItem}", name="app_orderitem_pdf")
+     */
+    public function itempdfAction($idOrderItem)
+    {
+        $orderManager = $this->get('app.order_manager');
+
+        $orderItem = $orderManager->getOrderItemById($idOrderItem);
+        $order= $orderItem->getOrderLaundry();
+
+        if (!$order || $this->getUser()!= $order->getUser())
+        {
+            return $this->redirectToRoute('homepage');
+        }
+
+
+        $html = $this->renderView(':pdf:sacBill.html.twig',[
+                'order' => $order,
+                'item' => $orderItem,
+                'countOrderItem' => $order->getOrderItems()->count(),
+            ]);
+
+        $filename = sprintf('test-%s.pdf', date('Y-m-d'));
+        $snappy = $this->get('knp_snappy.pdf');
+        $snappy->setOption('encoding', 'UTF-8');
 
         return new Response(
             $snappy->getOutputFromHtml($html),

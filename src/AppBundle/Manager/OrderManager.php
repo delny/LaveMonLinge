@@ -84,4 +84,9 @@ class OrderManager
     {
         return $this->manager->getRepository(OrderItem::class)->getOrderItemByBarcode($barcode);
     }
+
+    public function getOrderItemById($idOrderItem)
+    {
+        return $this->manager->getRepository(OrderItem::class)->find($idOrderItem);
+    }
 }
