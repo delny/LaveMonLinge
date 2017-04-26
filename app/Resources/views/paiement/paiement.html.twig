@@ -2,9 +2,14 @@
 
 {% block title %}Paiement{% endblock %}
 
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
+
 {% block content %}
-    <div id="wrapper">
-        <div id="container p150">
+
+        <div class="container p150">
             <div id="welcome">
                 <h1>Paiement de votre commande</h1>
             </div>
@@ -34,7 +39,7 @@
                 </p>
             </div>
         </div>
-    </div>
+
 {% endblock %}
 
 
