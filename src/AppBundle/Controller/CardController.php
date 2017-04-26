@@ -66,7 +66,7 @@ class CardController extends Controller
                 $test = strtotime($dateCollect. ' + 5 days');
                 $t = date('d-m-Y', $test);
                 if($dateDelivery > $t){
-                    $this->get('session')->getFlashBag()->add('danger', 'la date n\'est pas valide pressing');
+                    $this->get('session')->getFlashBag()->add('danger', 'la date n\'est pas valide');
                     $basket->setDateCollect(null);
                     $basket->setDateDelivery(null);
                     return $this->redirect($_SERVER['HTTP_REFERER']);
@@ -75,7 +75,7 @@ class CardController extends Controller
                 $dateDeliveryLaverie = strtotime($dateCollect. ' + 3 days');
                 $dateDeliveryLaverieFormated = date('d-m-Y', $dateDeliveryLaverie);
                 if($dateDelivery > $dateDeliveryLaverieFormated){
-                    $this->get('session')->getFlashBag()->add('danger', 'la date n\'est pas valide laverie');
+                    $this->get('session')->getFlashBag()->add('danger', 'la date n\'est pas valide');
                     $basket->setDateCollect(null);
                     $basket->setDateDelivery(null);
                     return $this->redirect($_SERVER['HTTP_REFERER']);
