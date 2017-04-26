@@ -150,65 +150,7 @@ li{
 .form_container{
     padding: 25px 0;
 }
-#custom-nav {
-    background-color: rgba(0,0,0,0);
-    border: 0;
-    box-shadow: none;
-    z-index: 999;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-transition: background .5s ease-in-out, opacity .5s ease;
-    -moz-transition: background .5s ease-in-out, opacity .5s ease;
-    transition: background .5s ease-in-out, opacity .5s ease;
-}
 
-#custom-nav .dropdown-menu {
-    border-radius: 0;
-    border: none;
-    border-top: 5px solid transparent;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    padding-top: 0;
-}
-
-
-
-#custom-nav .container {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    -webkit-transition: padding-top .5s ease, padding-bottom .5s ease;
-    -moz-transition: padding-top .5s ease, padding-bottom .5s ease;
-    transition: padding-top .5s ease, padding-top .5s ease, padding-bottom .5s ease;
-}
-
-#custom-nav.affix {
-    top: 0;
-    min-width: 100%;
-    background-color: #f9fafc;
-    border-bottom: 1px solid #dfe3ee;    -webkit-transition: background .5s ease-in-out, opacity .5s ease;
-    -moz-transition: background .5s ease-in-out, opacity .5s ease;
-    transition: background .5s ease-in-out, opacity .5s ease;
-}
-
-.header{
-    background: url(../img/pf_1492954201.jpg) no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-    position: relative;
-}
-.header_down{
-    position: absolute;
-    bottom: 0;
-    background: white;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0 20px 0;
-}
-
-.presentation_section, .choices{
-    padding-top: 70px;
-}
 
 footer{
     background: #f9fafc;
@@ -339,8 +281,9 @@ button[type=submit]:hover{
 
 }
 
-.p80{
-    padding-top:80px;
+.p150{
+    padding-top:150px;
+    padding-bottom: 80px;
 }
 
 .p20{
@@ -351,4 +294,49 @@ button[type=submit]:hover{
     position: absolute;
     left:25%;
     z-index: 1;
+}
+
+.address{
+    padding-top:40px;
+}
+.test{
+    background:red;
+}
+
+.presentation_img{
+    height:60px;
+    width: 57px;
+}
+
+.presentation .col-md-12:first-child{
+    padding-top:40px;
+}
+.presentation .col-md-12{
+    padding-bottom: 50px;
+}
+.presentation .col-md-10 p{
+    margin: 0;
+}
+
+.presentation .col-md-10 p:first-child{
+    font-size: 18px;
+
+}
+
+footer{
+    color:#8492a6;
+}
+.phone{
+    text-align: right;
+}
+.mail{
+    text-align: left;
+}
+.hours{
+    text-align: center;
+}
+
+.foot_content{
+    padding-top:40px;
+    padding-bottom:60px;
 }

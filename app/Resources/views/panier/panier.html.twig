@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ma commande{% endblock %}
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
 {% block content %}
+    <div class="container p150">
     <div ng-app="MyApp" ng-controller="BasketController">
     <h2>Ma commande</h2>
 
@@ -38,7 +42,7 @@
 
     <section class="row">
         {% for address in app.user.address %}
-            <article class="col-md-3">
+            <article class="col-md-3 address">
                 <h3>Adresse de {{ address.type }}</h3>
                 <address>
                     <ul>
@@ -71,6 +75,7 @@
         <script src="{{ asset('bundles/app/js/angular/Basket/Service/PanierService.js') }}"></script>
         <script src="{{ asset('bundles/app/js/angular/Basket/Service/TVAService.js') }}"></script>
 
+    </div>
     </div>
     <!--fin angular js -->
 {% endblock %}

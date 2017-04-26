@@ -19,18 +19,19 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add(
+                'type', ChoiceType::class, [
+                'choices' => [
+                    'Facturation' => 'Facturation',
+                    'Collecte' => 'Collecte',
+                    'Livraison' => 'Livraison',
+                ]
+            ])
             ->add('streetNumber', HiddenType::class)
             ->add('street', HiddenType::class)
             ->add('cp', HiddenType::class)
-            ->add('city', HiddenType::class)
-            ->add(
-                'type', ChoiceType::class, [
-                 'choices' => [
-                     'Facturation' => 'Facturation',
-                     'Collecte' => 'Collecte',
-                     'Livraison' => 'Livraison',
-                 ]
-                ]);
+            ->add('city', HiddenType::class);
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

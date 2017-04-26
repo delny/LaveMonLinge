@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {% if app.session.started and app.session.flashBag.peekAll is not empty %}
-                    <div class="messages p80">
+                    <div class="messages p150">
                         {% for type, messages in app.session.flashBag.all %}
                             {% for message in messages %}
                                 {# Bootstrap alert, see http://getbootstrap.com/components/#alerts #}
@@ -61,10 +61,11 @@
 
     <footer class="container-fluid">
         <section class="container">
-
-            <article class="col-md-6"> <i class="fa fa-phone" aria-hidden="true"></i>  04 67 XX XX XX</article>
-            <article class="col-md-6"> <i class="fa fa-envelope" aria-hidden="true"></i>   Lavemonlinge@xxx.fr</article>
-            <article class="col-md-12"> <i class="fa fa-clock-o" aria-hidden="true"></i>   8-18 h</article>
+        <section class="foot_content">
+            <article class="col-md-6 phone"> <i class="fa fa-phone" aria-hidden="true"></i>  04 67 XX XX XX</article>
+            <article class="col-md-6 mail"> <i class="fa fa-envelope" aria-hidden="true"></i>   Lavemonlinge@xxx.fr</article>
+            <article class="col-md-offset-4 col-md-4 hours"> <i class="fa fa-clock-o" aria-hidden="true"></i>Lun-Ven 8h-19h</article>
+        </section>
         </section>
     </footer>
 
@@ -78,7 +79,6 @@
             <script src="{{ asset('bundles/app/js/main.js') }}"></script>
             <script src="{{ asset('bundles/app/js/datepicker.js') }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/adesignscalendar/js/fullcalendar/jquery.fullcalendar.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>

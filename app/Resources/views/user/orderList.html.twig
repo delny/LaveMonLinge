@@ -1,11 +1,14 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}Vos commandes{% endblock %}
-
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
 
 {% block content %}
 
-    <div class="container p80">
+    <div class="container p150">
         <h1>Historique de vos commandes</h1>
         {% if orders is not empty %}
             <div class="orderlist">

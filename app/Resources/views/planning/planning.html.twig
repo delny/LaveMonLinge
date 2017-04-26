@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Planning {%  endblock %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/nav.css') }}" />
+{% endblock %}
+
+{% block content %}
+    {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+{% endblock %}
